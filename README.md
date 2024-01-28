@@ -56,10 +56,10 @@ To begin using Swat Swap, follow these steps:
    - Set up a local or remote database.
    - Update the database configuration in `config.js`.
 
-4. Run the application:
+4. Start the Docker dev server:
 
    ```bash
-   npm start
+   docker compose up
    ```
 
 Visit [http://localhost:3000](http://localhost:3000) to access Swat Swap locally.
