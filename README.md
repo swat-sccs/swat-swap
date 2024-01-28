@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# swat-swap
-=======
 # Swat Swap: Swarthmore College Local Marketplace
 
 Welcome to Swat Swap, a community-driven platform tailored for Swarthmore College students to facilitate the exchange of goods and services. This GitHub repository contains the source code and documentation for the Swat Swap website.
