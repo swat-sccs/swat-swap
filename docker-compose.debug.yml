@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  swatswap:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - .:/usr/src/app
+    environment:
+      NODE_ENV: development
+      DOMAIN: http://127.0.0.1:5469/
+      DATABASE_URL: "postgresql://user:p@ssw0rd@swatswap-db:5432/swatswap_db"
+    ports:
+      - 5469:3000
+    env_file:
+      - .env
+    command: sh -c "npm install && sleep 10 && npx prisma migrate dev --name init && npx prisma generate && npm run dev "
+
+  swatswap-db:
+    image: postgres:16.1
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=p@ssw0rd
+      - POSTGRES_DB=swatswap_db
