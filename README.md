@@ -55,10 +55,10 @@ To begin using Swat Swap, follow these steps:
    - Set up a local or remote database.
    - Update the database configuration in `config.js`.
 
-4. Run the application:
+4. Start the Docker dev server:
 
    ```bash
-   npm start
+   docker compose up
    ```
 
 Visit [http://localhost:3000](http://localhost:3000) to access Swat Swap locally.
@@ -86,4 +86,3 @@ For major changes, please open an issue first to discuss the proposed changes.
 This project is licensed under the [MIT License](LICENSE).
 
 Feel free to explore and enhance Swat Swap to make it an even better platform for the Swarthmore College community! If you have any questions or issues, please don't hesitate to open an issue on GitHub.
->>>>>>> 11a84873246d60c32e55c9f5309ae8c36ad728d3
