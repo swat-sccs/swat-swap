@@ -24,8 +24,6 @@ Swarthmore College boasts a vibrant community, and Swat Swap aims to enhance the
 
 - **Categories and Tags:** Organize listings efficiently using predefined categories and tags, making it easy for users to find what they need.
 
-- **Secure Messaging:** Facilitate secure communication between users for smooth and reliable transactions.
-
 - **Search and Filters:** Users can efficiently search for specific items or apply filters to refine results based on preferences.
 
 - **User Profiles:** Build trust within the community by exploring user profiles and transaction history.
@@ -68,11 +66,10 @@ Visit [http://localhost:3000](http://localhost:3000) to access Swat Swap locally
 
 ## Usage
 
-1. Register or log in to your account.
+1. Log into your account
 2. Create a listing for the item you want to sell or trade.
 3. Browse available listings based on categories or use the search feature.
-4. Communicate with other users through secure messaging.
-5. Finalize the transaction and enjoy your new item!
+4. Finalize the transaction and enjoy your new item!
 
 ## Contributing
 
