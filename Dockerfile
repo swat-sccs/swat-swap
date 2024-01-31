@@ -1,5 +1,5 @@
 FROM node:lts-bookworm
-ENV DATABASE_URL="mysql://root:p@ssw0rd@swatsale-db:3306/swatswap"
+ENV DATABASE_URL="mysql://root:p@ssw0rd@swatswap-db:3306/swatswap"
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
 # Leave ports for compose
