@@ -1,13 +1,8 @@
 FROM node:lts-bookworm
-ENV DATABASE_URL="mysql://root:p@ssw0rd@swatswap-db:3306/swatswap"
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 WORKDIR /usr/src/app
 # Leave ports for compose
 # EXPOSE 3000
-COPY . .
-RUN rm -rf node_modules
+COPY package*.json ./
 RUN chown -R node:node /usr/src/app
 USER node
-RUN npm install
-RUN npx prisma generate
-RUN npm run build

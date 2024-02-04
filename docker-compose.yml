@@ -1,32 +1,25 @@
 version: '3.4'
 
-# This is the Swatswap production Docker Compose spec
-# You MUST have a .env file in this dir with the following vars set:
-# MARIADB_ROOT_PASSWORD
-# MARIADB_USER
-# MARIADB_PASSWORD
-# MARIADB_DATABASE
-# INTERNAL_PORT
-
 services:
   swatswap:
     build:
       context: .
       dockerfile: ./Dockerfile
+    volumes:
+      - .:/usr/src/app
     environment:
-      NODE_ENV: production
-      # TODO: user perms instead of root
-      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@swatswap-db:5432/${POSTGRES_DB}"
-    volumes:
-      - ./logs:/usr/src/app/logs
+      NODE_ENV: development
+      DOMAIN: http://127.0.0.1:3000/
+      # DATABASE_URL: "postgresql://user:p@ssw0rd@swatswap-db:5432/swatswap_db"
     ports:
-      - "${INTERNAL_PORT}:3000"
-    # Ensure db is migrated to current version, generate bindings, and serve
-    command: sh -c "npm start"
-  swatswap-db:
-    image: postgres:16.1
-    volumes:
-      - ./db-backup:/backup
-      - ./data:/var/lib/mysql
+      - 3000:3000
     env_file:
       - .env
+    command: sh -c "npm install && npm run dev "
+
+  # swatswap-db:
+  #   image: postgres:16.1
+  #   environment:
+  #     - POSTGRES_USER=user
+  #     - POSTGRES_PASSWORD=p@ssw0rd
+  #     - POSTGRES_DB=swatswap_db
