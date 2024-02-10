@@ -12,22 +12,30 @@
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-end-rgb: 22, 30, 44;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+header {
+  background-image: none !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.mui-jkymtx-MuiPaper-root {
+  background-color: #31425f80 !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.MuiMenu-paper {
+  background-color: #31425f80 !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.MuiTypography-root.MuiTypography-body2.MuiListItemText-secondary {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

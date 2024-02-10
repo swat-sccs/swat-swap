@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Raleway } from 'next/font/google'
 import "./globals.css";
+import SCCSNavBar from "@/components/SCCSNavBar";
+import { NextAuthProvider } from './NextAuthProvider';
+import ThemeRegistry from '@/app/ThemeRegistry'
 
-const inter = Inter({ subsets: ["latin"] });
+const raleway = Raleway({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +18,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <NextAuthProvider>
+      <html lang="en">
+        <body className={raleway.className + " bg-[radial-gradient(circle_at_bottom,_var(--tw-gradient-stops))] from-primary via-dark-blue to-black-600"}>
+          <ThemeRegistry options={{ key: 'mui' }}>
+            <main>
+              <SCCSNavBar />
+              <div className="flex flex-col items-center justify-between xs:p-6 sm:p-12" >
+                {children}
+              </div>
+            </main>
+          </ThemeRegistry>
+        </body>
+      </html>
+    </NextAuthProvider>
   );
 }
