@@ -80,7 +80,7 @@ function ResponsiveAppBar(props: any) {
                         }}
                         className="text-white transition-colors duration-200 ease-in-out hover:text-accent"
                     >
-                        TickFlow
+                        SwatSwap
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -135,7 +135,7 @@ function ResponsiveAppBar(props: any) {
                             textDecoration: 'none'
                         }}
                     >
-                        TickFlow
+                        SwatSwap
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {Object.entries(pages).map(([page, link]) => (
