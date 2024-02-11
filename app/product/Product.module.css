@@ -1,0 +1,13 @@
+.mainContainer {
+    background-color: #F1F0EF;
+}
+
+.subText {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+div {
+    background-color: green; 
+    height: 100px;
+    width: 100px;
+}
