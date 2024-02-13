@@ -33,6 +33,12 @@ const theme = createTheme({
     },
     typography: {
         allVariants: raleway.style,
+        h5: {
+            fontWeight: 600 // or 'bold'
+        },
+        h4: {
+            fontWeight: 600 // or 'bold'
+        },
     },
     breakpoints: {
         values: {

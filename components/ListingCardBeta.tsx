@@ -3,17 +3,15 @@
 import React from 'react'
 
 export interface infoProp {
-    header:String;
-    imgPath:String;
-    price:Number;
+    header: String;
+    imgPath: String;
+    price: Number;
 }
 
-export default function Card ({info}:any) {
+export default function ListingCard(info: any) {
 
-
-
-    return(
-        <div className='w-[300px] h-[260px] bg-gray-100 rounded shadow-lg flex flex-col text-center'>
+    return (
+        <div className='w-[300px] h-[260px] bg-gray-100 rounded shadow-lg flex flex-col text-center' >
             <header >
                 {info.header}
             </header>
