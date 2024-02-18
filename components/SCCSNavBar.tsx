@@ -63,7 +63,7 @@ function ResponsiveAppBar(props: any) {
     };
 
     return (
-        <AppBar position="static" enableColorOnDark>
+        <AppBar position="sticky" enableColorOnDark>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography

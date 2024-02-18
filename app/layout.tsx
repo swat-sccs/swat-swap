@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { Raleway } from 'next/font/google'
 import "./globals.css";
-import SCCSNavBar from "@/components/SCCSNavBar";
 import { NextAuthProvider } from './NextAuthProvider';
 import ThemeRegistry from '@/app/ThemeRegistry'
-
-const raleway = Raleway({ subsets: ['latin'] })
+import SCCSNavBar from "@/components/SCCSNavBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,18 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <NextAuthProvider>
-      <html lang="en">
-        <body className={raleway.className + " bg-[radial-gradient(circle_at_bottom,_var(--tw-gradient-stops))] from-primary via-dark-blue to-black-600"}>
-          <ThemeRegistry options={{ key: 'mui' }}>
-            <main>
-              <SCCSNavBar />
-              <div className="flex flex-col items-center justify-between xs:p-6 sm:p-12" >
-                {children}
-              </div>
-            </main>
-          </ThemeRegistry>
-        </body>
-      </html>
+      <ThemeRegistry options={{ key: 'mui' }}>
+        <html lang="en">
+          <body className="max-h-full">
+            <SCCSNavBar></SCCSNavBar>
+            {children}
+          </body>
+        </html>
+      </ThemeRegistry>
     </NextAuthProvider>
   );
 }
