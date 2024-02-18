@@ -1,50 +1,119 @@
-import React from 'react';
-import { Container, Typography, Grid, Button, TextField, MenuItem, Select, Input } from '@mui/material';
+import React from "react";
+import {
+  Container,
+  Typography,
+  Grid,
+  Radio,
+  FormControlLabel,
+  TextField,
+  MenuItem,
+  Select,
+  RadioGroup,
+  Button,
+} from "@mui/material";
 
 export default function Create() {
-  return (   
-    <Container style={{ 
-      backgroundColor: 'lightGray', 
-      height: '75vh', 
-      width: '40%', 
-      margin: 'auto', 
-      display: 'flex',
-      flexDirection: 'column', 
-      alignItems: 'flex-start', 
-    }}>
-      <Grid container justifyContent="flex-start" alignItems="flex-start" style={{ paddingTop: '20px' }}>
-        <Button style={{ marginRight: '10px' }}>Selling</Button>
-        <Button style={{ marginRight: '10px' }}>Buying</Button>
-        <Button>Service</Button>
-      </Grid>
-      <Typography variant="subtitle1" style={{ marginTop: '20px' }}>Listing Title</Typography>
-      <TextField 
-        style={{ marginTop: '10px' }}
+  return (
+    <Container
+      style={{
+        backgroundColor: "#f1f1f1",
+        height: "auto",
+        width: "50%",
+        margin: "auto",
+        marginTop: "20px",
+        padding: "40px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        borderRadius: "4px",
+      }}
+    >
+      <Typography
+        fontSize={"20px"}
+        fontWeight={"bold"}
+        style={{ marginBottom: "20px" }}
+      >
+        Choose a type of listing
+      </Typography>
+      <RadioGroup aria-labelledby="radiohead" aria-orientation="horizontal" row>
+        <FormControlLabel
+          value="selling"
+          control={<Radio />}
+          label="Selling"
+          style={{ marginRight: "40px" }}
+        />
+        <FormControlLabel
+          value="buying"
+          control={<Radio />}
+          label="Buying"
+          style={{ marginRight: "40px" }}
+        />
+        <FormControlLabel
+          value="service"
+          control={<Radio />}
+          label="Service"
+          style={{ marginRight: "40px" }}
+        />
+      </RadioGroup>
+      <Typography
+        fontSize={"20px"}
+        fontWeight={"bold"}
+        style={{ marginTop: "20px" }}
+      >
+        Add a title
+      </Typography>
+      <TextField
+        fullWidth
+        style={{ marginTop: "10px" }}
         InputProps={{
-          style: { background: 'white' },
+          style: { background: "white" },
         }}
       />
-      <Typography variant="subtitle1" style={{ marginTop: '20px' }}>Listing Images</Typography>
-      <Typography variant="subtitle1" style={{ marginTop: '20px' }}>Listing Title</Typography>
-      <TextField 
-        style={{ marginTop: '10px' }}
+      <Typography
+        fontSize={"20px"}
+        fontWeight={"bold"}
+        style={{ marginTop: "20px" }}
+      >
+        Add images
+      </Typography>
+      <input type="file" style={{ marginTop: "10px" }} />
+      <Typography
+        fontSize={"20px"}
+        fontWeight={"bold"}
+        style={{ marginTop: "20px" }}
+      >
+        Add a description
+      </Typography>
+      <TextField
+        multiline
+        rows={4}
+        style={{ marginTop: "10px", width: "100%" }}
         InputProps={{
-          style: { background: 'white' },
+          style: { background: "white" },
         }}
       />
-      <Typography variant="subtitle1" style={{ marginTop: '20px' }}>Select Category</Typography>
+      <Typography
+        fontSize={"20px"}
+        fontWeight={"bold"}
+        style={{ marginTop: "20px" }}
+      >
+        Choose a category
+      </Typography>
       <Select
-  label="Category"
-  style={{ marginTop: '10px', width: '40%' }}
->
-  <MenuItem value="cats">Cats</MenuItem>
-  <MenuItem value="black-cats">Black Cats</MenuItem>
-  <MenuItem value="awesome-cats">Awesome Cats</MenuItem>
-</Select>
+        label="Category"
+        style={{
+          background: "white",
+          marginTop: "10px",
+          width: "50%",
+        }}
+      >
+        <MenuItem value="cats">Cats</MenuItem>
+        <MenuItem value="black-cats">Black Cats</MenuItem>
+        <MenuItem value="awesome-cats">Awesome Cats</MenuItem>
+      </Select>
+      <Button style={{ marginTop: "20px" }}>
+        <Typography>List it!</Typography>
+      </Button>
     </Container>
   );
 }
-
-
-
-
