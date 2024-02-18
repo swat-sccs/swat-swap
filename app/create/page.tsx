@@ -74,9 +74,32 @@ export default function Create() {
         fontWeight={"bold"}
         style={{ marginTop: "20px" }}
       >
+        Choose a category
+      </Typography>
+      <Select
+        label="Category"
+        style={{
+          background: "white",
+          marginTop: "10px",
+          width: "50%",
+        }}
+      >
+        <MenuItem value="cats">Cats</MenuItem>
+        <MenuItem value="black-cats">Black Cats</MenuItem>
+        <MenuItem value="awesome-cats">Awesome Cats</MenuItem>
+      </Select>
+      <Typography
+        fontSize={"20px"}
+        fontWeight={"bold"}
+        style={{ marginTop: "20px" }}
+      >
         Add images
       </Typography>
-      <input type="file" style={{ marginTop: "10px" }} />
+      <input
+        type="file"
+        style={{ marginTop: "10px" }}
+        accept="image/*"
+      />
       <Typography
         fontSize={"20px"}
         fontWeight={"bold"}
@@ -92,25 +115,6 @@ export default function Create() {
           style: { background: "white" },
         }}
       />
-      <Typography
-        fontSize={"20px"}
-        fontWeight={"bold"}
-        style={{ marginTop: "20px" }}
-      >
-        Choose a category
-      </Typography>
-      <Select
-        label="Category"
-        style={{
-          background: "white",
-          marginTop: "10px",
-          width: "50%",
-        }}
-      >
-        <MenuItem value="cats">Cats</MenuItem>
-        <MenuItem value="black-cats">Black Cats</MenuItem>
-        <MenuItem value="awesome-cats">Awesome Cats</MenuItem>
-      </Select>
       <Button style={{ marginTop: "20px" }}>
         <Typography>List it!</Typography>
       </Button>
