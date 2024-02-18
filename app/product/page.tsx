@@ -1,46 +1,81 @@
-import { Box, Typography } from '@mui/material';
+import { Container, Typography, Grid } from '@mui/material';
 import style from './Product.module.css';
+import Image from 'next/image';
 
 export default function Product() {
   return (
-    <Box className={style.mainContainer}>
+    <Container style={{
+      width: "75%",
+      height: "auto",
+      display: "flex",
+      flexDirection: "column",  // Set to column to stack items vertically
+      margin: "auto",
+      marginTop: "20pt",
+      paddingBottom: "20pt",
+      backgroundColor: "#f1f1f1"  
+    }}>
+      <Grid container spacing={2} style={{ margin: '8px' }}>
+        
+        <Grid item xs={12} md={6} >
+          <Image
+          src="/static/images/cards/maxwell1.jpg" 
+          alt="image"
+          width={400}  
+          height={400} 
+          />
+        </Grid>
+        
+        <Grid item xs={12} md={6} >
+          <Typography variant="h5">
+            Product Title
+          </Typography>
+          <Typography 
+            fontSize={"20px"}
+            fontWeight={"bold"}>
+            $69.00
+          </Typography>
+          <Typography fontSize={"18px"}>
+            Bottom text Bottom textBottom textBottom 
+            textBottom textBottom textBottom text Bottom 
+            textBottom textBottom textBottom textBottom 
+            text
+          </Typography>
 
-      <Box>
-        <Typography variant="h4">Home &gt; C1 &gt; C2</Typography>
-      </Box>
+          <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+            <Typography 
+              fontSize={"18px"} 
+              fontWeight={"bold"}>
+              Contact:
+            </Typography>
+            <Typography 
+              fontSize={"18px"} 
+              style={{ marginLeft: "8px" }}>
+              Alina Vykliuk
+            </Typography>
+          </div>
+          <Typography fontSize={"18px"}>
+              +38(068)6969696
+            </Typography>
+          <Typography fontSize={"18px"}>
+            avykliu1@swarthmore.edu
+          </Typography>
+          <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+            <Typography 
+              fontSize={"18px"} 
+              fontWeight={"bold"}>
+              Posted on:
+            </Typography>
+            <Typography 
+              fontSize={"18px"} 
+              style={{ marginLeft: "8px" }}>
+              Feb 18, 2024
+            </Typography>
+          </div>
+        </Grid>
+      </Grid>
 
-      <Box>
-        <Typography variant="h5">Image</Typography>
-      </Box>
-
-      <Box>
-        <Typography variant="h5">Product Name</Typography>
-      </Box>
-
-      <Box>
-        <Typography variant="h5">Price</Typography>
-      </Box>
-
-      <Box>
-        <Typography variant="h5">Product Description</Typography>
-      </Box>
-
-      <Box>
-        <Typography variant="h5">Contact Details</Typography>
-      </Box>
-
-      <Box>
-        <Typography variant="h5">Post date</Typography>
-      </Box>
-
-      {/* <div className={style.subText}>Home &gt; C1 &gt; C2</div>
-      <div>Image</div>
-      <div>Product Name</div>
-      <div>Price</div>
-      <div>Product Description</div>
-      <div>Contact Details</div>
-      <div>Post date</div> */}
-
-    </Box >
+    </Container>
   );
 }
+
+
