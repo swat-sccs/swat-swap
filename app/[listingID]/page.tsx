@@ -2,13 +2,13 @@ import { Container, Typography, Grid } from '@mui/material';
 import style from './Product.module.css';
 import Image from 'next/image';
 
-export default function Product() {
+export default function ListingID() {
   return (
     <Container style={{
       width: "75%",
       height: "auto",
       display: "flex",
-      flexDirection: "column",  // Set to column to stack items vertically
+      flexDirection: "column", 
       margin: "auto",
       marginTop: "20pt",
       paddingBottom: "20pt",
