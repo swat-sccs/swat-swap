@@ -35,6 +35,7 @@ export default function Create() {
       >
         Choose a type of listing
       </Typography>
+
       <RadioGroup aria-labelledby="radiohead" aria-orientation="horizontal" row>
         <FormControlLabel
           value="selling"
@@ -55,6 +56,7 @@ export default function Create() {
           style={{ marginRight: "40px" }}
         />
       </RadioGroup>
+
       <Typography
         fontSize={"20px"}
         fontWeight={"bold"}

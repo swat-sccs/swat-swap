@@ -8,14 +8,18 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
-const pages = { 'Home': '/', 'Create': '/create' };
+const pages = {
+    'Create': '/create',
+    'My Listings': '/my_listings',
+    'Saved Listings': '/saved',
+    'Profile Test Page': '/profile/testUser',
+};
 
 function ResponsiveAppBar(props: any) {
     const { data: session, status } = useSession();
@@ -23,6 +27,7 @@ function ResponsiveAppBar(props: any) {
     let authenticated;
     let loginLink;
     let nameButton;
+
     if (props.hasOwnProperty("login")) {
         loginLink = null
         nameButton = null

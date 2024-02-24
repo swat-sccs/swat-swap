@@ -9,7 +9,8 @@ import {
     CardMedia,
     CardActions,
     Typography,
-    Box
+    Box,
+    Link
 } from '@mui/material';
 
 import BookmarkIcon from '@mui/icons-material/Bookmark';
@@ -24,20 +25,32 @@ const cardWidth = 256;
 
 export default function ListingCard(props: linkProp) {
 
+    const link = 'listing/' + props.title
+
     return (
         <Card sx={{ maxWidth: cardWidth, margin: 1 }}>
             <CardHeader
                 title={
                     <Typography
-                        variant="h5"
-                        color="text.primary"
                         className={"max-w-56"}
                         noWrap
                     >
-                        <b>{props.title}</b>
+                        <Link
+                            href={link}
+                            underline="none"
+                            variant="h5"
+                            color="text.primary"
+                        >
+                            {props.title}
+                        </Link>
                     </Typography>}
 
-                subheader={<Typography variant="h5" color="text.primary">
+                subheader={<Typography
+                    fontSize={20}
+                    fontWeight={500}
+                    color="text.primary"
+                >
+
                     ${props.cost}
                 </Typography>}
             />
@@ -45,7 +58,7 @@ export default function ListingCard(props: linkProp) {
             <CardMedia
                 sx={{ height: cardWidth * 4 / 5, width: cardWidth }}
                 component="img"
-                image={props.imgPath}
+                image={"/static/images/cards/" + props.imgPath}
                 alt="ooh what he doing :3"
             />
 
