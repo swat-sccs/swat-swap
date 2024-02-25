@@ -84,6 +84,49 @@ export default function Create() {
           Add a title
         </Typography>
         <TextField name="title" fullWidth style={{ marginTop: "10px" }} />
+
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Add a price
+        </Typography>
+        <TextField
+          name="price"
+          type="number"
+          style={{ marginTop: "10px", width: "30%" }}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }}
+        />
+        
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Add a description
+        </Typography>
+        <TextField
+          name="description"
+          multiline
+          rows={4}
+          style={{ marginTop: "10px", width: "100%" }}
+        />
+       <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Add images
+        </Typography>
+        <input
+          type="file"
+          style={{ marginTop: "10px" }}
+          accept="image/*"
+          name="image"
+        />
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
@@ -93,11 +136,12 @@ export default function Create() {
         </Typography>
         <Select
           name="category"
-          label="category"
+          multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
+          value={[]}
         >
           <MenuItem value="clothing & accessories">
             clothing & accessories
@@ -120,11 +164,12 @@ export default function Create() {
         </Typography>
         <Select
           name="payment"
-          label="payment"
+          multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
+          value={[]}
         >
           <MenuItem value="cash">cash</MenuItem>
           <MenuItem value="PayPal">PayPal</MenuItem>
@@ -140,11 +185,12 @@ export default function Create() {
         </Typography>
         <Select
           name="condition"
-          label="condition"
+          multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
+          value={[]}
         >
           <MenuItem value="clothing & accessories">
             clothing & accessories
@@ -166,14 +212,17 @@ export default function Create() {
         </Typography>
         <Select
           name="gender"
-          label="gender"
+          multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
+          value={[]}
         >
-          <MenuItem value="women's / feminine">women's / feminine </MenuItem>
-          <MenuItem value="men's / masculine">men's / masculine</MenuItem>
+          <MenuItem value="women's / feminine">
+            {"women's / feminine "}
+          </MenuItem>
+          <MenuItem value="men's / masculine">{"men's / masculine"}</MenuItem>
           <MenuItem value="unisex / genderless">unisex / genderless</MenuItem>
         </Select>
         <Typography
@@ -185,11 +234,12 @@ export default function Create() {
         </Typography>
         <Select
           name="size"
-          label="size"
+          multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
+          value={[]}
         >
           <MenuItem value="<xs">xxs</MenuItem>
           <MenuItem value="xs">xs</MenuItem>
@@ -209,11 +259,12 @@ export default function Create() {
         </Typography>
         <Select
           name="color"
-          label="color"
+          multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
+          value={[]}
         >
           <MenuItem value="clothing & accessories">
             clothing & accessories
@@ -225,47 +276,7 @@ export default function Create() {
           <MenuItem value="warm tones">warm</MenuItem>
           <MenuItem value="cool tones">cool</MenuItem>
         </Select>
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
-          Add images
-        </Typography>
-        <input
-          type="file"
-          style={{ marginTop: "10px" }}
-          accept="image/*"
-          name="image"
-        />
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
-          Add a description
-        </Typography>
-        <TextField
-          name="description"
-          multiline
-          rows={4}
-          style={{ marginTop: "10px", width: "100%" }}
-        />
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
-          Add a price
-        </Typography>
-        <TextField
-          name="price"
-          type="number"
-          style={{ marginTop: "10px", width: "100%" }}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-          }}
-        />
+
         <Button style={{ marginTop: "20px" }} type="submit">
           <Typography>List it!</Typography>
         </Button>
