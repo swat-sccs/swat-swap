@@ -12,6 +12,7 @@ import {
   Select,
   RadioGroup,
   Button,
+  InputAdornment,
 } from "@mui/material";
 
 export default function Create() {
@@ -138,6 +139,22 @@ export default function Create() {
           rows={4}
           style={{ marginTop: "10px", width: "100%" }}
           InputProps={{
+            style: { background: "white" },
+          }}
+        />
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Add a price
+        </Typography>
+        <TextField
+          name="price"
+          type="number"
+          style={{ marginTop: "10px", width: "100%" }}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
             style: { background: "white" },
           }}
         />
