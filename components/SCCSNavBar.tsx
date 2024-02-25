@@ -18,7 +18,7 @@ const pages = {
     'Create': '/create',
     'My Listings': '/my_listings',
     'Saved Listings': '/saved',
-    'Profile Test Page': '/profile/testUser',
+    'Profile Test Page': '/profile/bzhang1',
 };
 
 function ResponsiveAppBar(props: any) {

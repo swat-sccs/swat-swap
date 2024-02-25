@@ -181,7 +181,7 @@ const colorDropdownContent = (
 
 export default function SideBar() {
     return (
-        <Box className='grid content-between w-96 max-h-full overflow-y-auto'
+        <Box className='grid content-between w-80 max-h-full overflow-y-auto'
             component="form">
 
             <Box id="dropdown-Menus" className='w-auto '>
