@@ -32,11 +32,9 @@ export default function Create() {
     <form action="" onSubmit={handleSubmit}>
       <Container
         style={{
-          backgroundColor: "#f1f1f1",
           height: "auto",
           width: "50%",
           margin: "auto",
-          marginTop: "20px",
           padding: "40px",
           display: "flex",
           flexDirection: "column",
