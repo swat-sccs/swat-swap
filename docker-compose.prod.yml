@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 # This is the Swatswap production Docker Compose spec
 # You MUST have a .env file in this dir with the following vars set:

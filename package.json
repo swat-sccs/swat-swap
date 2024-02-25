@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.16",
-    "@prisma/client": "^5.5.2",
+    "@prisma/client": "^5.10.2",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/uuid": "^9.0.7",
@@ -30,7 +30,7 @@
     "@types/node": "^20.11.19",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
-    "prisma": "^5.9.1",
+    "prisma": "^5.10.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },

@@ -18,10 +18,11 @@ services:
     command: sh -c "npm install && npm run dev "
 
   swatswap-db:
-    image: postgres:16.1
+    image: postgres
+    container_name: postgres
     ports:
-      - 5432:5432
+      - 5434:5432
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: swatswap_db
+      # POSTGRES_DB: swatswap_db
