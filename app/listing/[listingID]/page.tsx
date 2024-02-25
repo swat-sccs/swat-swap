@@ -18,7 +18,7 @@ export default function ListingID() {
 
         <Grid item xs={12} md={6} >
           <Image
-            src="/static/images/cards/maxwell1.jpg"
+            src="/static/images/cards/uni.jpg"
             alt="image"
             width={400}
             height={400}
@@ -40,7 +40,78 @@ export default function ListingID() {
             textBottom textBottom textBottom textBottom
             text
           </Typography>
-
+          <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+            <Typography
+              fontSize={"18px"}
+              fontWeight={"bold"}>
+              Category:
+            </Typography>
+            <Typography
+              fontSize={"18px"}
+              style={{ marginLeft: "8px" }}>
+              cat
+            </Typography>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+            <Typography
+              fontSize={"18px"}
+              fontWeight={"bold"}>
+              Payment Type:
+            </Typography>
+            <Typography
+              fontSize={"18px"}
+              style={{ marginLeft: "8px" }}>
+              Garnet Cash
+            </Typography>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+            <Typography
+              fontSize={"18px"}
+              fontWeight={"bold"}>
+              Condition:
+            </Typography>
+            <Typography
+              fontSize={"18px"}
+              style={{ marginLeft: "8px" }}>
+              good
+            </Typography>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+            <Typography
+              fontSize={"18px"}
+              fontWeight={"bold"}>
+              Apparel Gender:
+            </Typography>
+            <Typography
+              fontSize={"18px"}
+              style={{ marginLeft: "8px" }}>
+              Gender
+            </Typography>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+            <Typography
+              fontSize={"18px"}
+              fontWeight={"bold"}>
+              Size:
+            </Typography>
+            <Typography
+              fontSize={"18px"}
+              style={{ marginLeft: "8px" }}>
+              big
+            </Typography>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+            <Typography
+              fontSize={"18px"}
+              fontWeight={"bold"}>
+              Color:
+            </Typography>
+            <Typography
+              fontSize={"18px"}
+              style={{ marginLeft: "8px" }}>
+              colorful
+            </Typography>
+          </div>
           <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
             <Typography
               fontSize={"18px"}
