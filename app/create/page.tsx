@@ -83,14 +83,7 @@ export default function Create() {
         >
           Add a title
         </Typography>
-        <TextField
-          name="title"
-          fullWidth
-          style={{ marginTop: "10px" }}
-          InputProps={{
-            style: { background: "white" },
-          }}
-        />
+        <TextField name="title" fullWidth style={{ marginTop: "10px" }} />
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
@@ -100,16 +93,137 @@ export default function Create() {
         </Typography>
         <Select
           name="category"
-          label="Category"
+          label="category"
           style={{
-            background: "white",
             marginTop: "10px",
             width: "50%",
           }}
         >
-          <MenuItem value="cats">Cats</MenuItem>
-          <MenuItem value="black-cats">Black Cats</MenuItem>
-          <MenuItem value="awesome-cats">Awesome Cats</MenuItem>
+          <MenuItem value="clothing & accessories">
+            clothing & accessories
+          </MenuItem>
+          <MenuItem value="furniture & decor">furniture & decor</MenuItem>
+          <MenuItem value="school supplies">school supplies</MenuItem>
+          <MenuItem value="books">books</MenuItem>
+          <MenuItem value="electronics">electronics</MenuItem>
+          <MenuItem value="sports equipment">sports equipment</MenuItem>
+          <MenuItem value="musical instruments">musical instruments</MenuItem>
+          <MenuItem value="transportation">transportation</MenuItem>
+          <MenuItem value="misc">misc</MenuItem>
+        </Select>
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Choose a payment type
+        </Typography>
+        <Select
+          name="payment"
+          label="payment"
+          style={{
+            marginTop: "10px",
+            width: "50%",
+          }}
+        >
+          <MenuItem value="cash">cash</MenuItem>
+          <MenuItem value="PayPal">PayPal</MenuItem>
+          <MenuItem value="Zelle">Zelle</MenuItem>
+          <MenuItem value="Venmo">Venmo</MenuItem>
+        </Select>
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Choose a condition
+        </Typography>
+        <Select
+          name="condition"
+          label="condition"
+          style={{
+            marginTop: "10px",
+            width: "50%",
+          }}
+        >
+          <MenuItem value="clothing & accessories">
+            clothing & accessories
+          </MenuItem>
+          <MenuItem value="brand new unboxed">brand new unboxed</MenuItem>
+          <MenuItem value="brand new open box">brand new open box</MenuItem>
+          <MenuItem value="like new">like new</MenuItem>
+          <MenuItem value="lightly used">lightly used</MenuItem>
+          <MenuItem value="well-loved">well-loved</MenuItem>
+          <MenuItem value="not working">not working</MenuItem>
+          <MenuItem value="parts missing">parts missing</MenuItem>
+        </Select>
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Choose an apparel gender
+        </Typography>
+        <Select
+          name="gender"
+          label="gender"
+          style={{
+            marginTop: "10px",
+            width: "50%",
+          }}
+        >
+          <MenuItem value="women's / feminine">women's / feminine </MenuItem>
+          <MenuItem value="men's / masculine">men's / masculine</MenuItem>
+          <MenuItem value="unisex / genderless">unisex / genderless</MenuItem>
+        </Select>
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Choose an apparel size
+        </Typography>
+        <Select
+          name="size"
+          label="size"
+          style={{
+            marginTop: "10px",
+            width: "50%",
+          }}
+        >
+          <MenuItem value="<xs">xxs</MenuItem>
+          <MenuItem value="xs">xs</MenuItem>
+          <MenuItem value="s">s</MenuItem>
+          <MenuItem value="m">m</MenuItem>
+          <MenuItem value="l">l</MenuItem>
+          <MenuItem value="xl">xl</MenuItem>
+          <MenuItem value="xxl">xxl</MenuItem>
+          <MenuItem value=">xxl">xxxl</MenuItem>
+        </Select>
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Choose a color
+        </Typography>
+        <Select
+          name="color"
+          label="color"
+          style={{
+            marginTop: "10px",
+            width: "50%",
+          }}
+        >
+          <MenuItem value="clothing & accessories">
+            clothing & accessories
+          </MenuItem>
+          <MenuItem value="light tones">light</MenuItem>
+          <MenuItem value="dark tones">dark</MenuItem>
+          <MenuItem value="neutral tones">neutral</MenuItem>
+          <MenuItem value="colorful tones">colorful</MenuItem>
+          <MenuItem value="warm tones">warm</MenuItem>
+          <MenuItem value="cool tones">cool</MenuItem>
         </Select>
         <Typography
           fontSize={"20px"}
@@ -136,9 +250,6 @@ export default function Create() {
           multiline
           rows={4}
           style={{ marginTop: "10px", width: "100%" }}
-          InputProps={{
-            style: { background: "white" },
-          }}
         />
         <Typography
           fontSize={"20px"}
@@ -153,7 +264,6 @@ export default function Create() {
           style={{ marginTop: "10px", width: "100%" }}
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
-            style: { background: "white" },
           }}
         />
         <Button style={{ marginTop: "20px" }} type="submit">
