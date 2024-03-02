@@ -100,7 +100,7 @@ export default function Create() {
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
         />
-        
+
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
@@ -114,7 +114,7 @@ export default function Create() {
           rows={4}
           style={{ marginTop: "10px", width: "100%" }}
         />
-       <Typography
+        <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
           style={{ marginTop: "20px" }}

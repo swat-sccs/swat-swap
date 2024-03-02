@@ -6,3 +6,5 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN chown -R node:node /usr/src/app
 USER node
+
+RUN NODE_ENV=development npm install
