@@ -7,7 +7,6 @@ import {
   ConditionType,
 } from "@/app/utils/types";
 import prisma from "@/prisma/prisma";
-import * as fs from "fs/promises";
 
 export async function POST(request: Request) {
   try {
