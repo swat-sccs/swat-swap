@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
 import {
   Container,
   Typography,
@@ -13,21 +14,46 @@ import {
   RadioGroup,
   Button,
   InputAdornment,
+  SelectChangeEvent,
 } from "@mui/material";
 
 export default function Create() {
+  const [formData, setFormData] = useState({
+    category: [],
+    payment: [],
+    condition: "",
+    gender: [],
+    size: [],
+    color: [],
+  });
+
+  const handleChange = (e: SelectChangeEvent) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
-
+    for (const [key, value] of Object.entries(formData)) {
+      data.append(key, JSON.stringify(value));
+    }
     const res = await fetch("/api/create_listing", {
       method: "POST",
       body: data,
     });
 
-    console.log(res);
+    // Temporary placeholder for the success message
+    if (res.ok) {
+      if (window.confirm("Listing created successfully")) {
+        window.location.href = "/";
+      }
+    } else {
+      alert("Error creating listing");
+    }
   };
+
   return (
     <form action="" onSubmit={handleSubmit}>
       <Container
@@ -141,17 +167,19 @@ export default function Create() {
             marginTop: "10px",
             width: "50%",
           }}
-          value={[]}
+          // @ts-ignore
+          value={formData.category}
+          onChange={handleChange}
         >
-          <MenuItem value="clothing & accessories">
+          <MenuItem value="clothing_accessories">
             clothing & accessories
           </MenuItem>
-          <MenuItem value="furniture & decor">furniture & decor</MenuItem>
-          <MenuItem value="school supplies">school supplies</MenuItem>
+          <MenuItem value="furniture_decor">furniture & decor</MenuItem>
+          <MenuItem value="school_supplies">school supplies</MenuItem>
           <MenuItem value="books">books</MenuItem>
           <MenuItem value="electronics">electronics</MenuItem>
-          <MenuItem value="sports equipment">sports equipment</MenuItem>
-          <MenuItem value="musical instruments">musical instruments</MenuItem>
+          <MenuItem value="sports_equipment">sports equipment</MenuItem>
+          <MenuItem value="music_instruments">musical instruments</MenuItem>
           <MenuItem value="transportation">transportation</MenuItem>
           <MenuItem value="misc">misc</MenuItem>
         </Select>
@@ -169,12 +197,14 @@ export default function Create() {
             marginTop: "10px",
             width: "50%",
           }}
-          value={[]}
+          onChange={handleChange}
+          //@ts-ignore
+          value={formData.payment}
         >
           <MenuItem value="cash">cash</MenuItem>
-          <MenuItem value="PayPal">PayPal</MenuItem>
-          <MenuItem value="Zelle">Zelle</MenuItem>
-          <MenuItem value="Venmo">Venmo</MenuItem>
+          <MenuItem value="paypal">PayPal</MenuItem>
+          <MenuItem value="zelle">Zelle</MenuItem>
+          <MenuItem value="venmo">Venmo</MenuItem>
         </Select>
         <Typography
           fontSize={"20px"}
@@ -185,23 +215,24 @@ export default function Create() {
         </Typography>
         <Select
           name="condition"
-          multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
-          value={[]}
+          onChange={handleChange}
+          //@ts-ignore
+          value={formData.condition}
         >
-          <MenuItem value="clothing & accessories">
+          <MenuItem value="clothing_accessories">
             clothing & accessories
           </MenuItem>
-          <MenuItem value="brand new unboxed">brand new unboxed</MenuItem>
-          <MenuItem value="brand new open box">brand new open box</MenuItem>
-          <MenuItem value="like new">like new</MenuItem>
-          <MenuItem value="lightly used">lightly used</MenuItem>
-          <MenuItem value="well-loved">well-loved</MenuItem>
-          <MenuItem value="not working">not working</MenuItem>
-          <MenuItem value="parts missing">parts missing</MenuItem>
+          <MenuItem value="brand_new_unboxed">brand new unboxed</MenuItem>
+          <MenuItem value="brand_new_openbox">brand new open box</MenuItem>
+          <MenuItem value="like_new">like new</MenuItem>
+          <MenuItem value="lightly_used">lightly used</MenuItem>
+          <MenuItem value="well_loved">well-loved</MenuItem>
+          <MenuItem value="not_working">not working</MenuItem>
+          <MenuItem value="parts_missing">parts missing</MenuItem>
         </Select>
         <Typography
           fontSize={"20px"}
@@ -217,13 +248,13 @@ export default function Create() {
             marginTop: "10px",
             width: "50%",
           }}
-          value={[]}
+          //@ts-ignore
+          value={formData.gender}
+          onChange={handleChange}
         >
-          <MenuItem value="women's / feminine">
-            {"women's / feminine "}
-          </MenuItem>
-          <MenuItem value="men's / masculine">{"men's / masculine"}</MenuItem>
-          <MenuItem value="unisex / genderless">unisex / genderless</MenuItem>
+          <MenuItem value="women">{"women's / feminine "}</MenuItem>
+          <MenuItem value="men">{"men's / masculine"}</MenuItem>
+          <MenuItem value="unisex">unisex / genderless</MenuItem>
         </Select>
         <Typography
           fontSize={"20px"}
@@ -239,16 +270,18 @@ export default function Create() {
             marginTop: "10px",
             width: "50%",
           }}
-          value={[]}
+          onChange={handleChange}
+          //@ts-ignore
+          value={formData.size}
         >
-          <MenuItem value="<xs">xxs</MenuItem>
+          <MenuItem value="xxs">xxs</MenuItem>
           <MenuItem value="xs">xs</MenuItem>
           <MenuItem value="s">s</MenuItem>
           <MenuItem value="m">m</MenuItem>
           <MenuItem value="l">l</MenuItem>
           <MenuItem value="xl">xl</MenuItem>
           <MenuItem value="xxl">xxl</MenuItem>
-          <MenuItem value=">xxl">xxxl</MenuItem>
+          <MenuItem value=">xxxl">xxxl</MenuItem>
         </Select>
         <Typography
           fontSize={"20px"}
@@ -264,7 +297,9 @@ export default function Create() {
             marginTop: "10px",
             width: "50%",
           }}
-          value={[]}
+          onChange={handleChange}
+          //@ts-ignore
+          value={formData.color}
         >
           <MenuItem value="clothing & accessories">
             clothing & accessories

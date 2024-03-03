@@ -21,11 +21,12 @@ model Listing {
   price       Int
   type        Type
   description String
-  category    Category?
-  paymentType PaymentType?
-  condition   Condition?
-  apparel     Apparel?
-  color       Color?
+  category    String []
+  paymentType String []
+  condition   Condition
+  apparel     String []
+  size        String []
+  color       String []
   userId      Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

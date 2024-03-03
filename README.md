@@ -3,6 +3,7 @@
 Welcome to Swat Swap, a community-driven platform tailored for Swarthmore College students to facilitate the exchange of goods and services. This GitHub repository contains the source code and documentation for the Swat Swap website.
 
 ## Table of Contents
+
 - [Introduction](#introduction)
 - [Key Features](#key-features)
 - [Getting Started](#getting-started)
@@ -54,6 +55,16 @@ To begin using Swat Swap, follow these steps:
 
    - Set up a local or remote database.
    - Update the database configuration in `config.js`.
+
+   Updating schema
+   ```bash
+   bin/migrate.sh
+   ```
+
+   Connecting to database
+   ```bash
+   bin/dbconnect.sh
+   ```
 
 4. Start the Docker dev server:
 

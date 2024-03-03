@@ -1,3 +1,5 @@
+// Kinda useless
+
 export const ListingType: {
   buying: "buying";
   selling: "selling";
