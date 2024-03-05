@@ -3,8 +3,8 @@ ENV NODE_ENV=development
 WORKDIR /usr/src/app
 # Leave ports for compose
 # EXPOSE 3000
-COPY package*.json ./
 RUN chown -R node:node /usr/src/app
-USER node
+RUN apt update 2> /dev/null
+RUN apt install -y netcat-openbsd 2> /dev/null
 
-RUN NODE_ENV=development npm install
+USER node

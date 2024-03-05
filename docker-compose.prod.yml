@@ -22,7 +22,7 @@ services:
     ports:
       - "${INTERNAL_PORT}:3000"
     # Ensure db is migrated to current version, generate bindings, and serve
-    command: sh -c "npm start"
+    command: sh -c "timeout 22 sh -c 'until nc -z $0 $1; do sleep 1; done' swatswap-db 5432 && npx prisma migrate deploy && npm start "
   swatswap-db:
     image: postgres:16.1
     volumes:
