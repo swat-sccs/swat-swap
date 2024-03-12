@@ -1,54 +1,86 @@
-import { list } from "postcss";
 export const dynamic = "force-dynamic"; // defaults to auto
-import {
-  ListingType,
-  CategoryType,
-  PaymentType,
-  ConditionType,
-} from "@/app/utils/types";
 import prisma from "@/prisma/prisma";
+import { createListingSchema } from "@/app/dtos/listing";
 
-export async function POST(request: Request) {
+export async function POST(req: Request, res: Response) {
   try {
-    const res = await request.formData();
+    // add user authentication and authorization checks
 
-    // Converting file to buffer
-    const image = res.get("image") as any;
-    const imageBuffer = await image.arrayBuffer();
-    const uint8Array = new Uint8Array(imageBuffer);
+    const requestBody = await req.formData();
 
-    // Apparently, FormData can't handle arrays, so we have to parse them manually
-    // Might need to change fix the any type for W.
-    const category = JSON.parse(res.getAll("category")[1] as any);
-    const payment = JSON.parse(res.getAll("payment")[1] as any);
-    const condition = JSON.parse(res.getAll("condition")[1] as any);
-    const gender = JSON.parse(res.getAll("gender")[1] as any);
-    const size = JSON.parse(res.getAll("size")[1] as any);
-    const color = JSON.parse(res.getAll("color")[1] as any);
+    const requiredFields = [
+      "title",
+      "description",
+      "type",
+      "category",
+      "price",
+      "paymentType",
+      "condition",
+      "apparelSize",
+      "apparelGender",
+      "color",
+    ];
 
-    const listing = await prisma.listing.create({
+    for (const field of requiredFields) {
+      if (!requestBody.has(field)) {
+        return new Response(`${field} is required`, { status: 400 });
+      }
+    }
+
+    const requestImageFile = requestBody.get("image");
+    if (!(requestImageFile instanceof File)) {
+      return new Response("Image file is required", { status: 400 });
+    }
+
+    const imageBuffer = await requestImageFile.arrayBuffer();
+    const imageBlob = new Blob([imageBuffer], { type: "image/jpeg" });
+    const imageFile = new File([imageBlob], "image.jpg");
+
+    const listingData = {
+      title: requestBody.get("title"),
+      price: Number(requestBody.get("price")),
+      description: requestBody.get("description"),
+      type: requestBody.get("type"),
+      category: new Array(requestBody.get("category")),
+      paymentType: new Array(requestBody.get("paymentType")),
+      condition: requestBody.get("condition"),
+      apparelSize: new Array(requestBody.get("apparelSize")),
+      apparelGender: new Array(requestBody.get("apparelGender")),
+      color: new Array(requestBody.get("color")),
+      image: imageFile,
+    };
+
+    const parsedListing = createListingSchema.parse(listingData);
+    await prisma.listing.create({
       data: {
-        title: res.get("title") as string,
-        description: res.get("description") as string,
-        type: res.get("type") as ListingType,
-        image: [Buffer.from(uint8Array)],
-        category: category,
-        paymentType: payment,
-        condition: condition,
-        apparel: gender,
-        size: size,
-        color: color,
-        price: Number(res.get("price")),
-
+        title: parsedListing.title,
+        description: parsedListing.description,
+        type: parsedListing.type,
+        image: [Buffer.from(imageBuffer)],
+        category: parsedListing.category,
+        paymentType: parsedListing.paymentType,
+        condition: parsedListing.condition,
+        apparel: parsedListing.apparelGender,
+        size: parsedListing.apparelSize,
+        color: parsedListing.color,
+        price: parsedListing.price,
         // Still need to make this field dynamic
         userId: 1,
       },
     });
-
-    console.log(listing);
-
-    return Response.json({ success: "Listing created successfully" });
+    return new Response("Listing created", { status: 201 });
   } catch (error) {
     console.error(error);
+    return new Response("Internal server error", { status: 500 });
+  }
+}
+
+export async function GET(req: Request, res: Response) {
+  try {
+    const listings = await prisma.listing.findMany();
+    return new Response(JSON.stringify(listings), { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return new Response("Internal server error", { status: 500 });
   }
 }

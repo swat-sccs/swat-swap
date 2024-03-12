@@ -1,11 +1,9 @@
 "use client";
 
-import React from "react";
-import { useState } from "react";
+import React, { useCallback } from "react";
 import {
   Container,
   Typography,
-  Grid,
   Radio,
   FormControlLabel,
   TextField,
@@ -14,48 +12,45 @@ import {
   RadioGroup,
   Button,
   InputAdornment,
-  SelectChangeEvent,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createListingSchema } from "../dtos/listing";
+import { CreateListing } from "../dtos/listing/create-listing";
+import { serialize } from "object-to-formdata";
+import { useRouter } from "next/navigation";
 
 export default function Create() {
-  const [formData, setFormData] = useState({
-    category: [],
-    payment: [],
-    condition: "",
-    gender: [],
-    size: [],
-    color: [],
+  const router = useRouter();
+  const { register, handleSubmit, control } = useForm<CreateListing>({
+    resolver: zodResolver(createListingSchema),
   });
 
-  const handleChange = (e: SelectChangeEvent) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const onFormSubmitSuccess = useCallback(
+    async (data: CreateListing) => {
+      const res = await fetch("/api/create_listing", {
+        method: "POST",
+        body: serialize(data, {
+          noAttributesWithArrayNotation: true,
+        }),
+      });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const data = new FormData(e.currentTarget);
-    for (const [key, value] of Object.entries(formData)) {
-      data.append(key, JSON.stringify(value));
-    }
-    const res = await fetch("/api/create_listing", {
-      method: "POST",
-      body: data,
-    });
-
-    // Temporary placeholder for the success message
-    if (res.ok) {
-      if (window.confirm("Listing created successfully")) {
-        window.location.href = "/";
+      if (res.ok) {
+        alert("Successfully created listing.");
+        router.push("/");
+      } else {
+        alert("Failed to created listing. Try again later.");
       }
-    } else {
-      alert("Error creating listing");
-    }
-  };
+    },
+    [router]
+  );
+
+  const onFormSubmitError = useCallback((error: any) => {
+    console.log(error);
+  }, []);
 
   return (
-    <form action="" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onFormSubmitSuccess, onFormSubmitError)}>
       <Container
         style={{
           height: "auto",
@@ -77,10 +72,10 @@ export default function Create() {
         </Typography>
 
         <RadioGroup
-          name="type"
           aria-labelledby="radiohead"
           aria-orientation="horizontal"
           row
+          {...register("type")}
         >
           <FormControlLabel
             value="selling"
@@ -109,7 +104,11 @@ export default function Create() {
         >
           Add a title
         </Typography>
-        <TextField name="title" fullWidth style={{ marginTop: "10px" }} />
+        <TextField
+          fullWidth
+          style={{ marginTop: "10px" }}
+          {...register("title")}
+        />
 
         <Typography
           fontSize={"20px"}
@@ -119,12 +118,14 @@ export default function Create() {
           Add a price
         </Typography>
         <TextField
-          name="price"
           type="number"
           style={{ marginTop: "10px", width: "30%" }}
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
+          {...register("price", {
+            valueAsNumber: true,
+          })}
         />
 
         <Typography
@@ -135,10 +136,10 @@ export default function Create() {
           Add a description
         </Typography>
         <TextField
-          name="description"
           multiline
           rows={4}
           style={{ marginTop: "10px", width: "100%" }}
+          {...register("description")}
         />
         <Typography
           fontSize={"20px"}
@@ -147,11 +148,21 @@ export default function Create() {
         >
           Add images
         </Typography>
-        <input
-          type="file"
-          style={{ marginTop: "10px" }}
-          accept="image/*"
+        <Controller
           name="image"
+          control={control}
+          render={({ field: { value, onChange, ...field } }) => (
+            <input
+              type="file"
+              style={{ marginTop: "10px" }}
+              accept="image/*"
+              onChange={(e) => {
+                e.preventDefault();
+                onChange(e.target.files?.length ? e.target.files[0] : null);
+              }}
+              {...field}
+            />
+          )}
         />
         <Typography
           fontSize={"20px"}
@@ -161,15 +172,13 @@ export default function Create() {
           Choose a category
         </Typography>
         <Select
-          name="category"
           multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
-          // @ts-ignore
-          value={formData.category}
-          onChange={handleChange}
+          defaultValue={[]}
+          {...register("category")}
         >
           <MenuItem value="clothing_accessories">
             clothing & accessories
@@ -191,15 +200,13 @@ export default function Create() {
           Choose a payment type
         </Typography>
         <Select
-          name="payment"
           multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
-          onChange={handleChange}
-          //@ts-ignore
-          value={formData.payment}
+          defaultValue={[]}
+          {...register("paymentType")}
         >
           <MenuItem value="cash">cash</MenuItem>
           <MenuItem value="paypal">PayPal</MenuItem>
@@ -214,18 +221,13 @@ export default function Create() {
           Choose a condition
         </Typography>
         <Select
-          name="condition"
           style={{
             marginTop: "10px",
             width: "50%",
           }}
-          onChange={handleChange}
-          //@ts-ignore
-          value={formData.condition}
+          defaultValue={[]}
+          {...register("condition")}
         >
-          <MenuItem value="clothing_accessories">
-            clothing & accessories
-          </MenuItem>
           <MenuItem value="brand_new_unboxed">brand new unboxed</MenuItem>
           <MenuItem value="brand_new_openbox">brand new open box</MenuItem>
           <MenuItem value="like_new">like new</MenuItem>
@@ -242,20 +244,19 @@ export default function Create() {
           Choose an apparel gender
         </Typography>
         <Select
-          name="gender"
           multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
-          //@ts-ignore
-          value={formData.gender}
-          onChange={handleChange}
+          defaultValue={[]}
+          {...register("apparelGender")}
         >
           <MenuItem value="women">{"women's / feminine "}</MenuItem>
           <MenuItem value="men">{"men's / masculine"}</MenuItem>
           <MenuItem value="unisex">unisex / genderless</MenuItem>
         </Select>
+
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
@@ -264,15 +265,13 @@ export default function Create() {
           Choose an apparel size
         </Typography>
         <Select
-          name="size"
           multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
-          onChange={handleChange}
-          //@ts-ignore
-          value={formData.size}
+          defaultValue={[]}
+          {...register("apparelSize")}
         >
           <MenuItem value="xxs">xxs</MenuItem>
           <MenuItem value="xs">xs</MenuItem>
@@ -283,6 +282,7 @@ export default function Create() {
           <MenuItem value="xxl">xxl</MenuItem>
           <MenuItem value=">xxxl">xxxl</MenuItem>
         </Select>
+
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
@@ -291,15 +291,13 @@ export default function Create() {
           Choose a color
         </Typography>
         <Select
-          name="color"
           multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
-          onChange={handleChange}
-          //@ts-ignore
-          value={formData.color}
+          defaultValue={[]}
+          {...register("color")}
         >
           <MenuItem value="clothing & accessories">
             clothing & accessories
