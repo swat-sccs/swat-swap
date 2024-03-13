@@ -71,31 +71,37 @@ export default function Create() {
           Choose a type of listing
         </Typography>
 
-        <RadioGroup
-          aria-labelledby="radiohead"
-          aria-orientation="horizontal"
-          row
-          {...register("type")}
-        >
-          <FormControlLabel
-            value="selling"
-            control={<Radio />}
-            label="Selling"
-            style={{ marginRight: "40px" }}
-          />
-          <FormControlLabel
-            value="buying"
-            control={<Radio />}
-            label="Buying"
-            style={{ marginRight: "40px" }}
-          />
-          <FormControlLabel
-            value="service"
-            control={<Radio />}
-            label="Service"
-            style={{ marginRight: "40px" }}
-          />
-        </RadioGroup>
+        <Controller
+          name="type"
+          control={control}
+          render={({ field }) => (
+            <RadioGroup
+              aria-labelledby="radiohead"
+              aria-orientation="horizontal"
+              row
+              {...field}
+            >
+              <FormControlLabel
+                value="selling"
+                control={<Radio />}
+                label="Selling"
+                style={{ marginRight: "40px" }}
+              />
+              <FormControlLabel
+                value="buying"
+                control={<Radio />}
+                label="Buying"
+                style={{ marginRight: "40px" }}
+              />
+              <FormControlLabel
+                value="service"
+                control={<Radio />}
+                label="Service"
+                style={{ marginRight: "40px" }}
+              />
+            </RadioGroup>
+          )}
+        />
 
         <Typography
           fontSize={"20px"}
