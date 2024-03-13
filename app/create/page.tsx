@@ -19,6 +19,7 @@ import { createListingSchema } from "../dtos/listing";
 import { CreateListing } from "../dtos/listing/create-listing";
 import { serialize } from "object-to-formdata";
 import { useRouter } from "next/navigation";
+import { createListing } from "../actions";
 
 export default function Create() {
   const router = useRouter();
@@ -28,14 +29,11 @@ export default function Create() {
 
   const onFormSubmitSuccess = useCallback(
     async (data: CreateListing) => {
-      const res = await fetch("/api/create_listing", {
-        method: "POST",
-        body: serialize(data, {
-          noAttributesWithArrayNotation: true,
-        }),
-      });
-
-      if (res.ok) {
+      const res = await createListing(
+        serialize(data, { noAttributesWithArrayNotation: true })
+      );
+      console.log(res);
+      if (res.status === 200) {
         alert("Successfully created listing.");
         router.push("/");
       } else {
