@@ -1,10 +1,12 @@
 import ListingCard from "@/components/ListingCard";
 import SideBar from "@/components/SideBar";
 import { Box, Grid } from "@mui/material";
-import { getAllActiveListings } from "../lib/listing";
+import { getAllActiveUserListings } from "../lib/userListing";
 
 export default async function Home() {
-  const listings = await getAllActiveListings();
+  const userId = "123";
+  const userIdNumber = parseInt(userId, 10);
+  const listings = await getAllActiveUserListings(userIdNumber);
 
   return (
     <Box className="flex h-[calc(100vh-68.5px)]">
@@ -17,8 +19,8 @@ export default async function Home() {
         alignItems="stretch"
         className="flex-1 p-4 overflow-y-scroll"
       >
-        {listings.map((listing) => (
-          <ListingCard key={listing.id} listing={listing} />
+        {listings.map((userListing) => (
+          <ListingCard key={userListing.id} listing={userListing} />
         ))}
       </Grid>
     </Box>
