@@ -6,6 +6,10 @@ export async function getAllActiveListings(): Promise<Listing[]> {
   const listings = await prisma.listing.findMany({
     where: {
       active: true,
+      userId: {
+        // replace with actual userId
+        not: 0,
+      },
     },
   });
 
