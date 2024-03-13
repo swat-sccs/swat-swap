@@ -20,3 +20,24 @@ export async function getAllActiveListings(): Promise<Listing[]> {
   const parsedListings = getAllListingsSchema.parse(mappedListings);
   return parsedListings;
 }
+
+export async function getUserCreatedListings(
+  userId: number
+): Promise<Listing[]> {
+  const listings = await prisma.listing.findMany({
+    where: {
+      userId: userId,
+    },
+  });
+
+  const mappedListings = listings.map((listing) => {
+    const imageFile = new File([listing.image[0]], "image.jpg");
+    return {
+      ...listing,
+      image: imageFile,
+    };
+  });
+
+  const parsedListings = getAllListingsSchema.parse(mappedListings);
+  return parsedListings;
+}
