@@ -4,6 +4,7 @@ import { Box, Grid } from "@mui/material";
 import { getAllActiveUserListings } from "../lib/userListing";
 
 export default async function Home() {
+    // dummy id
   const userId = "123";
   const userIdNumber = parseInt(userId, 10);
   const listings = await getAllActiveUserListings(userIdNumber);
