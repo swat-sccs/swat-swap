@@ -25,5 +25,3 @@ export default async function Home() {
     </Box>
   );
 }
-
-// export async
