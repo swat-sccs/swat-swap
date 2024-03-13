@@ -21,7 +21,7 @@ model Listing {
   price       Int
   type        Type
   description String
-  category    String []
+  category    Category []
   paymentType String []
   condition   Condition
   apparel     String []
