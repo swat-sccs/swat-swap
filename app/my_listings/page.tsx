@@ -5,9 +5,7 @@ import { getAllActiveUserListings } from "../lib/userListing";
 
 export default async function Home() {
   // dummy id
-  const userId = "123";
-  const userIdNumber = parseInt(userId, 10);
-  const listings = await getAllActiveUserListings(userIdNumber);
+  const listings = await getAllActiveUserListings(1);
 
   return (
     <Box className="flex h-[calc(100vh-68.5px)]">
