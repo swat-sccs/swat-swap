@@ -12,7 +12,7 @@ model User {
   name     String
   email    String    @unique
   listings Listing[]
-  displayname String @default("")
+  displayName String @default("")
   biography String @default("")
 }
 
