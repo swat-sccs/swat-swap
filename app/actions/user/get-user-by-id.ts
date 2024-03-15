@@ -1,6 +1,6 @@
 "use server";
 
-import { getUserSchema } from "@/app/dtos/user";
+import { userSchema } from "@/app/dtos/user";
 import prisma from "@/prisma/prisma";
 
 export async function getUserById(userId: number) {
@@ -13,6 +13,6 @@ export async function getUserById(userId: number) {
     },
   });
 
-  const parsedUser = getUserSchema.parse(user);
+  const parsedUser = userSchema.parse(user);
   return parsedUser;
 }

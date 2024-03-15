@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const getUserSchema = z.object({
+export const userSchema = z.object({
   id: z.number(),
   name: z.string(),
   email: z.string(),
@@ -8,4 +8,4 @@ export const getUserSchema = z.object({
   biography: z.string(),
 });
 
-export type User = z.infer<typeof getUserSchema>;
+export type User = z.infer<typeof userSchema>;
