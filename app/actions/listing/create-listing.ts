@@ -10,7 +10,7 @@ import {
 import { listingImagesBucketName } from "@/app/config";
 
 export async function createListing(formData: FormData) {
-  // TODO: get access to the user's unique ID
+  // TODO: get access to the user's unique ID dynamically
   const userId = 1;
 
   try {
@@ -95,7 +95,7 @@ export async function createListing(formData: FormData) {
         size: validatedListingFormData.apparelSize,
         color: validatedListingFormData.color,
         price: validatedListingFormData.price,
-        // Still need to make this field dynamic
+        // TODO: make this field dynamic
         userId: 1,
       },
     });
