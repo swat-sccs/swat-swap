@@ -12,8 +12,8 @@ export async function getAllActiveUserListings(
     where: {
       active: true,
       userId: {
-        // TODO: replace with actual userId
-        not: userId,
+        // TODO: replace with actual userId (keep for now for testing)
+        not: 2,
       },
     },
   });
