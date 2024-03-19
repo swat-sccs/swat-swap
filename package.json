@@ -20,6 +20,7 @@
     "@types/react-dom": "^18",
     "@types/uuid": "^9.0.7",
     "autoprefixer": "^10.0.1",
+    "minio": "^7.1.3",
     "next": "14.0.1",
     "next-auth": "^4.24.5",
     "object-to-formdata": "^4.5.1",
@@ -31,6 +32,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/minio": "^7.1.1",
     "@types/node": "^20.11.19",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
