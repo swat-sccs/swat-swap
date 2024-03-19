@@ -1,11 +1,19 @@
 import { z } from "zod";
 import { ListingCategories, ListingConditions, ListingTypes } from ".";
 
-export const getListingSchema = z.object({
+export const listingImageSchema = z.object({
+  id: z.number(),
+  bucketName: z.string(),
+  fileName: z.string(),
+  checksum: z.string(),
+  listingId: z.number(),
+});
+
+export const listingSchema = z.object({
   id: z.number(),
   userId: z.number(),
   active: z.boolean(),
-  image: z.instanceof(File),
+  images: z.array(listingImageSchema),
   title: z.string(),
   price: z.number().positive(),
   type: z.nativeEnum(ListingTypes),
@@ -20,6 +28,6 @@ export const getListingSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const getAllListingsSchema = z.array(getListingSchema);
+export const listingsSchema = z.array(listingSchema);
 
-export type Listing = z.infer<typeof getListingSchema>;
+export type Listing = z.infer<typeof listingSchema>;

@@ -28,7 +28,7 @@ export enum ListingCategories {
   Misc = "misc",
 }
 
-export const createListingSchema = z.object({
+export const createListingFormDataSchema = z.object({
   image: z.instanceof(File),
   title: z.string(),
   price: z.number().positive(),
@@ -42,4 +42,4 @@ export const createListingSchema = z.object({
   color: z.array(z.string()),
 });
 
-export type CreateListing = z.infer<typeof createListingSchema>;
+export type CreateListing = z.infer<typeof createListingFormDataSchema>;
