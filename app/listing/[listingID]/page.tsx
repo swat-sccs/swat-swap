@@ -1,8 +1,34 @@
-import { Container, Typography, Grid } from '@mui/material';
+import { Container, Typography, Grid, Button } from '@mui/material';
 // import style from './Product.module.css';
 import Image from 'next/image';
+import prisma from '@/prisma/prisma';
+import { getUserById } from "@/app/actions";
+import { User } from "@/app/dtos";
 
-export default function ListingID() {
+async function getListing(listing: number) {
+  'use server'
+  return await prisma.listing.findUnique({
+    where: {
+      id: listing,
+    }
+  })
+}
+
+async function getUserId(userID: number) {
+  'use server'
+  return await prisma.user.findUnique({
+    where: {
+      id: userID,
+    }
+  })
+}
+
+export default async function ListingID({ params }: { params: { listingID: number } }) {
+  const listing = await getListing(params.listingID);
+  const userId = listing?.userId ?? 1;
+  const user: User = await getUserById(userId);
+  const formattedCreatedAt = listing?.createdAt ? new Date(listing.createdAt).toLocaleString() : '';
+
   return (
     <Container style={{
       width: "75%",
@@ -27,18 +53,15 @@ export default function ListingID() {
 
         <Grid item xs={12} md={6} >
           <Typography variant="h5">
-            Product Title
+            {listing?.title}
           </Typography>
           <Typography
             fontSize={"20px"}
             fontWeight={"bold"}>
-            $69.00
+            ${listing?.price}
           </Typography>
           <Typography fontSize={"18px"}>
-            Bottom text Bottom textBottom textBottom
-            textBottom textBottom textBottom text Bottom
-            textBottom textBottom textBottom textBottom
-            text
+          {listing?.description}
           </Typography>
           <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
             <Typography
@@ -49,7 +72,7 @@ export default function ListingID() {
             <Typography
               fontSize={"18px"}
               style={{ marginLeft: "8px" }}>
-              cat
+              {listing?.category}
             </Typography>
           </div>
           <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
@@ -61,7 +84,7 @@ export default function ListingID() {
             <Typography
               fontSize={"18px"}
               style={{ marginLeft: "8px" }}>
-              Garnet Cash
+              {listing?.paymentType}
             </Typography>
           </div>
           <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
@@ -73,7 +96,7 @@ export default function ListingID() {
             <Typography
               fontSize={"18px"}
               style={{ marginLeft: "8px" }}>
-              good
+              {listing?.condition}
             </Typography>
           </div>
           <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
@@ -85,7 +108,7 @@ export default function ListingID() {
             <Typography
               fontSize={"18px"}
               style={{ marginLeft: "8px" }}>
-              Gender
+              {listing?.apparel}
             </Typography>
           </div>
           <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
@@ -97,7 +120,7 @@ export default function ListingID() {
             <Typography
               fontSize={"18px"}
               style={{ marginLeft: "8px" }}>
-              big
+              {listing?.size}
             </Typography>
           </div>
           <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
@@ -109,7 +132,7 @@ export default function ListingID() {
             <Typography
               fontSize={"18px"}
               style={{ marginLeft: "8px" }}>
-              colorful
+              {listing?.color}
             </Typography>
           </div>
           <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
@@ -121,14 +144,14 @@ export default function ListingID() {
             <Typography
               fontSize={"18px"}
               style={{ marginLeft: "8px" }}>
-              Alina Vykliuk
+              {user.name}
             </Typography>
           </div>
           <Typography fontSize={"18px"}>
-            +38(068)6969696
+            696969
           </Typography>
           <Typography fontSize={"18px"}>
-            avykliu1@swarthmore.edu
+            {user.email}
           </Typography>
           <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
             <Typography
@@ -139,10 +162,11 @@ export default function ListingID() {
             <Typography
               fontSize={"18px"}
               style={{ marginLeft: "8px" }}>
-              Feb 18, 2024
+              {formattedCreatedAt}
             </Typography>
           </div>
         </Grid>
+        <Button>delete</Button>
       </Grid>
 
     </Container>
