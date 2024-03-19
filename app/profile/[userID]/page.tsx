@@ -1,7 +1,7 @@
 import ListingCard from "@/components/ListingCard";
 import { Divider, Icon } from "@mui/material";
 import Image from "next/image";
-import { getAllActiveUserListings } from "../../lib/userListing";
+import { getAllActiveUserListings } from "@/app/actions";
 import { getUserById } from "@/app/actions";
 import { User } from "@/app/dtos";
 import { Edit } from "@/components/icons";
