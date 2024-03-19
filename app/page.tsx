@@ -1,10 +1,12 @@
 import ListingCard from "@/components/ListingCard";
 import SideBar from "@/components/SideBar";
 import { Box, Grid } from "@mui/material";
-import { getAllActiveListings } from "@/app/actions";
+import { getAllActiveUserListings } from "@/app/actions";
 
 export default async function Home() {
-  const listings = await getAllActiveListings();
+  // TODO: refactor with actual userId (may want to do this in the server action itself)
+  const userId = 1;
+  const listings = await getAllActiveUserListings(userId);
 
   return (
     <Box className="flex h-[calc(100vh-68.5px)]">
