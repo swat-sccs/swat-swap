@@ -8,32 +8,41 @@ datasource db {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  name     String
-  email    String    @unique
-  listings Listing[]
-  displayName String @default("")
-  biography String @default("")
+  id          Int       @id @default(autoincrement())
+  name        String
+  email       String    @unique
+  listings    Listing[]
+  displayName String    @default("")
+  biography   String    @default("")
+}
+
+model ListingImage {
+  id         Int     @id @default(autoincrement())
+  bucketName String
+  fileName   String
+  checksum   String
+  listingId  Int
+  listing    Listing @relation(fields: [listingId], references: [id])
 }
 
 model Listing {
-  id          Int      @id @default(autoincrement())
-  image       Bytes[] @db.ByteA
+  id          Int            @id @default(autoincrement())
   title       String
   price       Int
   type        Type
   description String
-  category    Category []
-  paymentType String []
+  images      ListingImage[]
+  category    Category[]
+  paymentType String[]
   condition   Condition
-  apparel     String []
-  size        String []
-  color       String []
+  apparel     String[]
+  size        String[]
+  color       String[]
   userId      Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  user        User     @relation(fields: [userId], references: [id])
-  active     Boolean  @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  user        User           @relation(fields: [userId], references: [id])
+  active      Boolean        @default(true)
 }
 
 enum Type {
