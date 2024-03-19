@@ -1,7 +1,7 @@
 import ListingCard from "@/components/ListingCard";
 import SideBar from "@/components/SideBar";
 import { Box, Grid } from "@mui/material";
-import { getAllActiveListings } from "./lib/listing";
+import { getAllActiveListings } from "@/app/actions";
 
 export default async function Home() {
   const listings = await getAllActiveListings();

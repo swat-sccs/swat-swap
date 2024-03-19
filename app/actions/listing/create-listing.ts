@@ -1,10 +1,18 @@
 "use server";
 
-import { createListingSchema } from "@/app/dtos/listing";
+import { createListingFormDataSchema } from "@/app/dtos/listing";
 import { revalidatePath } from "next/cache";
 import prisma from "@/prisma/prisma";
+import {
+  createBucketIfNotExists,
+  uploadFileToListingImagesBucket,
+} from "@/minio/actions";
+import { listingImagesBucketName } from "@/app/config";
 
 export async function createListing(formData: FormData) {
+  // TODO: get access to the user's unique ID
+  const userId = 1;
+
   try {
     const requiredFields = [
       "title",
@@ -30,10 +38,6 @@ export async function createListing(formData: FormData) {
       return new Response("Image file is required", { status: 400 });
     }
 
-    const imageBuffer = await requestImageFile.arrayBuffer();
-    const imageBlob = new Blob([imageBuffer], { type: "image/jpeg" });
-    const imageFile = new File([imageBlob], "image.jpg");
-
     const listingData = {
       title: formData.get("title"),
       price: Number(formData.get("price")),
@@ -45,23 +49,52 @@ export async function createListing(formData: FormData) {
       apparelSize: new Array(formData.get("apparelSize")),
       apparelGender: new Array(formData.get("apparelGender")),
       color: new Array(formData.get("color")),
-      image: imageFile,
+      image: requestImageFile,
     };
 
-    const parsedListing = createListingSchema.parse(listingData);
+    const validatedListingFormData =
+      createListingFormDataSchema.parse(listingData);
+
+    await createBucketIfNotExists(listingImagesBucketName);
+
+    const imageBuffer = await requestImageFile.arrayBuffer();
+
+    const digest = await crypto.subtle.digest("SHA-256", imageBuffer);
+    const digestBytes = new Uint8Array(digest);
+    const checksum = btoa(
+      digestBytes.reduce((acc, byte) => acc + String.fromCharCode(byte), "")
+    );
+
+    await uploadFileToListingImagesBucket(
+      requestImageFile,
+      listingImagesBucketName
+    );
+
+    const listingImages = [
+      {
+        bucketName: listingImagesBucketName,
+        checksum: checksum,
+        fileName: requestImageFile.name,
+      },
+    ];
+
     await prisma.listing.create({
       data: {
-        title: parsedListing.title,
-        description: parsedListing.description,
-        type: parsedListing.type,
-        image: [Buffer.from(imageBuffer)],
-        category: parsedListing.category,
-        paymentType: parsedListing.paymentType,
-        condition: parsedListing.condition,
-        apparel: parsedListing.apparelGender,
-        size: parsedListing.apparelSize,
-        color: parsedListing.color,
-        price: parsedListing.price,
+        title: validatedListingFormData.title,
+        description: validatedListingFormData.description,
+        type: validatedListingFormData.type,
+        images: {
+          createMany: {
+            data: listingImages,
+          },
+        },
+        category: validatedListingFormData.category,
+        paymentType: validatedListingFormData.paymentType,
+        condition: validatedListingFormData.condition,
+        apparel: validatedListingFormData.apparelGender,
+        size: validatedListingFormData.apparelSize,
+        color: validatedListingFormData.color,
+        price: validatedListingFormData.price,
         // Still need to make this field dynamic
         userId: 1,
       },
