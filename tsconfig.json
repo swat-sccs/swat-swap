@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "app/env.mjs"  ],
   "exclude": [
     "node_modules"
   ]
