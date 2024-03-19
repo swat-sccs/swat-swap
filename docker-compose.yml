@@ -30,6 +30,24 @@ services:
       - swatswap-db-data:/var/lib/postgresql/data
     env_file:
       - .env.local
+    
+  swatswap-minio:
+    image: minio/minio
+    command:
+      - server
+      - /data
+      - --console-address
+      - ":9001"
+    container_name: swatswap-minio
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: password
+    volumes:
+      - swatswap-minio-data:/data
 
 volumes:
   swatswap-db-data:
+  swatswap-minio-data:
