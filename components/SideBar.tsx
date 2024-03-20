@@ -173,7 +173,7 @@ const colorDropdownContent = (
 export default function SideBar() {
   return (
     <Box
-      className="grid content-between w-80 max-h-full overflow-y-auto"
+      className="grid content-between w-80 max-h-full overflow-y-auto flex-shrink-0"
       component="form"
     >
       <Box id="dropdown-Menus" className="w-auto ">
