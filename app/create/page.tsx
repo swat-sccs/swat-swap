@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createListingSchema } from "../dtos/listing";
+import { createListingFormDataSchema } from "../dtos/listing";
 import { CreateListing } from "../dtos/listing/create-listing";
 import { serialize } from "object-to-formdata";
 import { useRouter } from "next/navigation";
@@ -24,7 +24,7 @@ import { createListing } from "../actions";
 export default function Create() {
   const router = useRouter();
   const { register, handleSubmit, control } = useForm<CreateListing>({
-    resolver: zodResolver(createListingSchema),
+    resolver: zodResolver(createListingFormDataSchema),
   });
 
   const onFormSubmitSuccess = useCallback(
