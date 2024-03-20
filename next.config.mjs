@@ -1,16 +1,16 @@
 /** @type {import('next').NextConfig} */
-import("./app/env.mjs")
+import("./app/env.mjs");
 const nextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: "http",
-                hostname: "host.docker.internal",  
+                hostname: process.env.MINIO_ENDPOINT,
                 port: "9000",
-                pathname: "/swatswap-listing-images/*"
-            }
+                pathname: "**"
+            },
         ]
     }
 };
 
 export default nextConfig;
+
