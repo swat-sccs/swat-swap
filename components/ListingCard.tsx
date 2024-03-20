@@ -1,86 +1,45 @@
 import * as React from "react";
 
-import { blue } from "@mui/material/colors";
-import {
-  Avatar,
-  IconButton,
-  Card,
-  CardHeader,
-  CardMedia,
-  CardActions,
-  Typography,
-  Box,
-  Link,
-} from "@mui/material";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { Listing } from "@/app/dtos/listing";
+import Image from "next/image";
+import {
+  listingImagesBucketName,
+  minioEndpoint,
+  minioPort,
+} from "@/app/config";
+import ListingTypePill from "./ListingTypePill";
+import Link from "next/link";
 
 export interface ListingCardProps {
   listing: Listing;
 }
 
-const cardWidth = 256;
-
 export default function ListingCard({ listing }: ListingCardProps) {
-  const link = "/listing/" + listing.id;
-
   return (
-    <Card sx={{ maxWidth: cardWidth, margin: 1 }}>
-      <CardHeader
-        title={
-          <Typography
-            className={"max-w-56"}
-            noWrap
-            variant="h5"
-            color="text.primary"
-          >
-            <Link href={link} underline="none">
-              {listing.title}
-            </Link>
-          </Typography>
-        }
-        subheader={
-          <Box className="flex justify-between">
-            <Typography variant="h6" color="text.primary">
-              ${listing.price}
-            </Typography>
-            <Typography
-              variant="h6"
-              fontWeight={600}
-              sx={{
-                color: "black",
-                backgroundColor: {
-                  buying: "#9EEA6C",
-                  selling: "#EA6C6C",
-                  service: "#EA6C6C",
-                }[listing.type],
-                paddingInline: "6px",
-                borderRadius: "4px",
-              }}
-            >
-              {listing.type}
-            </Typography>
-          </Box>
-        }
-      />
+    <div className="flex flex-col p-4 shadow-md rounded-lg h-fit gap-y-2">
+      <div className="flex justify-between">
+        <Link href={`listing/${listing.id}`}>
+          <p className="text-xl font-semibold">{listing.title}</p>
+        </Link>
+        <p className="font-semibold">${listing.price}</p>
+      </div>
 
-      <CardMedia
-        sx={{ height: (cardWidth * 4) / 5, width: cardWidth }}
-        component="img"
-        // think about image support later
-        // image={listing.image}
-        alt="ooh what he doing :3"
-      />
-
-      <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-        <IconButton aria-label="bookmark">
-          <BookmarkIcon />
-        </IconButton>
-
-        <Avatar sx={{ bgcolor: blue[500] }} aria-label="User">
-          :3
-        </Avatar>
-      </CardActions>
-    </Card>
+      {listing.images.map((image) => (
+        <div
+          key={image.id}
+          className="flex flex-col relative min-w-64 min-h-64 p-8 overflow-hidden"
+        >
+          <Image
+            fill={true}
+            className="object-cover"
+            src={`http://${minioEndpoint}:${minioPort}/${listingImagesBucketName}/${image.fileName}`}
+            alt="listing image featuring a product/service"
+          />
+        </div>
+      ))}
+      <div className="flex justify-end">
+        <ListingTypePill type={listing.type} />
+      </div>
+    </div>
   );
 }
