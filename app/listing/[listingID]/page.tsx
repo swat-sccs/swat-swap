@@ -1,15 +1,23 @@
 "use server";
-import { Container, Typography, Grid, Button } from "@mui/material";
+import { Container, Typography, Grid, Button, Box } from "@mui/material";
 // import style from './Product.module.css';
 import Image from "next/image";
 import prisma from "@/prisma/prisma";
 import { getUserById } from "@/app/actions";
 import { User } from "@/app/dtos";
+import {
+  listingImagesBucketName,
+  minioEndpoint,
+  minioPort,
+} from "@/app/config";
 
 async function getListing(listingId: number) {
   return await prisma.listing.findUnique({
     where: {
       id: listingId,
+    },
+    include: {
+      images: true,
     },
   });
 }
@@ -49,12 +57,21 @@ export default async function ListingID({
     >
       <Grid container spacing={2} style={{ margin: "8px" }}>
         <Grid item xs={12} md={6}>
-          <Image
-            src="/static/images/cards/uni.jpg"
-            alt="image"
-            width={400}
-            height={400}
-          />
+          <Box
+            sx={{
+              height: '90%',
+              width: '90%',
+              overflow: "clip",
+              position: "relative",
+            }}
+          >
+            <Image
+              fill={true}
+              src={`http://${minioEndpoint}:${minioPort}/${listingImagesBucketName}/${listing?.images[0].fileName}`}
+              alt="listing image featuring a product/service"
+              className="object-cover overflow-clip"
+            />
+          </Box>
         </Grid>
 
         <Grid item xs={12} md={6} gap={8}>
@@ -133,7 +150,6 @@ export default async function ListingID({
               {user.name}
             </Typography>
           </div>
-          <Typography fontSize={"18px"}>696969</Typography>
           <Typography fontSize={"18px"}>{user.email}</Typography>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
