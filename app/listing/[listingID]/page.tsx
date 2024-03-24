@@ -78,9 +78,17 @@ export default async function ListingID({
             <Typography fontSize={"18px"} fontWeight={"bold"}>
               Category:
             </Typography>
-            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {listing?.category}
-            </Typography>
+
+            {listing?.category.map((category, index) => (
+              <Typography
+                key={category}
+                fontSize={"18px"}
+                style={{ marginLeft: "8px" }}
+              >
+                {category}
+                {index !== listing.category.length - 1 && ","}
+              </Typography>
+            ))}
           </div>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
@@ -116,9 +124,16 @@ export default async function ListingID({
             <Typography fontSize={"18px"} fontWeight={"bold"}>
               Apparel Gender:
             </Typography>
-            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {listing?.apparel}
-            </Typography>
+            {listing?.apparel.map((appar, index) => (
+              <Typography
+                key={appar}
+                fontSize={"18px"}
+                style={{ marginLeft: "8px" }}
+              >
+                {appar}
+                {index !== listing.apparel.length - 1 && ","}
+              </Typography>
+            ))}
           </div>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
@@ -126,9 +141,16 @@ export default async function ListingID({
             <Typography fontSize={"18px"} fontWeight={"bold"}>
               Size:
             </Typography>
-            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {listing?.size}
-            </Typography>
+            {listing?.size.map((size, index) => (
+              <Typography
+                key={size}
+                fontSize={"18px"}
+                style={{ marginLeft: "8px" }}
+              >
+                {size}
+                {index !== listing.size.length - 1 && ","}
+              </Typography>
+            ))}
           </div>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
@@ -136,9 +158,16 @@ export default async function ListingID({
             <Typography fontSize={"18px"} fontWeight={"bold"}>
               Color:
             </Typography>
-            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {listing?.color}
-            </Typography>
+            {listing?.color.map((color, index) => (
+              <Typography
+                key={color}
+                fontSize={"18px"}
+                style={{ marginLeft: "8px" }}
+              >
+                {color}
+                {index !== listing.color.length - 1 && ","}
+              </Typography>
+            ))}
           </div>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
