@@ -22,7 +22,7 @@ model ListingImage {
   fileName   String
   checksum   String
   listingId  Int
-  listing    Listing @relation(fields: [listingId], references: [id])
+  listing    Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model Listing {
