@@ -3,24 +3,14 @@ import { Container, Typography, Grid, Button, Box } from "@mui/material";
 // import style from './Product.module.css';
 import Image from "next/image";
 import prisma from "@/prisma/prisma";
-import { getUserById } from "@/app/actions";
+import { deleteListing, getUserById, getListing } from "@/app/actions";
 import { User } from "@/app/dtos";
 import {
   listingImagesBucketName,
   minioEndpoint,
   minioPort,
 } from "@/app/config";
-
-async function getListing(listingId: number) {
-  return await prisma.listing.findUnique({
-    where: {
-      id: listingId,
-    },
-    include: {
-      images: true,
-    },
-  });
-}
+import DeleteListingButton from "@/components/DeleteListingButton";
 
 async function getUserId(userID: number) {
   return await prisma.user.findUnique({
@@ -41,7 +31,9 @@ export default async function ListingID({
   const formattedCreatedAt = listing?.createdAt
     ? new Date(listing.createdAt).toLocaleString()
     : "";
-
+  if (!listing) {
+    return <p>Listing does not exist!</p>;
+  }
   return (
     <Container
       style={{
@@ -59,8 +51,8 @@ export default async function ListingID({
         <Grid item xs={12} md={6}>
           <Box
             sx={{
-              height: '90%',
-              width: '90%',
+              height: "90%",
+              width: "90%",
               overflow: "clip",
               position: "relative",
             }}
@@ -96,9 +88,17 @@ export default async function ListingID({
             <Typography fontSize={"18px"} fontWeight={"bold"}>
               Payment Type:
             </Typography>
-            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {listing?.paymentType}
-            </Typography>
+
+            {listing?.paymentType.map((pt, index) => (
+              <Typography
+                key={pt}
+                fontSize={"18px"}
+                style={{ marginLeft: "8px" }}
+              >
+                {pt}
+                {index !== listing.paymentType.length - 1 && ","}
+              </Typography>
+            ))}
           </div>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
@@ -162,7 +162,7 @@ export default async function ListingID({
             </Typography>
           </div>
         </Grid>
-        <Button>delete</Button>
+        <DeleteListingButton listingId={listing.id} />
       </Grid>
     </Container>
   );
