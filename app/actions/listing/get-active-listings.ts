@@ -6,9 +6,9 @@ export async function getAllActiveUserListings(
   userId: number
 ): Promise<Listing[]> {
   const dbListings = await prisma.listing.findMany({
-    include: {
-      images: true,
-    },
+    // include: {
+    //   images: true,
+    // },
     where: {
       active: true,
       userId: {
