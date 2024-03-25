@@ -23,7 +23,7 @@ export default async function UserProfilePage({
     <div className="flex flex-col gap-y-4 lg:py-8 lg:px-12">
       <div className="flex gap-x-16 items-center">
         <Image
-          src="/static/images/cards/maxwell1.jpg"
+          src="/images/cards/maxwell1.jpg"
           alt="image"
           width={400}
           height={400}
