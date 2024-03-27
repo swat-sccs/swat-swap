@@ -22,7 +22,6 @@ const pages = {
 
 function ResponsiveAppBar(props: any) {
   const { data: session, status } = useSession();
-  console.log(session)
 
   let authenticated;
   let loginLink;

@@ -6,18 +6,22 @@ import { getUserById } from "@/app/actions";
 import { User } from "@/app/dtos";
 import { Edit } from "@/components/icons";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/configurations/auth";
 
 interface UserProfilePageProps {
   params: {
-    userID: string;
+    userID: string | null | undefined;
   };
 }
 
 export default async function UserProfilePage({
   params,
 }: UserProfilePageProps) {
-  const user: User = await getUserById(parseInt(params.userID));
-  const userListings = await getAllActiveUserListings(parseInt(params.userID));
+  const session = await getServerSession(authOptions);
+
+  const user: User = await getUserById(session?.user.id);
+  const userListings = await getAllActiveUserListings(session?.user.id);
 
   return (
     <div className="flex flex-col gap-y-4 lg:py-8 lg:px-12">

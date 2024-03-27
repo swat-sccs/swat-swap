@@ -3,7 +3,7 @@ import { Listing, listingsSchema } from "@/app/dtos";
 import prisma from "@/prisma/prisma";
 
 export async function getAllActiveUserListings(
-  userId: number
+  userId: string | null | undefined
 ): Promise<Listing[]> {
   const dbListings = await prisma.listing.findMany({
     // include: {
@@ -13,7 +13,7 @@ export async function getAllActiveUserListings(
       active: true,
       userId: {
         // TODO: replace with actual userId (keep for now for testing)
-        not: 2,
+        not: userId,
       },
     },
   });
