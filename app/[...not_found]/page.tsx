@@ -8,7 +8,7 @@ export default function NotFound() {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
       <Typography variant='h2'>Oopsies! Page not found!</Typography>
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <Image src="/static/images/cards/uni.jpg" alt="Page not found" width={200} height={150} />
+        <Image src="/static/images/cards/uni.jpg" alt="Page not found" width={400} height={300} />
       </div>
       <div style={{ marginTop: '20px' }}>
         <Link href="/"><Typography variant='h2'>Go back to Home</Typography></Link>
