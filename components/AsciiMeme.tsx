@@ -20,7 +20,7 @@ export default function AsciiMeme() {
         }
         return(
             <>
-                <Typography variant='h2'>Your special number: {ascii_total}</Typography>
+                <Typography variant='h3'>Your special number: {ascii_total}</Typography>
             </>
         )
     }
