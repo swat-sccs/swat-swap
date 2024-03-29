@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import AsciiMeme from '@/components/AsciiMeme';
 
 export default function NotFound() {
   return (
@@ -11,6 +12,10 @@ export default function NotFound() {
       <div style={{ marginTop: '20px' }}>
         <Link href="/">Go back to Home</Link>
       </div>
+      <div style={{ marginTop: '20px' }}>
+        <AsciiMeme/>
+      </div>
+
     </div>
   );
 }
