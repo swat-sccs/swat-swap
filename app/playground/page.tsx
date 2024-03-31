@@ -1,5 +1,5 @@
 import { authOptions } from "@/configurations/auth"
-import { getServerSession } from "next-auth/next"
+import { getServerSession } from "next-auth"
 
 export default async function Playground() {
     const session = await getServerSession(authOptions)

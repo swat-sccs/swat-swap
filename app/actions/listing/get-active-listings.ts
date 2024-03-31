@@ -10,7 +10,7 @@ export async function getAllActiveUserListings(
     //   images: true,
     // },
     where: {
-      active: true,
+    //   active: true,
       userId: {
         // TODO: replace with actual userId (keep for now for testing)
         not: userId,
