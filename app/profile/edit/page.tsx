@@ -51,7 +51,7 @@ export default function EditProfilePage({}: EditProfilePageProps) {
     <div className="flex flex-col p-8">
       <div className="flex gap-8">
         <Image
-          src="/static/images/cards/maxwell1.jpg"
+          src="/images/cards/maxwell1.jpg"
           alt="image"
           width={400}
           height={400}

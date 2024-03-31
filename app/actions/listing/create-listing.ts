@@ -8,10 +8,11 @@ import {
   uploadFileToListingImagesBucket,
 } from "@/minio/actions";
 import { listingImagesBucketName } from "@/app/config";
+import { getServerSession } from "next-auth";
 
 export async function createListing(formData: FormData) {
   // TODO: get access to the user's unique ID dynamically
-  const userId = 1;
+  const session = await getServerSession()
 
   try {
     const requiredFields = [
@@ -96,7 +97,7 @@ export async function createListing(formData: FormData) {
         color: validatedListingFormData.color,
         price: validatedListingFormData.price,
         // TODO: make this field dynamic
-        userId: 1,
+        userId: session?.user.id,
       },
     });
     revalidatePath("/");

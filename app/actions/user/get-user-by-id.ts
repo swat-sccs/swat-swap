@@ -3,13 +3,13 @@
 import { userSchema } from "@/app/dtos/user";
 import prisma from "@/prisma/prisma";
 
-export async function getUserById(userId: number) {
+export async function getUserById(userId: string | null | undefined) {
   const user = await prisma.user.findUnique({
     include: {
       listings: false,
     },
     where: {
-      id: userId,
+      userId: userId,
     },
   });
 
