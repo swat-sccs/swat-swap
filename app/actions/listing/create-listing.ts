@@ -97,7 +97,7 @@ export async function createListing(formData: FormData) {
         color: validatedListingFormData.color,
         price: validatedListingFormData.price,
         // TODO: make this field dynamic
-        userId: session?.user.id,
+        userId: 1,
       },
     });
     revalidatePath("/");

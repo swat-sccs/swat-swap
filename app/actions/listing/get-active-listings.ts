@@ -6,14 +6,14 @@ export async function getAllActiveUserListings(
   userId: string | null | undefined
 ): Promise<Listing[]> {
   const dbListings = await prisma.listing.findMany({
-    // include: {
-    //   images: true,
-    // },
+    include: {
+      images: true,
+    },
     where: {
     //   active: true,
       userId: {
         // TODO: replace with actual userId (keep for now for testing)
-        not: userId,
+        not: 2,
       },
     },
   });

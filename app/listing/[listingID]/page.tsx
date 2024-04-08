@@ -11,6 +11,7 @@ import {
   minioPort,
 } from "@/app/config";
 import DeleteListingButton from "@/components/DeleteListingButton";
+import DeactivateListingButton from "@/components/DeactivateListingButton";
 
 async function getUserId(userID: number) {
   return await prisma.user.findUnique({
@@ -27,7 +28,7 @@ export default async function ListingID({
 }) {
   const listing = await getListing(parseInt(params.listingID));
   const userId = listing?.userId ?? 1;
-  const user: User = await getUserById(userId);
+  const user: User = await getUserById(1);
   const formattedCreatedAt = listing?.createdAt
     ? new Date(listing.createdAt).toLocaleString()
     : "";
@@ -192,6 +193,10 @@ export default async function ListingID({
           </div>
         </Grid>
         <DeleteListingButton listingId={listing.id} />
+        <DeactivateListingButton
+          listingId={listing.id}
+          active={listing.active}
+        ></DeactivateListingButton>
       </Grid>
     </Container>
   );
