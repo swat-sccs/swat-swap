@@ -78,7 +78,7 @@ export async function createListing(formData: FormData) {
         fileName: requestImageFile.name,
       },
     ];
-
+    
     await prisma.listing.create({
       data: {
         title: validatedListingFormData.title,
