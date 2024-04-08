@@ -192,11 +192,17 @@ export default async function ListingID({
             </Typography>
           </div>
         </Grid>
-        <DeleteListingButton listingId={listing.id} />
-        <DeactivateListingButton
-          listingId={listing.id}
-          active={listing.active}
-        ></DeactivateListingButton>
+        <Grid container spacing={3} style={{ marginTop: "5px" }}>
+          <Grid item>
+            <DeleteListingButton listingId={listing.id} />
+          </Grid>
+          <Grid item>
+            <DeactivateListingButton
+              listingId={listing.id}
+              active={listing.active}
+            />
+          </Grid>
+        </Grid>
       </Grid>
     </Container>
   );
