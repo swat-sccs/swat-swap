@@ -26,6 +26,7 @@ export const listingSchema = z.object({
   color: z.array(z.string()),
   createdAt: z.date(),
   updatedAt: z.date(),
+  favorited: z.boolean(),
 });
 
 export const listingsSchema = z.array(listingSchema);

@@ -1,6 +1,7 @@
 "use server";
 import { Listing, listingsSchema } from "@/app/dtos";
 import prisma from "@/prisma/prisma";
+import { revalidatePath } from "next/cache";
 
 export async function getAllFavoritedListings(
   userId: number
@@ -12,14 +13,19 @@ export async function getAllFavoritedListings(
       },
     },
     include: {
-      listing: true,
+      listing: {
+        include: {
+          images: true,
+        },
+      },
     },
   });
 
   const mappedListings = dbListings.map((listing) => {
-    return { ...listing, favorited: true };
+    return { ...listing.listing, favorited: true };
   });
 
   const validatedListings = listingsSchema.parse(mappedListings);
+
   return validatedListings;
 }

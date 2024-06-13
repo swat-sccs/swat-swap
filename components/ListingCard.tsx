@@ -1,5 +1,8 @@
+// "use client";
+
 import * as React from "react";
 
+import { favoriteListing } from "@/app/actions";
 import { Listing } from "@/app/dtos/listing";
 import Image from "next/image";
 import {
@@ -9,6 +12,7 @@ import {
 } from "@/app/config";
 import ListingTypePill from "./ListingTypePill";
 import Link from "next/link";
+import FavoriteListingIcon from "./FavoriteListingIcon";
 
 export interface ListingCardProps {
   listing: Listing;
@@ -39,6 +43,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
       ))}
       <div className="flex justify-end">
         <ListingTypePill type={listing.type} />
+        <FavoriteListingIcon listing={listing} />
       </div>
     </div>
   );
