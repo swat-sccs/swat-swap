@@ -34,9 +34,9 @@ model Listing {
   type        Type
   description String
   images      ListingImage[]
-  category    Category[]
   paymentType String[]
   condition   Condition
+  category    Category
   apparel     String[]
   size        String[]
   color       String[]
