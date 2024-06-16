@@ -1,6 +1,7 @@
 import { getUserCreatedListings } from "@/app/actions";
 import { getSessionUserId } from "../utils/hooks";
 import UserListingCard from "@/components/UserListingCard";
+import ZeroListingsNotice from "./components/ZeroListingsNotice";
 
 export default async function Home() {
   const userId = await getSessionUserId();
@@ -14,9 +15,13 @@ export default async function Home() {
   return (
     <div className="flex gap-x-8">
       <div className="flex flex-wrap gap-8">
-        {userListings.map((listing) => (
-          <UserListingCard key={listing.id} listing={listing} />
-        ))}
+        {userListings.length === 0 ? (
+          <ZeroListingsNotice />
+        ) : (
+          userListings.map((listing) => (
+            <UserListingCard key={listing.id} listing={listing} />
+          ))
+        )}
       </div>
     </div>
   );
