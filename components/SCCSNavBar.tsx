@@ -18,6 +18,7 @@ const pages = {
   Create: "/create",
   "Saved Listings": "/saved",
   "My Profile": "/profile/1",
+  "My Listings": "/my-listings",
 };
 
 function ResponsiveAppBar(props: any) {

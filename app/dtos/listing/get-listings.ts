@@ -32,3 +32,9 @@ export const listingSchema = z.object({
 export const listingsSchema = z.array(listingSchema);
 
 export type Listing = z.infer<typeof listingSchema>;
+
+export const userListingSchema = listingSchema.omit({ favorited: true });
+
+export type UserListing = z.infer<typeof userListingSchema>;
+
+export const userListingsSchema = z.array(userListingSchema);
