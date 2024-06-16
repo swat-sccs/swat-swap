@@ -1,7 +1,7 @@
 import ListingCard from "@/components/ListingCard";
 import { Divider, Icon } from "@mui/material";
 import Image from "next/image";
-import { getAllActiveUserListings } from "@/app/actions";
+import { getAvailableListings } from "@/app/actions";
 import { getUserById } from "@/app/actions";
 import { User } from "@/app/dtos";
 import { Edit } from "@/components/icons";
@@ -21,7 +21,7 @@ export default async function UserProfilePage({
   const session = await getServerSession(authOptions);
 
   const user: User = await getUserById(session?.user.id);
-  const userListings = await getAllActiveUserListings(session?.user.id);
+  const userListings = await getAvailableListings(session?.user.id);
 
   return (
     <div className="flex flex-col gap-y-4 lg:py-8 lg:px-12">

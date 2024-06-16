@@ -1,10 +1,11 @@
 import ListingCard from "@/components/ListingCard";
 import { Box, Grid } from "@mui/material";
-import { getAllActiveUserListings } from "@/app/actions";
+import { getAvailableListings } from "@/app/actions";
+import { useSession } from "next-auth/react";
 
 export default async function Home() {
   // TODO: fix dummy id
-  const listings = await getAllActiveUserListings(1);
+  const listings = await getAvailableListings(1);
 
   return (
     <Box className="flex h-[calc(100vh-68.5px)]">

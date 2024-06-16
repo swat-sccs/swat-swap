@@ -1,14 +1,15 @@
 import ListingCard from "@/components/ListingCard";
 import SideBar from "@/components/SideBar";
-import { getAllActiveUserListings } from "@/app/actions";
-import { getServerSession } from "next-auth";
+import { getAvailableListings } from "@/app/actions";
+import { getSessionUserId } from "@/app/utils/hooks";
 
 export default async function Home() {
-  // TODO: refactor with actual userId (may want to do this in the server action itself)
-  const session = await getServerSession();
-  // const userId = 1;
+  const userId = await getSessionUserId();
+  if (!userId) {
+    return <div>Not logged in</div>;
+  }
 
-  const listings = await getAllActiveUserListings(session?.user.id);
+  const listings = await getAvailableListings(userId);
 
   return (
     <div className="flex gap-x-8">
