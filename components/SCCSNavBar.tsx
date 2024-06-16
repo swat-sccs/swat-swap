@@ -13,12 +13,16 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import {
+  CREATE_LISTING,
+  MY_LISTINGS,
+  SAVED_LISTINGS,
+} from "@/constants/routes";
 
 const pages = {
-  Create: "/create",
-  "Saved Listings": "/saved",
-  "My Profile": "/profile/1",
-  "My Listings": "/my-listings",
+  Create: CREATE_LISTING,
+  "Saved Listings": SAVED_LISTINGS,
+  "My Listings": MY_LISTINGS,
 };
 
 function ResponsiveAppBar(props: any) {
