@@ -1,13 +1,10 @@
 import ListingCard from "@/components/ListingCard";
 import { Divider, Icon } from "@mui/material";
 import Image from "next/image";
-import { getAvailableListings } from "@/app/actions";
-import { getUserById } from "@/app/actions";
-import { User } from "@/app/dtos";
+import { getAvailableListings, getUserById } from "@/app/actions";
 import { Edit } from "@/components/icons";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/configurations/auth";
+import { getSessionUserId } from "@/app/utils/hooks";
 
 interface UserProfilePageProps {
   params: {
@@ -18,10 +15,13 @@ interface UserProfilePageProps {
 export default async function UserProfilePage({
   params,
 }: UserProfilePageProps) {
-  const session = await getServerSession(authOptions);
+  const userId = await getSessionUserId();
+  if (!userId) {
+    return <div>Not logged in</div>;
+  }
 
-  const user: User = await getUserById(session?.user.id);
-  const userListings = await getAvailableListings(session?.user.id);
+  const userData = await getUserById(userId);
+  const userListings = await getAvailableListings(userId);
 
   return (
     <div className="flex flex-col gap-y-4 lg:py-8 lg:px-12">
@@ -40,13 +40,13 @@ export default async function UserProfilePage({
                 Edit Profile
               </p>
             </Link>
-            {user.id === Number(params.userID) && <Icon component={Edit} />}
+            {userData.id === Number(params.userID) && <Icon component={Edit} />}
           </div>
           <div className="flex gap-2 items-center">
-            <p className="text-5xl font-bold">{user.displayName}</p>
+            <p className="text-5xl font-bold">{userData.displayName}</p>
           </div>
-          <p className="ml-2 text-xl font-medium">{user.email}</p>
-          <p className="ml-2 text-xl line-clamp-4">{user.biography}</p>
+          <p className="ml-2 text-xl font-medium">{userData.email}</p>
+          <p className="ml-2 text-xl line-clamp-4">{userData.biography}</p>
         </div>
       </div>
       <Divider className="font-semibold text-xl">My Listings</Divider>

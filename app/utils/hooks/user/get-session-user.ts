@@ -1,4 +1,4 @@
-import { authOptions } from "@/configurations/auth";
+import { authOptions } from "@/config/auth";
 import { type Session, getServerSession } from "next-auth";
 
 export const getSessionUser = async (): Promise<
