@@ -1,4 +1,4 @@
-import CreateListingForm from "@/components/CreateListingForm";
+import CreateListingForm from "./components/CreateListingForm";
 import { getSessionUserId } from "../utils/hooks";
 
 export default async function Create() {

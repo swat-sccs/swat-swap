@@ -34,7 +34,7 @@ export const createListingFormDataSchema = z.object({
   price: z.number().positive(),
   type: z.nativeEnum(ListingTypes),
   description: z.string(),
-  category: z.array(z.nativeEnum(ListingCategories)),
+  category: z.nativeEnum(ListingCategories),
   paymentType: z.array(z.string()),
   condition: z.nativeEnum(ListingConditions),
   apparelSize: z.array(z.string()),
@@ -42,4 +42,4 @@ export const createListingFormDataSchema = z.object({
   color: z.array(z.string()),
 });
 
-export type CreateListing = z.infer<typeof createListingFormDataSchema>;
+export type CreateListingPayload = z.infer<typeof createListingFormDataSchema>;

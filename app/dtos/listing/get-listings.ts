@@ -18,7 +18,7 @@ export const listingSchema = z.object({
   price: z.number().positive(),
   type: z.nativeEnum(ListingTypes),
   description: z.string(),
-  category: z.array(z.nativeEnum(ListingCategories)),
+  category: z.nativeEnum(ListingCategories),
   paymentType: z.array(z.string()),
   condition: z.nativeEnum(ListingConditions),
   apparel: z.array(z.string()),

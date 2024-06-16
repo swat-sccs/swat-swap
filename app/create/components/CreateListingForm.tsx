@@ -1,7 +1,7 @@
 "use client";
 
 import { createListing } from "@/app/actions";
-import { CreateListing, createListingFormDataSchema } from "@/app/dtos";
+import { CreateListingPayload, createListingFormDataSchema } from "@/app/dtos";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -15,11 +15,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { serialize } from "object-to-formdata";
 import React, { useCallback } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 
 interface CreateListingFormProps {
   userId: number;
@@ -27,15 +26,19 @@ interface CreateListingFormProps {
 
 const CreateListingForm = ({ userId }: CreateListingFormProps) => {
   const router = useRouter();
-  const { register, handleSubmit, control } = useForm<CreateListing>({
+  const { register, handleSubmit, control } = useForm<CreateListingPayload>({
     resolver: zodResolver(createListingFormDataSchema),
   });
 
-  const session = useSession();
-  console.log("session is", session.data?.user);
+  const category = useWatch({
+    name: "category",
+    control,
+  });
+
+  console.log("category is", category);
 
   const onFormSubmitSuccess = useCallback(
-    async (data: CreateListing) => {
+    async (data: CreateListingPayload) => {
       const res = await createListing(
         userId,
         serialize(data, { noAttributesWithArrayNotation: true })
@@ -48,7 +51,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
         alert("Failed to created listing. Try again later.");
       }
     },
-    [router]
+    [router, userId]
   );
 
   const onFormSubmitError = useCallback((error: any) => {
@@ -184,12 +187,10 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           Choose a category
         </Typography>
         <Select
-          multiple
           style={{
             marginTop: "10px",
             width: "50%",
           }}
-          defaultValue={[]}
           {...register("category")}
         >
           <MenuItem value="clothing_accessories">

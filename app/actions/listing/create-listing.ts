@@ -40,7 +40,7 @@ export async function createListing(userId: number, formData: FormData) {
       price: Number(formData.get("price")),
       description: formData.get("description"),
       type: formData.get("type"),
-      category: new Array(formData.get("category")),
+      category: formData.get("category"),
       paymentType: new Array(formData.get("paymentType")),
       condition: formData.get("condition"),
       apparelSize: new Array(formData.get("apparelSize")),

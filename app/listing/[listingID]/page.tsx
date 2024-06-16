@@ -1,25 +1,12 @@
 "use server";
 import { Container, Typography, Grid, Button, Box } from "@mui/material";
-// import style from './Product.module.css';
 import Image from "next/image";
 import prisma from "@/prisma/prisma";
-import { deleteListing, getUserById, getListing } from "@/app/actions";
+import { getUserById, getListing } from "@/app/actions";
 import { User } from "@/app/dtos";
-import {
-  listingImagesBucketName,
-  minioEndpoint,
-  minioPort,
-} from "@/app/config";
+import { listingImagesBucketName, minioEndpoint, minioPort } from "@/config/";
 import DeleteListingButton from "@/components/DeleteListingButton";
 import DeactivateListingButton from "@/components/DeactivateListingButton";
-
-async function getUserId(userID: number) {
-  return await prisma.user.findUnique({
-    where: {
-      id: userID,
-    },
-  });
-}
 
 export default async function ListingID({
   params,
@@ -80,16 +67,9 @@ export default async function ListingID({
               Category:
             </Typography>
 
-            {listing?.category.map((category, index) => (
-              <Typography
-                key={category}
-                fontSize={"18px"}
-                style={{ marginLeft: "8px" }}
-              >
-                {category}
-                {index !== listing.category.length - 1 && ","}
-              </Typography>
-            ))}
+            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
+              {listing.category}
+            </Typography>
           </div>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
