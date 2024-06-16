@@ -1,7 +1,6 @@
 "use server";
 import { Listing, listingsSchema } from "@/app/dtos";
 import prisma from "@/prisma/prisma";
-import { revalidatePath } from "next/cache";
 
 export async function getAllFavoritedListings(
   userId: number

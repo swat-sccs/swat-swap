@@ -7,7 +7,7 @@ import {
   createBucketIfNotExists,
   uploadFileToListingImagesBucket,
 } from "@/minio/actions";
-import { listingImagesBucketName } from "@/app/config";
+import { listingImagesBucketName } from "@/config";
 
 export async function createListing(userId: number, formData: FormData) {
   try {

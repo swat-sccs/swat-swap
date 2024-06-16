@@ -1,4 +1,4 @@
-import { isProduction } from "@/app/config";
+import { isProduction } from "@/config";
 import { parsedEnv } from "@/app/env.mjs";
 import * as Minio from "minio";
 

@@ -2,11 +2,7 @@ import * as React from "react";
 
 import { UserListing } from "@/app/dtos/listing";
 import Image from "next/image";
-import {
-  listingImagesBucketName,
-  minioEndpoint,
-  minioPort,
-} from "@/app/config";
+import { listingImagesBucketName, minioEndpoint, minioPort } from "@/config";
 import ListingTypePill from "./ListingTypePill";
 import Link from "next/link";
 

@@ -1,15 +1,8 @@
-// "use client";
-
 import * as React from "react";
 
-import { favoriteListing } from "@/app/actions";
 import { Listing } from "@/app/dtos/listing";
 import Image from "next/image";
-import {
-  listingImagesBucketName,
-  minioEndpoint,
-  minioPort,
-} from "@/app/config";
+import { listingImagesBucketName, minioEndpoint, minioPort } from "@/config";
 import ListingTypePill from "./ListingTypePill";
 import Link from "next/link";
 import FavoriteListingIcon from "./FavoriteListingIcon";
