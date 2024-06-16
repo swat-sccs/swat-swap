@@ -1,4 +1,4 @@
-import { findOrCreateUser } from "@/app/actions";
+import { getOrCreateUser } from "@/app/actions";
 import { NextAuthOptions } from "next-auth";
 import KeycloakProvider from "next-auth/providers/keycloak";
 
@@ -26,10 +26,20 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+    signIn: async ({ user }) => {
+      if (!user.id) {
+        return false;
+      }
+      return true;
+    },
     jwt: async ({ user, token }) => {
       if (user) {
         // NOTE: user.id is the keycloak id
-        const actualUserId = await findOrCreateUser(user.id);
+        const actualUserId = await getOrCreateUser({
+          keycloakId: user.id,
+          email: user.email ?? "",
+          name: user.name ?? "",
+        });
         token.uid = actualUserId;
       }
       return token;

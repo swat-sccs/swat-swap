@@ -1,12 +1,12 @@
 "use server";
 
+import { CreateUserPayload } from "@/app/dtos/user/";
 import prisma from "@/prisma/prisma";
 
-// check if there is a user entry in the database with the provided keycloak id, if not create a new user
-export async function findOrCreateUser(keycloakId: string) {
+export async function getOrCreateUser(createUserPayload: CreateUserPayload) {
   const existingUser = await prisma.user.findUnique({
     where: {
-      keycloakId,
+      keycloakId: createUserPayload.keycloakId,
     },
   });
 
@@ -14,11 +14,7 @@ export async function findOrCreateUser(keycloakId: string) {
     return existingUser.id;
   } else {
     const newUser = await prisma.user.create({
-      data: {
-        name: "",
-        email: "",
-        keycloakId: keycloakId,
-      },
+      data: createUserPayload,
     });
     return newUser.id;
   }
