@@ -8,12 +8,8 @@ import {
   uploadFileToListingImagesBucket,
 } from "@/minio/actions";
 import { listingImagesBucketName } from "@/app/config";
-import { getServerSession } from "next-auth";
 
-export async function createListing(formData: FormData) {
-  // TODO: get access to the user's unique ID dynamically
-  const session = await getServerSession()
-
+export async function createListing(userId: number, formData: FormData) {
   try {
     const requiredFields = [
       "title",
@@ -78,7 +74,7 @@ export async function createListing(formData: FormData) {
         fileName: requestImageFile.name,
       },
     ];
-    
+
     await prisma.listing.create({
       data: {
         title: validatedListingFormData.title,
@@ -96,8 +92,7 @@ export async function createListing(formData: FormData) {
         size: validatedListingFormData.apparelSize,
         color: validatedListingFormData.color,
         price: validatedListingFormData.price,
-        // TODO: make this field dynamic
-        userId: 1,
+        userId,
       },
     });
     revalidatePath("/");

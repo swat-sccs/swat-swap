@@ -1,7 +1,9 @@
 import { authOptions } from "@/configurations/auth";
-import { getServerSession } from "next-auth";
+import { type Session, getServerSession } from "next-auth";
 
-export async function getSessionUser() {
+export const getSessionUser = async (): Promise<
+  Session["user"] | undefined
+> => {
   const session = await getServerSession(authOptions);
   console.log("session", session);
 
@@ -10,4 +12,4 @@ export async function getSessionUser() {
   }
 
   return session.user;
-}
+};
