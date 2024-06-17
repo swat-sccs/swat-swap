@@ -1,6 +1,6 @@
 import { getUserCreatedListings } from "@/app/actions";
 import { getSessionUserId } from "../utils/hooks";
-import UserListingCard from "@/components/UserListingCard";
+import UserListingCard from "./components/UserListingCard";
 import ZeroListingsNotice from "./components/ZeroListingsNotice";
 
 export default async function Home() {
