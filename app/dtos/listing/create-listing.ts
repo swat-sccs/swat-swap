@@ -39,7 +39,6 @@ export const createListingFormDataSchema = z.object({
   condition: z.nativeEnum(ListingConditions),
   apparelSize: z.array(z.string()),
   apparelGender: z.array(z.string()),
-  color: z.array(z.string()),
 });
 
 export type CreateListingPayload = z.infer<typeof createListingFormDataSchema>;

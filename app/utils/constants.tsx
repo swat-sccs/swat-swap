@@ -93,19 +93,3 @@ export const SizeType: {
   xxl: "xxl",
   xxxl: "xxxl",
 };
-
-export const ColorType: {
-  light: "light";
-  dark: "dark";
-  neutral: "neutral";
-  colorful: "colorful";
-  warm: "warm";
-  cool: "cool";
-} = {
-  light: "light",
-  dark: "dark",
-  neutral: "neutral",
-  colorful: "colorful",
-  warm: "warm",
-  cool: "cool",
-};

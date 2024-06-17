@@ -134,23 +134,6 @@ export default async function ListingID({
             ))}
           </div>
           <div
-            style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
-          >
-            <Typography fontSize={"18px"} fontWeight={"bold"}>
-              Color:
-            </Typography>
-            {listing?.color.map((color, index) => (
-              <Typography
-                key={color}
-                fontSize={"18px"}
-                style={{ marginLeft: "8px" }}
-              >
-                {color}
-                {index !== listing.color.length - 1 && ","}
-              </Typography>
-            ))}
-          </div>
-          <div
             style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
           >
             <Typography fontSize={"18px"} fontWeight={"bold"}>

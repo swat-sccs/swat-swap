@@ -21,7 +21,6 @@ export async function createListing(userId: number, formData: FormData) {
       "condition",
       "apparelSize",
       "apparelGender",
-      "color",
     ];
 
     for (const field of requiredFields) {
@@ -45,7 +44,6 @@ export async function createListing(userId: number, formData: FormData) {
       condition: formData.get("condition"),
       apparelSize: new Array(formData.get("apparelSize")),
       apparelGender: new Array(formData.get("apparelGender")),
-      color: new Array(formData.get("color")),
       image: requestImageFile,
     };
 
@@ -90,7 +88,6 @@ export async function createListing(userId: number, formData: FormData) {
         condition: validatedListingFormData.condition,
         apparel: validatedListingFormData.apparelGender,
         size: validatedListingFormData.apparelSize,
-        color: validatedListingFormData.color,
         price: validatedListingFormData.price,
         userId,
       },

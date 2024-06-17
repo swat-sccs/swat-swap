@@ -23,7 +23,6 @@ export const listingSchema = z.object({
   condition: z.nativeEnum(ListingConditions),
   apparel: z.array(z.string()),
   size: z.array(z.string()),
-  color: z.array(z.string()),
   createdAt: z.date(),
   updatedAt: z.date(),
   favorited: z.boolean(),

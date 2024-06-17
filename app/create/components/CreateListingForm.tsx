@@ -296,33 +296,6 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           <MenuItem value=">xxxl">xxxl</MenuItem>
         </Select>
 
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
-          Choose a color
-        </Typography>
-        <Select
-          multiple
-          style={{
-            marginTop: "10px",
-            width: "50%",
-          }}
-          defaultValue={[]}
-          {...register("color")}
-        >
-          <MenuItem value="clothing & accessories">
-            clothing & accessories
-          </MenuItem>
-          <MenuItem value="light tones">light</MenuItem>
-          <MenuItem value="dark tones">dark</MenuItem>
-          <MenuItem value="neutral tones">neutral</MenuItem>
-          <MenuItem value="colorful tones">colorful</MenuItem>
-          <MenuItem value="warm tones">warm</MenuItem>
-          <MenuItem value="cool tones">cool</MenuItem>
-        </Select>
-
         <Button style={{ marginTop: "20px" }} type="submit">
           <Typography>List it!</Typography>
         </Button>
