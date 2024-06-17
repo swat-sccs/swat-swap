@@ -37,7 +37,6 @@ model Listing {
   paymentType String[]
   condition   Condition
   category    Category
-  apparel     String[]
   size        String[]
   color       String[]
   userId      Int
@@ -46,6 +45,7 @@ model Listing {
   user        User           @relation(fields: [userId], references: [id])
   active      Boolean        @default(true)
   favoritedBy FavoriteListing[]
+  clothing    Clothing?    
 }
 
 model FavoriteListing {
@@ -57,6 +57,13 @@ model FavoriteListing {
   listing   Listing  @relation(fields: [listingId], references: [id])
   
   @@unique([userId, listingId])
+}
+
+model Clothing {
+  listingId         Int     @id
+  apparelSize       Apparel_Size
+  apparelGender     Apparel_Gender
+  listing           Listing @relation(fields: [listingId], references: [id])
 }
 
 enum Type {
@@ -95,7 +102,7 @@ enum Condition {
   parts_missing
 }
 
-enum Apparel {
+enum Apparel_Gender {
   women
   men
   unisex
