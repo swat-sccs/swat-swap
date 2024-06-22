@@ -7,19 +7,26 @@ import ListingTypePill from "./ListingTypePill";
 import Link from "next/link";
 import FavoriteListingIcon from "./FavoriteListingIcon";
 
-export interface ListingCardProps {
-  listing: Listing;
+interface ListingCardOptions {
+  display?: {
+    showPrice?: boolean;
+    showSaveButton?: boolean;
+  };
 }
 
-export default function ListingCard({ listing }: ListingCardProps) {
-  console.log("the price is", listing.price);
+export interface ListingCardProps {
+  listing: Listing;
+  options?: ListingCardOptions;
+}
+
+export default function ListingCard({ listing, options }: ListingCardProps) {
   return (
     <div className="flex flex-col p-4 shadow-md rounded-lg h-fit gap-y-2">
       <div className="flex justify-between">
         <Link href={`listing/${listing.id}`}>
           <p className="text-xl font-semibold">{listing.title}</p>
         </Link>
-        {listing.price !== null && (
+        {listing.price !== null && options?.display?.showPrice && (
           <p className="font-semibold">${listing.price}</p>
         )}
       </div>
@@ -39,7 +46,9 @@ export default function ListingCard({ listing }: ListingCardProps) {
       ))}
       <div className="flex justify-end">
         <ListingTypePill type={listing.type} />
-        <FavoriteListingIcon listing={listing} />
+        {options?.display?.showSaveButton && (
+          <FavoriteListingIcon listing={listing} />
+        )}
       </div>
     </div>
   );
