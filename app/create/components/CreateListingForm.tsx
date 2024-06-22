@@ -1,7 +1,11 @@
 "use client";
 
 import { createListing } from "@/app/actions";
-import { CreateListingPayload, createListingFormDataSchema } from "@/app/dtos";
+import {
+  CreateListingPayload,
+  ListingTypes,
+  createListingFormDataSchema,
+} from "@/app/dtos";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -30,12 +34,15 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
     resolver: zodResolver(createListingFormDataSchema),
   });
 
+  const listingType = useWatch({
+    name: "type",
+    control,
+  });
+
   const category = useWatch({
     name: "category",
     control,
   });
-
-  console.log("category is", category);
 
   const onFormSubmitSuccess = useCallback(
     async (data: CreateListingPayload) => {
@@ -130,24 +137,6 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           fontWeight={"bold"}
           style={{ marginTop: "20px" }}
         >
-          Add a price
-        </Typography>
-        <TextField
-          type="number"
-          style={{ marginTop: "10px", width: "30%" }}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-          }}
-          {...register("price", {
-            valueAsNumber: true,
-          })}
-        />
-
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
           Add a description
         </Typography>
         <TextField
@@ -156,6 +145,53 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           style={{ marginTop: "10px", width: "100%" }}
           {...register("description")}
         />
+
+        {listingType === ListingTypes.Selling && (
+          <>
+            <Typography
+              fontSize={"20px"}
+              fontWeight={"bold"}
+              style={{ marginTop: "20px" }}
+            >
+              Add a price
+            </Typography>
+            <TextField
+              type="number"
+              style={{ marginTop: "10px", width: "30%" }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">$</InputAdornment>
+                ),
+              }}
+              {...register("price", {
+                valueAsNumber: true,
+              })}
+            />
+
+            <Typography
+              fontSize={"20px"}
+              fontWeight={"bold"}
+              style={{ marginTop: "20px" }}
+            >
+              Choose a payment type
+            </Typography>
+            <Select
+              multiple
+              style={{
+                marginTop: "10px",
+                width: "50%",
+              }}
+              defaultValue={[]}
+              {...register("paymentType")}
+            >
+              <MenuItem value="cash">cash</MenuItem>
+              <MenuItem value="paypal">PayPal</MenuItem>
+              <MenuItem value="zelle">Zelle</MenuItem>
+              <MenuItem value="venmo">Venmo</MenuItem>
+            </Select>
+          </>
+        )}
+
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
