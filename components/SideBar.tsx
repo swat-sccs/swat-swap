@@ -155,19 +155,6 @@ const sizeDropdownContent = (
   </FormGroup>
 );
 
-const colorDropdownContent = (
-  <FormGroup>
-    {/* Use line below to set pre-checked marks */}
-    {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Pre-checked Box" /> */}
-    <FormControlLabel control={<Checkbox />} label="Light colors" />
-    <FormControlLabel control={<Checkbox />} label="Dark colors" />
-    <FormControlLabel control={<Checkbox />} label="Neutral tones" />
-    <FormControlLabel control={<Checkbox />} label="Colorful tones" />
-    <FormControlLabel control={<Checkbox />} label="Warm colors" />
-    <FormControlLabel control={<Checkbox />} label="Cold colors" />
-  </FormGroup>
-);
-
 // add section for clothing size
 
 export default function SideBar() {
@@ -178,17 +165,16 @@ export default function SideBar() {
     >
       <Box id="dropdown-Menus" className="w-auto ">
         {dropDown("Sort by: Recent", <SortIcon />, sortDropdownContent)}
-        {priceRange}
         {dropDown("Categories", <CategoryIcon />, categoriesDropdownContent)}
-        {dropDown("Payment Type", <PaymentIcon />, paymentDropdownContent)}
-        {dropDown(
+        {/* {priceRange} */}
+        {/* {dropDown("Payment Type", <PaymentIcon />, paymentDropdownContent)} */}
+        {/* {dropDown(
           "Condition: New/Used",
           <BarChartIcon />,
           conditionDropdownContent
-        )}
-        {dropDown("Apparel Gender: Women's", <WcIcon />, genderDropdownContent)}
-        {dropDown("Size", <HeightIcon />, sizeDropdownContent)}
-        {dropDown("Color", <ColorLensIcon />, colorDropdownContent)}
+        )} */}
+        {/* {dropDown("Apparel Gender: Women's", <WcIcon />, genderDropdownContent)} */}
+        {/* {dropDown("Size", <HeightIcon />, sizeDropdownContent)} */}
 
         <Box className="flex justify-around p-2">
           <Button>Clear</Button>
