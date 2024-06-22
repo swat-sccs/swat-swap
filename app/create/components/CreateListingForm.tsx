@@ -24,6 +24,8 @@ import { useRouter } from "next/navigation";
 import { serialize } from "object-to-formdata";
 import React, { useCallback } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
+import FieldErrorLabel from "./FieldErrorMessage";
+import FieldErrorMessage from "./FieldErrorMessage";
 
 interface CreateListingFormProps {
   userId: number;
@@ -31,7 +33,12 @@ interface CreateListingFormProps {
 
 const CreateListingForm = ({ userId }: CreateListingFormProps) => {
   const router = useRouter();
-  const { register, handleSubmit, control } = useForm<CreateListingPayload>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<CreateListingPayload>({
     defaultValues: {
       acceptedPaymentTypes: [],
     },
@@ -124,6 +131,8 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           )}
         />
 
+        <FieldErrorMessage errors={errors} field="type" />
+
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
@@ -175,6 +184,8 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           )}
         />
 
+        <FieldErrorMessage errors={errors} field="image" />
+
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
@@ -199,6 +210,8 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           <MenuItem value="parts_missing">parts missing</MenuItem>
         </Select>
 
+        <FieldErrorMessage errors={errors} field="condition" />
+
         {listingType === ListingTypes.Selling && (
           <>
             <Typography
@@ -221,6 +234,8 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
               })}
             />
 
+            <FieldErrorMessage errors={errors} field="price" />
+
             <Typography
               fontSize={"20px"}
               fontWeight={"bold"}
@@ -242,6 +257,8 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
               <MenuItem value="zelle">Zelle</MenuItem>
               <MenuItem value="venmo">Venmo</MenuItem>
             </Select>
+
+            <FieldErrorMessage errors={errors} field="acceptedPaymentTypes" />
           </>
         )}
 
@@ -272,6 +289,8 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           <MenuItem value="misc">misc</MenuItem>
         </Select>
 
+        <FieldErrorMessage errors={errors} field="category" />
+
         {category === ListingCategories.ClothingAccessories && (
           <>
             <Typography
@@ -294,6 +313,8 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
               <MenuItem value="men">{"men's / masculine"}</MenuItem>
               <MenuItem value="unisex">unisex / genderless</MenuItem>
             </Select>
+
+            <FieldErrorMessage errors={errors} field="apparelGender" />
 
             <Typography
               fontSize={"20px"}
@@ -320,6 +341,8 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
               <MenuItem value="xxl">xxl</MenuItem>
               <MenuItem value=">xxxl">xxxl</MenuItem>
             </Select>
+
+            <FieldErrorMessage errors={errors} field="apparelSize" />
           </>
         )}
 

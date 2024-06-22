@@ -51,14 +51,22 @@ export enum ClothingItemGenders {
 }
 
 export const createListingFormDataSchema = z.object({
-  image: z.instanceof(File),
+  image: z.instanceof(File, { message: "Required" }),
   title: z.string(),
   type: z.nativeEnum(ListingTypes),
   description: z.string(),
-  category: z.nativeEnum(ListingCategories),
+  category: z.nativeEnum(ListingCategories, {
+    errorMap: () => ({
+      message: "Invalid condition",
+    }),
+  }),
   price: z.number().positive().optional(),
   acceptedPaymentTypes: z.array(z.string()),
-  condition: z.nativeEnum(ListingConditions),
+  condition: z.nativeEnum(ListingConditions, {
+    errorMap: () => ({
+      message: "Invalid condition",
+    }),
+  }),
   apparelSize: z.array(z.string()).optional(),
   apparelGender: z.array(z.string()).optional(),
 });
