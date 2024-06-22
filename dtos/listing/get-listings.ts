@@ -28,32 +28,31 @@ export const clothingItemSchema = z.object({
   gender: z.nativeEnum(ClothingItemGenders),
 });
 
-export const listingSchema = z.object({
+export const baseListingSchema = z.object({
   id: z.number(),
-  userId: z.number(),
   active: z.boolean(),
-  images: z.array(listingImageSchema),
+  userId: z.number(),
   title: z.string(),
-  price: z.number().positive(),
-  type: z.nativeEnum(ListingTypes),
   description: z.string(),
+  images: z.array(listingImageSchema),
   category: z.nativeEnum(ListingCategories),
+  type: z.nativeEnum(ListingTypes),
+  price: z.number().positive().nullable(),
   acceptedPaymentTypes: z.array(z.string()),
   condition: z.nativeEnum(ListingConditions),
-  apparel: z.array(z.string()),
   createdAt: z.date(),
   updatedAt: z.date(),
 });
 
-export const clothingListingSchema = listingSchema.extend({
+export const clothingListingSchema = baseListingSchema.extend({
   clothing: clothingItemSchema,
 });
 
-export const favoritedListingSchema = listingSchema.extend({
+export const favoritedListingSchema = baseListingSchema.extend({
   favorited: z.boolean(),
 });
 
-export const listingsSchema = z.array(listingSchema);
+export const listingsSchema = z.array(baseListingSchema);
 
 export const userListingSchema = favoritedListingSchema.omit({
   favorited: true,
@@ -61,7 +60,7 @@ export const userListingSchema = favoritedListingSchema.omit({
 
 export const userListingsSchema = z.array(userListingSchema);
 
-export type Listing = z.infer<typeof listingSchema>;
+export type Listing = z.infer<typeof baseListingSchema>;
 
 export type UserListing = z.infer<typeof userListingSchema>;
 

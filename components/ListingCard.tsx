@@ -12,13 +12,16 @@ export interface ListingCardProps {
 }
 
 export default function ListingCard({ listing }: ListingCardProps) {
+  console.log("the price is", listing.price);
   return (
     <div className="flex flex-col p-4 shadow-md rounded-lg h-fit gap-y-2">
       <div className="flex justify-between">
         <Link href={`listing/${listing.id}`}>
           <p className="text-xl font-semibold">{listing.title}</p>
         </Link>
-        <p className="font-semibold">${listing.price}</p>
+        {listing.price !== null && (
+          <p className="font-semibold">${listing.price}</p>
+        )}
       </div>
 
       {listing.images.map((image) => (
