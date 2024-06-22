@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getAvailableListings, getUserById } from "@/app/actions";
 import { Edit } from "@/components/icons";
 import Link from "next/link";
-import { getSessionUserId } from "@/app/utils/hooks";
+import { getSessionUserId } from "@/utils/hooks";
 
 interface UserProfilePageProps {
   params: {

@@ -1,5 +1,5 @@
 import CreateListingForm from "./components/CreateListingForm";
-import { getSessionUserId } from "../utils/hooks";
+import { getSessionUserId } from "../../utils/hooks";
 
 export default async function Create() {
   const userId = await getSessionUserId();
