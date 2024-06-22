@@ -3,6 +3,7 @@
 import { createListing } from "@/app/actions";
 import {
   CreateListingPayload,
+  ListingCategories,
   ListingTypes,
   createListingFormDataSchema,
 } from "@/app/dtos";
@@ -146,6 +147,30 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           {...register("description")}
         />
 
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Add images
+        </Typography>
+        <Controller
+          name="image"
+          control={control}
+          render={({ field: { value, onChange, ...field } }) => (
+            <input
+              type="file"
+              style={{ marginTop: "10px" }}
+              accept="image/*"
+              onChange={(e) => {
+                e.preventDefault();
+                onChange(e.target.files?.length ? e.target.files[0] : null);
+              }}
+              {...field}
+            />
+          )}
+        />
+
         {listingType === ListingTypes.Selling && (
           <>
             <Typography
@@ -197,29 +222,6 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           fontWeight={"bold"}
           style={{ marginTop: "20px" }}
         >
-          Add images
-        </Typography>
-        <Controller
-          name="image"
-          control={control}
-          render={({ field: { value, onChange, ...field } }) => (
-            <input
-              type="file"
-              style={{ marginTop: "10px" }}
-              accept="image/*"
-              onChange={(e) => {
-                e.preventDefault();
-                onChange(e.target.files?.length ? e.target.files[0] : null);
-              }}
-              {...field}
-            />
-          )}
-        />
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
           Choose a category
         </Typography>
         <Select
@@ -242,75 +244,56 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           <MenuItem value="misc">misc</MenuItem>
         </Select>
 
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
-          Choose a condition
-        </Typography>
-        <Select
-          style={{
-            marginTop: "10px",
-            width: "50%",
-          }}
-          defaultValue={[]}
-          {...register("condition")}
-        >
-          <MenuItem value="brand_new_unboxed">brand new unboxed</MenuItem>
-          <MenuItem value="brand_new_openbox">brand new open box</MenuItem>
-          <MenuItem value="like_new">like new</MenuItem>
-          <MenuItem value="lightly_used">lightly used</MenuItem>
-          <MenuItem value="well_loved">well-loved</MenuItem>
-          <MenuItem value="not_working">not working</MenuItem>
-          <MenuItem value="parts_missing">parts missing</MenuItem>
-        </Select>
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
-          Choose an apparel gender
-        </Typography>
-        <Select
-          multiple
-          style={{
-            marginTop: "10px",
-            width: "50%",
-          }}
-          defaultValue={[]}
-          {...register("apparelGender")}
-        >
-          <MenuItem value="women">{"women's / feminine "}</MenuItem>
-          <MenuItem value="men">{"men's / masculine"}</MenuItem>
-          <MenuItem value="unisex">unisex / genderless</MenuItem>
-        </Select>
+        {category === ListingCategories.ClothingAccessories && (
+          <>
+            <Typography
+              fontSize={"20px"}
+              fontWeight={"bold"}
+              style={{ marginTop: "20px" }}
+            >
+              Choose an apparel gender
+            </Typography>
+            <Select
+              multiple
+              style={{
+                marginTop: "10px",
+                width: "50%",
+              }}
+              defaultValue={[]}
+              {...register("apparelGender")}
+            >
+              <MenuItem value="women">{"women's / feminine "}</MenuItem>
+              <MenuItem value="men">{"men's / masculine"}</MenuItem>
+              <MenuItem value="unisex">unisex / genderless</MenuItem>
+            </Select>
 
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
-          Choose an apparel size
-        </Typography>
-        <Select
-          multiple
-          style={{
-            marginTop: "10px",
-            width: "50%",
-          }}
-          defaultValue={[]}
-          {...register("apparelSize")}
-        >
-          <MenuItem value="xxs">xxs</MenuItem>
-          <MenuItem value="xs">xs</MenuItem>
-          <MenuItem value="s">s</MenuItem>
-          <MenuItem value="m">m</MenuItem>
-          <MenuItem value="l">l</MenuItem>
-          <MenuItem value="xl">xl</MenuItem>
-          <MenuItem value="xxl">xxl</MenuItem>
-          <MenuItem value=">xxxl">xxxl</MenuItem>
-        </Select>
+            <Typography
+              fontSize={"20px"}
+              fontWeight={"bold"}
+              style={{ marginTop: "20px" }}
+            >
+              Choose an apparel size
+            </Typography>
+            <Select
+              multiple
+              style={{
+                marginTop: "10px",
+                width: "50%",
+              }}
+              defaultValue={[]}
+              {...register("apparelSize")}
+            >
+              <MenuItem value="xxs">xxs</MenuItem>
+              <MenuItem value="xs">xs</MenuItem>
+              <MenuItem value="s">s</MenuItem>
+              <MenuItem value="m">m</MenuItem>
+              <MenuItem value="l">l</MenuItem>
+              <MenuItem value="xl">xl</MenuItem>
+              <MenuItem value="xxl">xxl</MenuItem>
+              <MenuItem value=">xxxl">xxxl</MenuItem>
+            </Select>
+          </>
+        )}
 
         <Button style={{ marginTop: "20px" }} type="submit">
           <Typography>List it!</Typography>
