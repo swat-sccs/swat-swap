@@ -34,7 +34,7 @@ model Listing {
   type        Type
   description String
   images      ListingImage[]
-  paymentType String[]
+  acceptedPaymentTypes String[]
   condition   Condition
   category    Category
   size        String[]
