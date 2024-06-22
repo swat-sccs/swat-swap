@@ -241,27 +241,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           <MenuItem value="transportation">transportation</MenuItem>
           <MenuItem value="misc">misc</MenuItem>
         </Select>
-        <Typography
-          fontSize={"20px"}
-          fontWeight={"bold"}
-          style={{ marginTop: "20px" }}
-        >
-          Choose a payment type
-        </Typography>
-        <Select
-          multiple
-          style={{
-            marginTop: "10px",
-            width: "50%",
-          }}
-          defaultValue={[]}
-          {...register("paymentType")}
-        >
-          <MenuItem value="cash">cash</MenuItem>
-          <MenuItem value="paypal">PayPal</MenuItem>
-          <MenuItem value="zelle">Zelle</MenuItem>
-          <MenuItem value="venmo">Venmo</MenuItem>
-        </Select>
+
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
