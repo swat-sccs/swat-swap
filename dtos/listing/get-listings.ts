@@ -41,7 +41,6 @@ export const listingSchema = z.object({
   acceptedPaymentTypes: z.array(z.string()),
   condition: z.nativeEnum(ListingConditions),
   apparel: z.array(z.string()),
-  size: z.array(z.string()),
   createdAt: z.date(),
   updatedAt: z.date(),
 });
