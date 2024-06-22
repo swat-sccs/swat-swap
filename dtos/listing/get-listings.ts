@@ -1,5 +1,19 @@
 import { z } from "zod";
-import { ListingCategories, ListingConditions, ListingTypes } from ".";
+import {
+  ClothingItemGenders,
+  ClothingItemSizes,
+  ListingCategories,
+  ListingConditions,
+  ListingTypes,
+} from ".";
+
+export function isClothingListing(listing: any): listing is ClothingListing {
+  return (
+    listing &&
+    listing.category &&
+    listing.category === ListingCategories.ClothingAccessories
+  );
+}
 
 export const listingImageSchema = z.object({
   id: z.number(),
@@ -7,6 +21,11 @@ export const listingImageSchema = z.object({
   fileName: z.string(),
   checksum: z.string(),
   listingId: z.number(),
+});
+
+export const clothingItemSchema = z.object({
+  size: z.nativeEnum(ClothingItemSizes),
+  gender: z.nativeEnum(ClothingItemGenders),
 });
 
 export const listingSchema = z.object({
@@ -19,21 +38,32 @@ export const listingSchema = z.object({
   type: z.nativeEnum(ListingTypes),
   description: z.string(),
   category: z.nativeEnum(ListingCategories),
-  paymentType: z.array(z.string()),
+  acceptedPaymentTypes: z.array(z.string()),
   condition: z.nativeEnum(ListingConditions),
   apparel: z.array(z.string()),
   size: z.array(z.string()),
   createdAt: z.date(),
   updatedAt: z.date(),
+});
+
+export const clothingListingSchema = listingSchema.extend({
+  clothing: clothingItemSchema,
+});
+
+export const favoritedListingSchema = listingSchema.extend({
   favorited: z.boolean(),
 });
 
 export const listingsSchema = z.array(listingSchema);
 
-export type Listing = z.infer<typeof listingSchema>;
+export const userListingSchema = favoritedListingSchema.omit({
+  favorited: true,
+});
 
-export const userListingSchema = listingSchema.omit({ favorited: true });
+export const userListingsSchema = z.array(userListingSchema);
+
+export type Listing = z.infer<typeof listingSchema>;
 
 export type UserListing = z.infer<typeof userListingSchema>;
 
-export const userListingsSchema = z.array(userListingSchema);
+export type ClothingListing = z.infer<typeof clothingListingSchema>;

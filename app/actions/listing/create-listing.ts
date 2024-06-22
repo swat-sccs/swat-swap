@@ -1,6 +1,10 @@
 "use server";
 
-import { createListingFormDataSchema } from "@/dtos/listing";
+import {
+  ListingCategories,
+  ListingTypes,
+  createListingFormDataSchema,
+} from "@/dtos/listing";
 import { revalidatePath } from "next/cache";
 import prisma from "@/prisma/prisma";
 import {
@@ -9,72 +13,94 @@ import {
 } from "@/minio/actions";
 import { listingImagesBucketName } from "@/config";
 
-export async function createListing(userId: number, formData: FormData) {
-  try {
-    const requiredFields = [
-      "title",
-      "description",
-      "type",
-      "category",
-      "price",
-      "paymentType",
-      "condition",
-      "apparelSize",
-      "apparelGender",
-    ];
+const validateFormDataField = (formData: FormData, field: string) => {
+  if (!formData.has(field) && formData.get(field)) {
+    throw new Error(`Missing required field: ${field}`);
+  }
+};
 
-    for (const field of requiredFields) {
-      if (!formData.has(field)) {
-        return new Response(`${field} is required`, { status: 400 });
-      }
+const presenceCheckBaseFields = (formData: FormData) => {
+  const baseRequiredFields = [
+    "title",
+    "description",
+    "type",
+    "category",
+    "condition",
+  ];
+
+  for (const field of baseRequiredFields) {
+    if (!formData.has(field)) {
+      console.error(`Missing required field: ${field}`);
+      throw new Error(`Missing required field: ${field}`);
     }
+  }
+};
+
+const uploadImageFile = async (imageFile: File) => {
+  const imageBuffer = await imageFile.arrayBuffer();
+
+  const digest = await crypto.subtle.digest("SHA-256", imageBuffer);
+  const digestBytes = new Uint8Array(digest);
+
+  await uploadFileToListingImagesBucket(imageFile, listingImagesBucketName);
+
+  const checksum = btoa(
+    digestBytes.reduce((acc, byte) => acc + String.fromCharCode(byte), "")
+  );
+
+  return {
+    bucketName: listingImagesBucketName,
+    checksum: checksum,
+    fileName: imageFile.name,
+  };
+};
+
+export async function createListing(userId: number, formData: FormData) {
+  console.log("form data", formData);
+  try {
+    presenceCheckBaseFields(formData);
 
     const requestImageFile = formData.get("image");
     if (!(requestImageFile instanceof File)) {
-      return new Response("Image file is required", { status: 400 });
+      throw new Error("Image file is required");
     }
 
-    const listingData = {
+    let listingData: Record<string, any> = {
       title: formData.get("title"),
-      price: Number(formData.get("price")),
       description: formData.get("description"),
       type: formData.get("type"),
       category: formData.get("category"),
-      paymentType: new Array(formData.get("paymentType")),
       condition: formData.get("condition"),
-      apparelSize: new Array(formData.get("apparelSize")),
-      apparelGender: new Array(formData.get("apparelGender")),
       image: requestImageFile,
+      acceptedPaymentTypes: formData.getAll("acceptedPaymentTypes") ?? [],
+      price: formData.get("price") ? Number(formData.get("price")) : undefined,
     };
+
+    if (listingData.category === ListingCategories.ClothingAccessories) {
+      validateFormDataField(formData, "apparelSize");
+      validateFormDataField(formData, "apparelGender");
+
+      listingData = {
+        ...listingData,
+        apparelSize: formData.get("apparelSize"),
+        apparelGender: formData.get("apparelGender"),
+      };
+    }
 
     const validatedListingFormData =
       createListingFormDataSchema.parse(listingData);
 
     await createBucketIfNotExists(listingImagesBucketName);
 
-    const imageBuffer = await requestImageFile.arrayBuffer();
-
-    const digest = await crypto.subtle.digest("SHA-256", imageBuffer);
-    const digestBytes = new Uint8Array(digest);
-    const checksum = btoa(
-      digestBytes.reduce((acc, byte) => acc + String.fromCharCode(byte), "")
+    const listingImages = await Promise.all(
+      [requestImageFile].map(
+        async (imageFile) => await uploadImageFile(imageFile)
+      )
     );
-
-    await uploadFileToListingImagesBucket(
-      requestImageFile,
-      listingImagesBucketName
-    );
-
-    const listingImages = [
-      {
-        bucketName: listingImagesBucketName,
-        checksum: checksum,
-        fileName: requestImageFile.name,
-      },
-    ];
 
     await prisma.listing.create({
       data: {
+        userId,
         title: validatedListingFormData.title,
         description: validatedListingFormData.description,
         type: validatedListingFormData.type,
@@ -84,12 +110,11 @@ export async function createListing(userId: number, formData: FormData) {
           },
         },
         category: validatedListingFormData.category,
-        paymentType: validatedListingFormData.paymentType,
         condition: validatedListingFormData.condition,
-        apparel: validatedListingFormData.apparelGender,
-        size: validatedListingFormData.apparelSize,
+        // paymentType: validatedListingFormData.paymentType,
+        // apparel: validatedListingFormData.apparelGender,
+        // size: validatedListingFormData.apparelSize,
         price: validatedListingFormData.price,
-        userId,
       },
     });
     revalidatePath("/");

@@ -32,6 +32,9 @@ interface CreateListingFormProps {
 const CreateListingForm = ({ userId }: CreateListingFormProps) => {
   const router = useRouter();
   const { register, handleSubmit, control } = useForm<CreateListingPayload>({
+    defaultValues: {
+      acceptedPaymentTypes: [],
+    },
     resolver: zodResolver(createListingFormDataSchema),
   });
 
@@ -47,6 +50,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
 
   const onFormSubmitSuccess = useCallback(
     async (data: CreateListingPayload) => {
+      console.log("submitting the following data", data);
       const res = await createListing(
         userId,
         serialize(data, { noAttributesWithArrayNotation: true })
@@ -171,6 +175,30 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
           )}
         />
 
+        <Typography
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          style={{ marginTop: "20px" }}
+        >
+          Choose a condition
+        </Typography>
+        <Select
+          style={{
+            marginTop: "10px",
+            width: "50%",
+          }}
+          defaultValue={[]}
+          {...register("condition")}
+        >
+          <MenuItem value="brand_new_unboxed">brand new unboxed</MenuItem>
+          <MenuItem value="brand_new_openbox">brand new open box</MenuItem>
+          <MenuItem value="like_new">like new</MenuItem>
+          <MenuItem value="lightly_used">lightly used</MenuItem>
+          <MenuItem value="well_loved">well-loved</MenuItem>
+          <MenuItem value="not_working">not working</MenuItem>
+          <MenuItem value="parts_missing">parts missing</MenuItem>
+        </Select>
+
         {listingType === ListingTypes.Selling && (
           <>
             <Typography
@@ -207,7 +235,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
                 width: "50%",
               }}
               defaultValue={[]}
-              {...register("paymentType")}
+              {...register("acceptedPaymentTypes")}
             >
               <MenuItem value="cash">cash</MenuItem>
               <MenuItem value="paypal">PayPal</MenuItem>

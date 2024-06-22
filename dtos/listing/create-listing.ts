@@ -28,17 +28,39 @@ export enum ListingCategories {
   Misc = "misc",
 }
 
+export enum ClothingItemSizes {
+  XXS = "xxs",
+  XS = "xs",
+  S = "s",
+  M = "m",
+  L = "l",
+  XL = "xl",
+  XXL = "xxl",
+  XXXL = "xxxl",
+}
+
+export enum ClothingItemGenders {
+  XXS = "xxs",
+  XS = "xs",
+  S = "s",
+  M = "m",
+  L = "l",
+  XL = "xl",
+  XXL = "xxl",
+  XXXL = "xxxl",
+}
+
 export const createListingFormDataSchema = z.object({
   image: z.instanceof(File),
   title: z.string(),
-  price: z.number().positive(),
   type: z.nativeEnum(ListingTypes),
   description: z.string(),
   category: z.nativeEnum(ListingCategories),
-  paymentType: z.array(z.string()),
+  price: z.number().positive().optional(),
+  acceptedPaymentTypes: z.array(z.string()),
   condition: z.nativeEnum(ListingConditions),
-  apparelSize: z.array(z.string()),
-  apparelGender: z.array(z.string()),
+  apparelSize: z.array(z.string()).optional(),
+  apparelGender: z.array(z.string()).optional(),
 });
 
 export type CreateListingPayload = z.infer<typeof createListingFormDataSchema>;
