@@ -111,7 +111,7 @@ export async function createListing(userId: number, formData: FormData) {
         },
         category: validatedListingFormData.category,
         condition: validatedListingFormData.condition,
-        // paymentType: validatedListingFormData.paymentType,
+        acceptedPaymentTypes: validatedListingFormData.acceptedPaymentTypes,
         // apparel: validatedListingFormData.apparelGender,
         // size: validatedListingFormData.apparelSize,
         price: validatedListingFormData.price,
