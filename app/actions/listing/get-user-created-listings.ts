@@ -1,6 +1,6 @@
 "use server";
 
-import { UserListing, userListingsSchema } from "@/app/dtos";
+import { UserListing, userListingsSchema } from "@/dtos";
 import prisma from "@/prisma/prisma";
 
 export async function getUserCreatedListings(

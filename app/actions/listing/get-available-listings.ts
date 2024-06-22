@@ -1,5 +1,5 @@
 "use server";
-import { Listing, listingsSchema } from "@/app/dtos";
+import { Listing, listingsSchema } from "@/dtos";
 import prisma from "@/prisma/prisma";
 
 export async function getAvailableListings(userId: number): Promise<Listing[]> {

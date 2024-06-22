@@ -1,6 +1,6 @@
 "use server";
 
-import { User } from "@/app/dtos";
+import { User } from "@/dtos";
 import prisma from "@/prisma/prisma";
 
 export async function PatchUser(userId: string, userChanges: Partial<User>) {

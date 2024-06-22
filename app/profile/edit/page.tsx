@@ -1,7 +1,7 @@
 "use client";
 
 import { PatchUser } from "@/app/actions/user/edit-user";
-import { EditUser, User, editUserSchema } from "@/app/dtos";
+import { EditUser, User, editUserSchema } from "@/dtos";
 import { useGetBareUserById } from "@/app/utils/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, TextField } from "@mui/material";

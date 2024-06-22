@@ -1,4 +1,4 @@
-import { ListingTypes } from "@/app/dtos";
+import { ListingTypes } from "@/dtos";
 import { clsx } from "clsx";
 import React from "react";
 

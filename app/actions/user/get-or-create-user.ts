@@ -1,6 +1,6 @@
 "use server";
 
-import { CreateUserPayload } from "@/app/dtos/user/";
+import { CreateUserPayload } from "@/dtos/user";
 import prisma from "@/prisma/prisma";
 
 export async function getOrCreateUser(createUserPayload: CreateUserPayload) {

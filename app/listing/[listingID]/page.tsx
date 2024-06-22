@@ -3,7 +3,7 @@ import { Container, Typography, Grid, Button, Box } from "@mui/material";
 import Image from "next/image";
 import prisma from "@/prisma/prisma";
 import { getUserById, getListing } from "@/app/actions";
-import { User } from "@/app/dtos";
+import { User } from "@/dtos";
 import { listingImagesBucketName, minioEndpoint, minioPort } from "@/config/";
 import DeleteListingButton from "@/components/DeleteListingButton";
 import DeactivateListingButton from "@/components/DeactivateListingButton";

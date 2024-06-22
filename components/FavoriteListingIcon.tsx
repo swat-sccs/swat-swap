@@ -1,7 +1,7 @@
 "use client";
 
 import { favoriteListing, unfavoriteListing } from "@/app/actions";
-import { Listing } from "@/app/dtos";
+import { Listing } from "@/dtos";
 import { useCallback } from "react";
 
 interface FavoriteListingIconProps {

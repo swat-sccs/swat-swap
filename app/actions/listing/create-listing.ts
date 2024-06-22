@@ -1,6 +1,6 @@
 "use server";
 
-import { createListingFormDataSchema } from "@/app/dtos/listing";
+import { createListingFormDataSchema } from "@/dtos/listing";
 import { revalidatePath } from "next/cache";
 import prisma from "@/prisma/prisma";
 import {

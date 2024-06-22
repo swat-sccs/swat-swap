@@ -1,6 +1,6 @@
 "use server";
 
-import { userSchema } from "@/app/dtos/user";
+import { userSchema } from "@/dtos/user";
 import prisma from "@/prisma/prisma";
 
 export async function getUserById(userId: number) {
@@ -9,7 +9,7 @@ export async function getUserById(userId: number) {
       listings: false,
     },
     where: {
-      id: userId
+      id: userId,
     },
   });
 

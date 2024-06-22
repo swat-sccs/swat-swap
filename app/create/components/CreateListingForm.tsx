@@ -6,7 +6,7 @@ import {
   ListingCategories,
   ListingTypes,
   createListingFormDataSchema,
-} from "@/app/dtos";
+} from "@/dtos";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
