@@ -9,7 +9,6 @@ import FavoriteListingIcon from "./FavoriteListingIcon";
 
 interface ListingCardOptions {
   display?: {
-    showPrice?: boolean;
     showSaveButton?: boolean;
   };
 }
@@ -26,7 +25,7 @@ export default function ListingCard({ listing, options }: ListingCardProps) {
         <Link href={`listing/${listing.id}`}>
           <p className="text-xl font-semibold">{listing.title}</p>
         </Link>
-        {listing.price !== null && options?.display?.showPrice && (
+        {listing.price !== null && (
           <p className="font-semibold">${listing.price}</p>
         )}
       </div>
