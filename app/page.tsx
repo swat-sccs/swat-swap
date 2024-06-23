@@ -16,7 +16,15 @@ export default async function Home() {
       <SideBar />
       <div className="flex flex-wrap gap-8">
         {listings.map((listing) => (
-          <ListingCard key={listing.id} listing={listing} />
+          <ListingCard
+            key={listing.id}
+            listing={listing}
+            options={{
+              display: {
+                showSaveButton: true,
+              },
+            }}
+          />
         ))}
       </div>
     </div>
