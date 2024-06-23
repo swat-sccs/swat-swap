@@ -1,10 +1,6 @@
 "use server";
 
-import {
-  ListingCategories,
-  ListingTypes,
-  createListingFormDataSchema,
-} from "@/dtos/listing";
+import { ListingCategories, createListingFormDataSchema } from "@/dtos/listing";
 import { revalidatePath } from "next/cache";
 import prisma from "@/prisma/prisma";
 import {
