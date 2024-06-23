@@ -1,25 +1,23 @@
-import ListingCard from "@/components/ListingCard";
-import { Box, Grid } from "@mui/material";
-import { getAllFavoritedListings } from "@/app/actions";
+import { Box } from "@mui/material";
+import { getSavedListings } from "@/app/actions";
+import { getSessionUserId } from "@/utils/hooks";
+import MySavedListingCard from "./components/MySavedListingCard";
 
 export default async function Home() {
-  // TODO: fix dummy id
-  const listings = await getAllFavoritedListings(1);
+  const userId = await getSessionUserId();
+
+  if (!userId) {
+    return <div>Not logged in</div>;
+  }
+  const savedListings = await getSavedListings(userId);
 
   return (
-    <Box className="flex h-[calc(100vh-68.5px)]">
-      <Grid
-        container
-        spacing={1}
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="stretch"
-        className="flex-1 p-4 overflow-y-scroll"
-      >
-        {listings.map((userListing) => (
-          <ListingCard key={userListing.id} listing={userListing} />
+    <Box className="flex h-[calc(100vh-68.5px)] p-8">
+      <div className="flex flex-wrap gap-6">
+        {savedListings.map((savedListing) => (
+          <MySavedListingCard key={savedListing.id} listing={savedListing} />
         ))}
-      </Grid>
+      </div>
     </Box>
   );
 }

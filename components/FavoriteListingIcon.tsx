@@ -1,25 +1,23 @@
 "use client";
 
 import { favoriteListing, unfavoriteListing } from "@/app/actions";
-import { Listing } from "@/dtos";
+import { SavedListing } from "@/dtos";
 import { useCallback } from "react";
 
 interface FavoriteListingIconProps {
-  listing: Listing;
+  listing: SavedListing;
 }
 
 const FavoriteListingIcon = ({ listing }: FavoriteListingIconProps) => {
   const onToggleFavorite = useCallback(() => {
-    if (listing.favorited) {
+    if (listing.saved) {
       unfavoriteListing(1, listing.id);
     } else {
       favoriteListing(1, listing.id);
     }
   }, [listing]);
   return (
-    <div onClick={onToggleFavorite}>
-      {listing.favorited ? "unsave" : "save"}
-    </div>
+    <div onClick={onToggleFavorite}>{listing.saved ? "unsave" : "save"}</div>
   );
 };
 

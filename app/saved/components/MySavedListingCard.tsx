@@ -1,24 +1,17 @@
-import * as React from "react";
-
-import { Listing, isSavedListing } from "@/dtos/listing";
 import Image from "next/image";
-import { listingImagesBucketName, minioEndpoint, minioPort } from "@/config";
-import ListingTypePill from "./ListingTypePill";
 import Link from "next/link";
-import FavoriteListingIcon from "./FavoriteListingIcon";
+import { SavedListing } from "@/dtos";
+import ListingTypePill from "@/components/ListingTypePill";
+import FavoriteListingIcon from "@/components/FavoriteListingIcon";
+import { listingImagesBucketName, minioEndpoint, minioPort } from "@/config";
 
-interface ListingCardOptions {
-  display?: {
-    showSaveButton?: boolean;
-  };
+export interface MySavedListingCardProps {
+  listing: SavedListing;
 }
 
-export interface ListingCardProps {
-  listing: Listing;
-  options?: ListingCardOptions;
-}
-
-export default function ListingCard({ listing, options }: ListingCardProps) {
+export default function MySavedListingCard({
+  listing,
+}: MySavedListingCardProps) {
   return (
     <div className="flex flex-col p-4 shadow-md rounded-lg h-fit gap-y-2">
       <div className="flex justify-between">
@@ -45,9 +38,7 @@ export default function ListingCard({ listing, options }: ListingCardProps) {
       ))}
       <div className="flex justify-end">
         <ListingTypePill type={listing.type} />
-        {isSavedListing(listing) && options?.display?.showSaveButton && (
-          <FavoriteListingIcon listing={listing} />
-        )}
+        <FavoriteListingIcon listing={listing} />
       </div>
     </div>
   );

@@ -48,14 +48,15 @@ export const clothingListingSchema = baseListingSchema.extend({
   clothing: clothingItemSchema,
 });
 
-export const favoritedListingSchema = baseListingSchema.extend({
-  favorited: z.boolean(),
-});
-
 export const listingsSchema = z.array(baseListingSchema);
 
-export const userListingSchema = favoritedListingSchema.omit({
-  favorited: true,
+export const savedListingSchema = baseListingSchema.extend({
+  saved: z.boolean(),
+});
+export const savedListingsSchema = z.array(savedListingSchema);
+
+export const userListingSchema = savedListingSchema.omit({
+  saved: true,
 });
 
 export const userListingsSchema = z.array(userListingSchema);
@@ -65,3 +66,5 @@ export type Listing = z.infer<typeof baseListingSchema>;
 export type UserListing = z.infer<typeof userListingSchema>;
 
 export type ClothingListing = z.infer<typeof clothingListingSchema>;
+
+export type SavedListing = z.infer<typeof savedListingSchema>;

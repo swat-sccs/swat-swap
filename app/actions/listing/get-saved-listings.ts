@@ -1,14 +1,19 @@
 "use server";
-import { Listing, listingsSchema } from "@/dtos";
+import { SavedListing, savedListingsSchema } from "@/dtos";
 import prisma from "@/prisma/prisma";
 
-export async function getAllFavoritedListings(
+export async function getSavedListings(
   userId: number
-): Promise<Listing[]> {
+): Promise<SavedListing[]> {
   const dbListings = await prisma.favoriteListing.findMany({
     where: {
       userId: {
         equals: userId,
+      },
+      listing: {
+        active: {
+          equals: true,
+        },
       },
     },
     include: {
@@ -21,10 +26,10 @@ export async function getAllFavoritedListings(
   });
 
   const mappedListings = dbListings.map((listing) => {
-    return { ...listing.listing, favorited: true };
+    return { ...listing.listing, saved: true };
   });
 
-  const validatedListings = listingsSchema.parse(mappedListings);
+  const validatedListings = savedListingsSchema.parse(mappedListings);
 
   return validatedListings;
 }
