@@ -1,7 +1,7 @@
 import ListingCard from "@/components/ListingCard";
 import { Divider, Icon } from "@mui/material";
 import Image from "next/image";
-import { getAvailableListings, getUserById } from "@/app/actions";
+import { getAvailableListings, getUserDataById } from "@/app/actions";
 import { Edit } from "@/components/icons";
 import Link from "next/link";
 import { getSessionUserId } from "@/utils/hooks";
@@ -20,7 +20,7 @@ export default async function UserProfilePage({
     return <div>Not logged in</div>;
   }
 
-  const userData = await getUserById(userId);
+  const userData = await getUserDataById(userId);
   const userListings = await getAvailableListings(userId);
 
   return (
