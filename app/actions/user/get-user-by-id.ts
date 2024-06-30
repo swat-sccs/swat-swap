@@ -3,7 +3,7 @@
 import { userSchema } from "@/dtos/user";
 import prisma from "@/prisma/prisma";
 
-export async function getUserById(userId: number) {
+export async function getUserDataById(userId: number) {
   const user = await prisma.user.findUnique({
     include: {
       listings: false,
