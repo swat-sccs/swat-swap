@@ -34,7 +34,7 @@ model Listing {
   type        Type
   description String
   images      ListingImage[]
-  acceptedPaymentTypes String[]
+  acceptedPaymentTypes Payment_Type[]
   condition   Condition
   category    Category
   userId      Int
@@ -115,4 +115,11 @@ enum Apparel_Size {
   xl
   xxl
   xxxl
+}
+
+enum Payment_Type {
+  cash
+  paypal
+  zelle
+  venmo
 }
