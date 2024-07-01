@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export enum ListingTypes {
   Selling = "selling",
-  Buying = "buying",
+  // Buying = "buying",
   Service = "service",
 }
 
@@ -60,7 +60,7 @@ export const createListingFormDataSchema = z.object({
       message: "Invalid condition",
     }),
   }),
-  price: z.number().positive().optional(),
+  price: z.number().positive(),
   acceptedPaymentTypes: z.array(z.string()),
   condition: z.nativeEnum(ListingConditions, {
     errorMap: () => ({
