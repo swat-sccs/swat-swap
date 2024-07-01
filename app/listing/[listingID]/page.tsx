@@ -1,27 +1,29 @@
-"use server";
-import { Container, Typography, Grid, Button, Box } from "@mui/material";
+import { Container, Typography, Grid, Box } from "@mui/material";
 import Image from "next/image";
-import prisma from "@/prisma/prisma";
-import { getUserById, getListing } from "@/app/actions";
-import { User } from "@/dtos";
+import { getUserDataById, getListing } from "@/app/actions";
 import { listingImagesBucketName, minioEndpoint, minioPort } from "@/config/";
 import DeleteListingButton from "@/components/DeleteListingButton";
 import DeactivateListingButton from "@/components/DeactivateListingButton";
 
-export default async function ListingID({
-  params,
-}: {
-  params: { listingID: string };
-}) {
-  const listing = await getListing(parseInt(params.listingID));
-  const userId = listing?.userId ?? 1;
-  const user: User = await getUserById(1);
-  const formattedCreatedAt = listing?.createdAt
-    ? new Date(listing.createdAt).toLocaleString()
-    : "";
+interface ListingPageProps {
+  params: {
+    listingId: string;
+  };
+}
+
+const ListingPage = async ({ params: { listingId } }: ListingPageProps) => {
+  const listing = await getListing(parseInt(listingId));
+
   if (!listing) {
     return <p>Listing does not exist!</p>;
   }
+
+  const listingUserData = await getUserDataById(listing.userId);
+
+  const formattedCreatedAt = listing?.createdAt
+    ? new Date(listing.createdAt).toLocaleString()
+    : "";
+
   return (
     <Container
       style={{
@@ -55,11 +57,23 @@ export default async function ListingID({
         </Grid>
 
         <Grid item xs={12} md={6} gap={8}>
-          <Typography variant="h5">{listing?.title}</Typography>
-          <Typography fontSize={"20px"} fontWeight={"bold"}>
-            ${listing?.price}
-          </Typography>
-          <Typography fontSize={"18px"}>{listing?.description}</Typography>
+          {/* <Typography variant="h5">theron:{listing?.title}</Typography> */}
+          {!!listing.price && (
+            <Typography fontSize={"20px"} fontWeight={"bold"}>
+              ${listing?.price}
+            </Typography>
+          )}
+
+          <div
+            style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
+          >
+            <Typography fontSize={"18px"} fontWeight={"bold"}>
+              {`Description:`}
+            </Typography>
+
+            <Typography fontSize={"18px"}>{listing?.description}</Typography>
+          </div>
+
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
           >
@@ -71,6 +85,7 @@ export default async function ListingID({
               {listing.category}
             </Typography>
           </div>
+
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
           >
@@ -78,14 +93,14 @@ export default async function ListingID({
               Payment Type:
             </Typography>
 
-            {listing?.paymentType.map((pt, index) => (
+            {listing?.acceptedPaymentTypes.map((pt, index) => (
               <Typography
                 key={pt}
                 fontSize={"18px"}
                 style={{ marginLeft: "8px" }}
               >
                 {pt}
-                {index !== listing.paymentType.length - 1 && ","}
+                {index !== listing.acceptedPaymentTypes.length - 1 && ","}
               </Typography>
             ))}
           </div>
@@ -102,10 +117,10 @@ export default async function ListingID({
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
           >
-            <Typography fontSize={"18px"} fontWeight={"bold"}>
+            {/* <Typography fontSize={"18px"} fontWeight={"bold"}>
               Apparel Gender:
-            </Typography>
-            {listing?.apparel.map((appar, index) => (
+            </Typography> */}
+            {/* {listing?.apparel.map((appar, index) => (
               <Typography
                 key={appar}
                 fontSize={"18px"}
@@ -114,25 +129,9 @@ export default async function ListingID({
                 {appar}
                 {index !== listing.apparel.length - 1 && ","}
               </Typography>
-            ))}
+            ))} */}
           </div>
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
-          >
-            <Typography fontSize={"18px"} fontWeight={"bold"}>
-              Size:
-            </Typography>
-            {listing?.size.map((size, index) => (
-              <Typography
-                key={size}
-                fontSize={"18px"}
-                style={{ marginLeft: "8px" }}
-              >
-                {size}
-                {index !== listing.size.length - 1 && ","}
-              </Typography>
-            ))}
-          </div>
+
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
           >
@@ -140,10 +139,10 @@ export default async function ListingID({
               Contact:
             </Typography>
             <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {user.name}
+              {listingUserData.name}
             </Typography>
           </div>
-          <Typography fontSize={"18px"}>{user.email}</Typography>
+          <Typography fontSize={"18px"}>{listingUserData.email}</Typography>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
           >
@@ -169,4 +168,6 @@ export default async function ListingID({
       </Grid>
     </Container>
   );
-}
+};
+
+export default ListingPage;
