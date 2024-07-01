@@ -115,12 +115,12 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
                 label="Selling"
                 style={{ marginRight: "40px" }}
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 value="buying"
                 control={<Radio />}
                 label="Buying"
                 style={{ marginRight: "40px" }}
-              />
+              /> */}
               <FormControlLabel
                 value="service"
                 control={<Radio />}
