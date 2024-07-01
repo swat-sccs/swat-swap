@@ -5,6 +5,7 @@ import {
   ListingCategories,
   ListingConditions,
   ListingTypes,
+  PaymentType,
 } from ".";
 
 export function isClothingListing(listing: any): listing is ClothingListing {
@@ -37,8 +38,8 @@ export const baseListingSchema = z.object({
   images: z.array(listingImageSchema),
   category: z.nativeEnum(ListingCategories),
   type: z.nativeEnum(ListingTypes),
-  price: z.number().positive().nullable(),
-  acceptedPaymentTypes: z.array(z.string()),
+  price: z.number().positive(),
+  acceptedPaymentTypes: z.array(z.nativeEnum(PaymentType)),
   condition: z.nativeEnum(ListingConditions),
   createdAt: z.date(),
   updatedAt: z.date(),
