@@ -50,6 +50,13 @@ export enum ClothingItemGenders {
   XXXL = "xxxl",
 }
 
+export enum PaymentType {
+  Cash = "cash",
+  Venmo = "venmo",
+  Paypal = "paypal",
+  Zelle = "zelle",
+}
+
 export const createListingFormDataSchema = z.object({
   image: z.instanceof(File, { message: "Required" }),
   title: z.string(),
@@ -61,7 +68,7 @@ export const createListingFormDataSchema = z.object({
     }),
   }),
   price: z.number().positive(),
-  acceptedPaymentTypes: z.array(z.string()),
+  acceptedPaymentTypes: z.array(z.nativeEnum(PaymentType)),
   condition: z.nativeEnum(ListingConditions, {
     errorMap: () => ({
       message: "Invalid condition",
