@@ -55,7 +55,7 @@ const FiltersSidebar = () => {
 
   return (
     <FormProvider {...methods}>
-      <div className="flex flex-col overflow-y-auto items-center justify-between w-1/4">
+      <div className="flex flex-col flex-shrink-0 overflow-y-auto items-center justify-between w-1/4">
         <form
           className="flex flex-col w-full px-4 space-y-4"
           onSubmit={methods.handleSubmit(
