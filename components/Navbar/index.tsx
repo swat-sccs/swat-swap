@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   CREATE_LISTING,
   MY_LISTINGS,
@@ -25,25 +24,26 @@ const NavBar = ({}: NavBarProps) => {
         </p>
       </a>
 
-      {/* desktop nav */}
-      <div className="hidden md:flex space-x-6">
-        {Object.entries(NavigationOptions).map(([page, link]) => (
-          <a key={page} href={link}>
-            <p className="font-semibold text-lg text-black transition-colors duration-200 ease-in-out hover:text-accent">
-              {page}
-            </p>
-          </a>
-        ))}
-      </div>
+      <div className="flex space-x-16">
+        <div className="hidden md:flex space-x-6">
+          {Object.entries(NavigationOptions).map(([page, link]) => (
+            <a key={page} href={link}>
+              <p className="font-semibold text-lg text-black transition-colors duration-200 ease-in-out hover:text-accent">
+                {page}
+              </p>
+            </a>
+          ))}
+        </div>
 
-      {/* settings menu */}
-      <div className="hidden md:block">
-        <SettingsMenu />
-      </div>
+        {/* desktop settings menu */}
+        <div className="hidden md:block">
+          <SettingsMenu />
+        </div>
 
-      {/* mobile menu*/}
-      <div className="block md:hidden">
-        <MobileMenu />
+        {/* mobile only menu*/}
+        <div className="block md:hidden">
+          <MobileMenu />
+        </div>
       </div>
     </div>
   );
