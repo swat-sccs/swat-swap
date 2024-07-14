@@ -4,7 +4,6 @@ import { EditUser, User, editUserSchema } from "@/dtos";
 import { useFetchUser } from "@/utils/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, TextField } from "@mui/material";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -48,19 +47,22 @@ export default function EditProfilePage({}: EditProfilePageProps) {
   if (!user) return null;
 
   return (
-    <div className="flex flex-col p-8">
-      <div className="flex gap-8">
-        <Image
+    <div className="flex flex-col items-center p-8">
+      <div className="flex gap-8 w-3/4">
+        {/* <Image
           src="/images/cards/maxwell1.jpg"
           alt="image"
           width={400}
           height={400}
           className="rounded-full w-1/3 lg:m-8 h-fit"
-        />
+        /> */}
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-2">
             <p className="text-lg font-medium">Display Name</p>
             <TextField type="text" {...register("displayName")} />
+            <p className="text-xs font-semibold text-red-500">
+              {errors.biography?.message}
+            </p>
           </div>
 
           <div className="flex flex-col gap-2 w-full">
