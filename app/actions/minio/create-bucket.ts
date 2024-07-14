@@ -1,4 +1,4 @@
-import { minioClient } from "../minio";
+import { minioClient } from "@/config/minio";
 
 export async function createBucketIfNotExists(bucketName: string) {
   const bucketExists = await minioClient.bucketExists(bucketName);

@@ -1,14 +1,13 @@
-import { isProduction } from "@/config";
-import { parsedEnv } from "@/app/env.mjs";
 import * as Minio from "minio";
+import { isProduction } from "./environment";
 
 const minioClientSingelton = () =>
   new Minio.Client({
-    endPoint: parsedEnv.MINIO_ENDPOINT,
-    port: parsedEnv.MINIO_PORT,
-    useSSL: parsedEnv.MINO_USE_SSL,
-    accessKey: parsedEnv.MINIO_ROOT_USER,
-    secretKey: parsedEnv.MINIO_ROOT_PASSWORD,
+    endPoint: process.env.MINIO_ENDPOINT!,
+    port: parseInt(process.env.MINIO_PORT!),
+    useSSL: !!process.env.MINO_USE_SSL,
+    accessKey: process.env.MINIO_ROOT_USER!,
+    secretKey: process.env.MINIO_ROOT_PASSWORD!,
   });
 
 declare global {

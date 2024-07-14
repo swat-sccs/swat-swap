@@ -1,4 +1,4 @@
-import { minioClient } from "../minio";
+import { minioClient } from "@/config/minio";
 
 export async function fileExists(bucketName: string, fileName: string) {
   try {
