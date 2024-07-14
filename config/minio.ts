@@ -3,7 +3,7 @@ import { isProduction } from "./environment";
 
 const minioClientSingelton = () =>
   new Minio.Client({
-    endPoint: process.env.MINIO_ENDPOINT!,
+    endPoint: process.env.MINIO_HOSTNAME!,
     port: parseInt(process.env.MINIO_PORT!),
     useSSL: !!process.env.MINO_USE_SSL,
     accessKey: process.env.MINIO_ROOT_USER!,

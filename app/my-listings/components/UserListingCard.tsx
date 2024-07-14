@@ -1,9 +1,8 @@
 import * as React from "react";
-
 import { UserListing } from "@/dtos/listing";
 import Image from "next/image";
-import { listingImagesBucketName, minioEndpoint, minioPort } from "@/config";
-import ListingTypePill from "../../../components/ListingTypePill";
+import { listingImagesBucketName, minioHostname, minioPort } from "@/config";
+import ListingTypePill from "@/components/ListingTypePill";
 import Link from "next/link";
 
 export interface ListingCardProps {
@@ -30,7 +29,7 @@ export default function UserListingCard({ listing }: ListingCardProps) {
             <Image
               fill={true}
               className="object-cover"
-              src={`http://${minioEndpoint}:${minioPort}/${listingImagesBucketName}/${image.fileName}`}
+              src={`http://${minioHostname}:${minioPort}/${listingImagesBucketName}/${image.fileName}`}
               alt="listing image featuring a product/service"
             />
           </div>

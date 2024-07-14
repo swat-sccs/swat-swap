@@ -3,7 +3,7 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                hostname: process.env.MINIO_ENDPOINT,
+                hostname: process.env.MINIO_HOSTNAME,
                 port: "9000",
                 pathname: "**"
             },
