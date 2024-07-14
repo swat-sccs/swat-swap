@@ -5,7 +5,7 @@ const minioClientSingelton = () =>
   new Minio.Client({
     endPoint: process.env.MINIO_HOSTNAME!,
     port: parseInt(process.env.MINIO_PORT!),
-    useSSL: !!process.env.MINO_USE_SSL,
+    useSSL: process.env.MINO_USE_SSL === "true" ? true : false,
     accessKey: process.env.MINIO_ROOT_USER!,
     secretKey: process.env.MINIO_ROOT_PASSWORD!,
   });
