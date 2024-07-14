@@ -4,7 +4,6 @@ import {
   MY_LISTINGS,
   SAVED_LISTINGS,
 } from "@/constants/routes";
-import { getSessionUser } from "@/utils/hooks";
 import SettingsMenu from "./SettingsMenu";
 import MobileMenu from "./MobileMenu";
 
@@ -16,7 +15,7 @@ const NavigationOptions = {
 
 interface NavBarProps {}
 
-const NavBar = async ({}: NavBarProps) => {
+const NavBar = ({}: NavBarProps) => {
   return (
     <div className="flex items-center justify-between sticky px-8 py-4">
       {/* Logo */}

@@ -1,7 +1,7 @@
 "use client";
 import { IconButton, Menu, MenuItem } from "@/components";
-import React, { useCallback, useState } from "react";
-import { MenuIcon } from "../icons";
+import React, { useCallback } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   CREATE_LISTING,
   MY_LISTINGS,
