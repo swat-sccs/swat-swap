@@ -1,5 +1,4 @@
 "use server";
-
 import { CreateUserPayload } from "@/dtos/user";
 import prisma from "@/prisma/db";
 

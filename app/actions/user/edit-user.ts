@@ -1,5 +1,4 @@
 "use server";
-
 import { User } from "@/dtos";
 import prisma from "@/prisma/db";
 
