@@ -1,8 +1,7 @@
 "use client";
-
 import { PatchUser } from "@/app/actions/user/edit-user";
 import { EditUser, User, editUserSchema } from "@/dtos";
-import { useGetBareUserById } from "@/utils/hooks";
+import { useFetchUser } from "@/utils/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, TextField } from "@mui/material";
 import Image from "next/image";
@@ -16,7 +15,8 @@ interface EditProfilePageProps {
 
 export default function EditProfilePage({}: EditProfilePageProps) {
   const router = useRouter();
-  const { data: user } = useGetBareUserById(1);
+  const { data: user } = useFetchUser(1);
+
   const {
     register,
     reset,
