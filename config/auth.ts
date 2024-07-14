@@ -5,7 +5,7 @@ import KeycloakProvider from "next-auth/providers/keycloak";
 export const authOptions: NextAuthOptions = {
   providers: [
     KeycloakProvider({
-      profile(profile, tokens) {
+      profile(profile) {
         return {
           id: profile.sub,
           name: profile.name,
