@@ -1,30 +1,42 @@
 "use client";
 import { Button, Divider } from "@mui/material";
 import StorefrontIcon from "@mui/icons-material/Storefront";
-import React, { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   createFiltersQueryFormSchema,
   CreateFiltersQueryPayload,
+  getListingFiltersSchema,
+  ListingFilters,
 } from "@/dtos";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CategoryFilter from "./CategoryFilter";
+import { split } from "lodash";
 
 const FiltersSidebar = () => {
-  const methods = useForm<CreateFiltersQueryPayload>({
-    resolver: zodResolver(createFiltersQueryFormSchema),
-    defaultValues: {
-      category: [],
-    },
-  });
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const clearSearchParams = useCallback(() => {
-    const params = new URLSearchParams(searchParams);
+  const initialListingsFilters = useMemo<ListingFilters>(() => {
+    return getListingFiltersSchema.parse({
+      category: searchParams.get("category")
+        ? split(searchParams.get("category"), ",")
+        : [],
+    });
+  }, [searchParams]);
 
+  const methods = useForm<CreateFiltersQueryPayload>({
+    resolver: zodResolver(createFiltersQueryFormSchema),
+    defaultValues: {
+      ...initialListingsFilters,
+    },
+  });
+
+  const clearSearchParams = useCallback(() => {
+    // params is a mutable version of searchParams
+    const params = new URLSearchParams(searchParams);
     params.forEach((_, key) => {
       params.delete(key);
     });
@@ -41,9 +53,9 @@ const FiltersSidebar = () => {
     (data: CreateFiltersQueryPayload) => {
       const params = new URLSearchParams(searchParams);
       if (data.category.length) {
-        params.set("categories", data.category.join(","));
+        params.set("category", data.category.join(","));
       } else {
-        params.delete("categories");
+        params.delete("category");
       }
 
       replace(`${pathname}?${params.toString()}`);
