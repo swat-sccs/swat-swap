@@ -23,7 +23,7 @@ const SettingsMenu = () => {
   return (
     <>
       <button
-        className="font-bold text-lg"
+        className="font-bold text-lg hover:text-accent"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
