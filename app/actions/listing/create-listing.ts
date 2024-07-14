@@ -1,5 +1,5 @@
 "use server";
-import { ListingCategories, createListingFormDataSchema } from "@/dtos/listing";
+import { createListingFormDataSchema } from "@/dtos/listing";
 import { revalidatePath } from "next/cache";
 import prisma from "@/prisma/db";
 import {
@@ -71,7 +71,7 @@ export async function createListing(userId: number, formData: FormData) {
       price: formData.get("price") ? Number(formData.get("price")) : undefined,
     };
 
-    if (listingData.category === ListingCategories.ClothingAccessories) {
+    if (listingData.category === "clothing") {
       validateFormDataField(formData, "apparelSize");
       validateFormDataField(formData, "apparelGender");
 

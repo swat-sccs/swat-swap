@@ -2,7 +2,6 @@
 import { createListing } from "@/app/actions";
 import {
   CreateListingPayload,
-  ListingCategories,
   ListingTypes,
   createListingFormDataSchema,
 } from "@/dtos";
@@ -277,7 +276,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
 
         <FieldErrorMessage errors={errors} field="category" />
 
-        {category === ListingCategories.ClothingAccessories && (
+        {category === "clothing" && (
           <>
             <Typography
               fontSize={"20px"}

@@ -9,11 +9,7 @@ import {
 } from ".";
 
 export function isClothingListing(listing: any): listing is ClothingListing {
-  return (
-    listing &&
-    listing.category &&
-    listing.category === ListingCategories.ClothingAccessories
-  );
+  return listing && listing.category && listing.category === "clothing";
 }
 
 export const listingImageSchema = z.object({
@@ -36,7 +32,7 @@ export const baseListingSchema = z.object({
   title: z.string(),
   description: z.string(),
   images: z.array(listingImageSchema),
-  category: z.nativeEnum(ListingCategories),
+  category: z.enum(ListingCategories),
   type: z.nativeEnum(ListingTypes),
   price: z.number().positive(),
   acceptedPaymentTypes: z.array(z.nativeEnum(PaymentType)),

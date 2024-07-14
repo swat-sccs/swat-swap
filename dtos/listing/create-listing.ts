@@ -15,18 +15,19 @@ export enum ListingConditions {
   NotWorking = "not_working",
   PartsMissing = "parts_missing",
 }
+export const ListingCategories = [
+  "clothing",
+  "furniture",
+  "school_supplies",
+  "books",
+  "electronics",
+  "sports_equipment",
+  "musical_instrument",
+  "transportation",
+  "misc",
+] as const;
 
-export enum ListingCategories {
-  ClothingAccessories = "clothing_accessories",
-  FurnitureDecor = "furniture_decor",
-  SchoolSupplies = "school_supplies",
-  Books = "books",
-  Electronics = "electronics",
-  SportsEquipment = "sports_equipment",
-  MusicInstruments = "music_instruments",
-  Transportation = "transportation",
-  Misc = "misc",
-}
+export type ListingCategory = (typeof ListingCategories)[number];
 
 export enum ClothingItemSizes {
   XXS = "xxs",
@@ -62,7 +63,7 @@ export const createListingFormDataSchema = z.object({
   title: z.string(),
   type: z.nativeEnum(ListingTypes),
   description: z.string(),
-  category: z.nativeEnum(ListingCategories, {
+  category: z.enum(ListingCategories, {
     errorMap: () => ({
       message: "Invalid condition",
     }),
