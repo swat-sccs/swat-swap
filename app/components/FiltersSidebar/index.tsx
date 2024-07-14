@@ -45,7 +45,7 @@ const FiltersSidebar = () => {
   }, [replace, pathname, searchParams]);
 
   const clearFilters = useCallback(() => {
-    methods.reset();
+    methods.setValue("category", []);
     clearSearchParams();
   }, [methods, clearSearchParams]);
 
