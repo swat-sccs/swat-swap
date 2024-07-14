@@ -1,5 +1,5 @@
 import { getUserCreatedListings } from "@/app/actions";
-import { getSessionUserId } from "../../utils/hooks";
+import { getSessionUserId } from "@/utils/hooks";
 import UserListingCard from "./components/UserListingCard";
 import ZeroListingsNotice from "./components/ZeroListingsNotice";
 
