@@ -1,7 +1,7 @@
 import NextAuthProvider from "./NextAuthProvider";
+import TanstackQueryClientProvider from "./TanstackQueryProvider";
 import NavBar from "@/components/Navbar";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import TanstackQueryClientProvider from "@/components/TanstackQueryProvider";
 import "./globals.css";
 
 export default function RootLayout({
