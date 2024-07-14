@@ -32,12 +32,16 @@ const CategoryCheckboxGroup = ({ options }: CheckboxControllerProps) => {
         <div key={option.category} className="flex items-center space-x-2">
           <Checkbox
             onChange={() => {
-              const updatedCategories = [
-                ...field.value,
-                ...(field.value.includes(option.category)
-                  ? []
-                  : [option.category]),
-              ];
+              const categoryChecked = field.value.includes(option.category);
+
+              const updatedCategories = categoryChecked
+                ? field.value.filter((v) => v !== option.category)
+                : [
+                    ...field.value,
+                    ...(field.value.includes(option.category)
+                      ? []
+                      : [option.category]),
+                  ];
 
               field.onChange(updatedCategories);
             }}
