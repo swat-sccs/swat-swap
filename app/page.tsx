@@ -3,15 +3,43 @@ import { getSessionUserId } from "@/utils/hooks";
 import prisma from "@/prisma/db";
 import { SavedListing, savedListingsSchema } from "@/dtos";
 import PublicListingCard from "./components/PublicListingCard";
+import { split } from "lodash";
 
-const getHomeListings = async (userId: number): Promise<SavedListing[]> => {
-  const availableListings = await getAvailableListings(userId);
+export interface QueryFilters {
+  categories?: string;
+}
+interface HomePageProps {
+  searchParams?: QueryFilters;
+}
+
+const getHomeListings = async (
+  userId: number,
+  query: QueryFilters
+): Promise<SavedListing[]> => {
+  const filters: Record<string, any> = {
+    active: true,
+    userId: {
+      not: userId,
+    },
+    ...(query.categories && {
+      category: {
+        in: split(query.categories, ","),
+      },
+    }),
+  };
+
+  const availableListings = await prisma.listing.findMany({
+    include: {
+      images: true,
+    },
+    where: {
+      ...filters,
+    },
+  });
 
   const favoritedListings = await prisma.favoriteListing.findMany({
     where: {
-      userId: {
-        equals: userId,
-      },
+      userId,
     },
   });
 
@@ -26,13 +54,13 @@ const getHomeListings = async (userId: number): Promise<SavedListing[]> => {
   return validatedListings;
 };
 
-export default async function Home() {
+export default async function Home({ searchParams }: HomePageProps) {
   const userId = await getSessionUserId();
   if (!userId) {
     return <div>Not logged in</div>;
   }
 
-  const listings = await getHomeListings(userId);
+  const listings = await getHomeListings(userId, searchParams ?? {});
 
   return (
     <div className="flex gap-x-8 h-full">
