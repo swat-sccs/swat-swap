@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/prisma/prisma";
+import prisma from "@/prisma/db";
 import { revalidatePath } from "next/cache";
 
 export async function unfavoriteListing(userId: number, listingId: number) {

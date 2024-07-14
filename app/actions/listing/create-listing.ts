@@ -1,12 +1,11 @@
 "use server";
-
 import { ListingCategories, createListingFormDataSchema } from "@/dtos/listing";
 import { revalidatePath } from "next/cache";
-import prisma from "@/prisma/prisma";
+import prisma from "@/prisma/db";
 import {
   createBucketIfNotExists,
   uploadFileToListingImagesBucket,
-} from "@/minio/actions";
+} from "@/app/actions/minio";
 import { listingImagesBucketName } from "@/config";
 
 const validateFormDataField = (formData: FormData, field: string) => {
@@ -38,14 +37,14 @@ const uploadImageFile = async (imageFile: File) => {
   const digest = await crypto.subtle.digest("SHA-256", imageBuffer);
   const digestBytes = new Uint8Array(digest);
 
-  await uploadFileToListingImagesBucket(imageFile, listingImagesBucketName);
+  await uploadFileToListingImagesBucket(imageFile, listingImagesBucketName!);
 
   const checksum = btoa(
     digestBytes.reduce((acc, byte) => acc + String.fromCharCode(byte), "")
   );
 
   return {
-    bucketName: listingImagesBucketName,
+    bucketName: listingImagesBucketName!,
     checksum: checksum,
     fileName: imageFile.name,
   };
@@ -86,7 +85,7 @@ export async function createListing(userId: number, formData: FormData) {
     const validatedListingFormData =
       createListingFormDataSchema.parse(listingData);
 
-    await createBucketIfNotExists(listingImagesBucketName);
+    await createBucketIfNotExists(listingImagesBucketName!);
 
     const listingImages = await Promise.all(
       [requestImageFile].map(

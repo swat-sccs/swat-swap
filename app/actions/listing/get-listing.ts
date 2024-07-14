@@ -1,5 +1,5 @@
 "use server";
-import prisma from "@/prisma/prisma";
+import prisma from "@/prisma/db";
 
 export async function getListing(listingId: number) {
   console.log("listingid is", listingId);

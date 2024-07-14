@@ -1,6 +1,6 @@
 "use server";
 import { SavedListing, savedListingsSchema } from "@/dtos";
-import prisma from "@/prisma/prisma";
+import prisma from "@/prisma/db";
 
 export async function getSavedListings(
   userId: number
