@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Listing, isSavedListing } from "@/dtos/listing";
 import Image from "next/image";
-import { listingImagesBucketName, minioEndpoint, minioPort } from "@/config";
+import { listingImagesBucketName, minioHostname, minioPort } from "@/config";
 import ListingTypePill from "./ListingTypePill";
 import Link from "next/link";
 import FavoriteListingIcon from "./FavoriteListingIcon";
@@ -38,7 +38,7 @@ export default function ListingCard({ listing, options }: ListingCardProps) {
           <Image
             fill={true}
             className="object-cover"
-            src={`http://${minioEndpoint}:${minioPort}/${listingImagesBucketName}/${image.fileName}`}
+            src={`http://${minioHostname}:${minioPort}/${listingImagesBucketName}/${image.fileName}`}
             alt="listing image featuring a product/service"
           />
         </div>
