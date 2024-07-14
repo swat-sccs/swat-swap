@@ -1,7 +1,7 @@
 "use server";
 
 import { CreateUserPayload } from "@/dtos/user";
-import prisma from "@/prisma/prisma";
+import prisma from "@/prisma/db";
 
 export async function getOrCreateUser(createUserPayload: CreateUserPayload) {
   const existingUser = await prisma.user.findUnique({

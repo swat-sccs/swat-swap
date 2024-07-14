@@ -1,7 +1,6 @@
 "use server";
-
 import { userSchema } from "@/dtos/user";
-import prisma from "@/prisma/prisma";
+import prisma from "@/prisma/db";
 
 export async function getUserDataById(userId: number) {
   const user = await prisma.user.findUnique({
