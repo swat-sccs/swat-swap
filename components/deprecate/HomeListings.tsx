@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import ListingCard from "./ListingCard";
+import ListingCard from "../ListingCard";
 import { getFilteredListings } from "@/app/lib/listing";
 import { FilterOptions } from "@/app/page";
 
