@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-import("./app/env.mjs");
 const nextConfig = {
     images: {
         remotePatterns: [
