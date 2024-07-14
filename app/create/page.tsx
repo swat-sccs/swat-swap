@@ -7,5 +7,11 @@ export default async function Create() {
     return <div>Not logged in</div>;
   }
 
-  return <CreateListingForm userId={userId} />;
+  return (
+    <div className="flex flex-col items-center">
+      <div className="w-full md:w-3/4 p-8">
+        <CreateListingForm userId={userId} />
+      </div>
+    </div>
+  );
 }

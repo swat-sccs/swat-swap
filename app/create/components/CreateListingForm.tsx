@@ -9,7 +9,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
-  Container,
   FormControlLabel,
   InputAdornment,
   MenuItem,
@@ -77,18 +76,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onFormSubmitSuccess, onFormSubmitError)}>
-      <Container
-        style={{
-          height: "auto",
-          width: "50%",
-          margin: "auto",
-          padding: "40px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          borderRadius: "4px",
-        }}
-      >
+      <div className="flex flex-col w-full items-start">
         <Typography
           fontSize={"20px"}
           fontWeight={"bold"}
@@ -347,7 +335,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
         <Button style={{ marginTop: "20px" }} type="submit">
           <Typography>List it!</Typography>
         </Button>
-      </Container>
+      </div>
     </form>
   );
 };
