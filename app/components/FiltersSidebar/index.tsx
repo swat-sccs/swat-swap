@@ -39,16 +39,16 @@ const FiltersSidebar = () => {
 
   const handleFormSubmitSuccess = useCallback(
     (data: CreateFiltersQueryPayload) => {
-      clearSearchParams();
-
       const params = new URLSearchParams(searchParams);
       if (data.category.length) {
         params.set("categories", data.category.join(","));
+      } else {
+        params.delete("categories");
       }
 
       replace(`${pathname}?${params.toString()}`);
     },
-    [searchParams, replace, pathname, clearSearchParams]
+    [searchParams, replace, pathname]
   );
 
   const handleFormSubmitError = useCallback((error: any) => {}, []);
