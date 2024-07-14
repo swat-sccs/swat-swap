@@ -10,8 +10,6 @@ export const authOptions: NextAuthOptions = {
           id: profile.sub,
           name: profile.name,
           email: profile.email,
-
-          //role: profile.groups.find((group: string) => group==="admin") || "user",
         };
       },
       clientId: process.env.KEYCLOAK_ID || "",
