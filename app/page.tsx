@@ -1,4 +1,3 @@
-import { getAvailableListings } from "@/app/actions";
 import { getSessionUserId } from "@/utils/hooks";
 import prisma from "@/prisma/db";
 import { SavedListing, savedListingsSchema } from "@/dtos";
