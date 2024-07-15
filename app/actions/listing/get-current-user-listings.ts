@@ -1,16 +1,15 @@
 "use server";
 import { Listing, listingsSchema } from "@/dtos";
-import prisma from "@/prisma/db";
 import { getSessionUserId } from "@/utils/hooks";
+import { getListings } from "./get-listings";
 
 export async function getCurrentUserListings(): Promise<Listing[]> {
   const userId = await getSessionUserId();
-  const dbListings = await prisma.listing.findMany({
+  const dbListings = await getListings({
     where: {
-      userId: userId,
-    },
-    include: {
-      images: true,
+      userId: {
+        equals: userId,
+      },
     },
   });
 

@@ -1,5 +1,5 @@
 export * from "./create-listing";
-export * from "./get-available-listings";
+export * from "./get-community-listings";
 export * from "./get-current-user-listings";
 export * from "./delete-listing";
 export * from "./get-listing";
