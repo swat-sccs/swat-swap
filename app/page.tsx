@@ -1,9 +1,9 @@
 import { getSessionUserId } from "@/utils/hooks";
 import prisma from "@/prisma/db";
 import { SavedListing, savedListingsSchema } from "@/dtos";
-import PublicListingCard from "./components/PublicListingCard";
 import FiltersSidebar from "./components/FiltersSidebar";
 import { split } from "lodash";
+import { CommunityListingCard } from "@/components";
 
 export interface QueryFilters {
   categories?: string;
@@ -67,7 +67,7 @@ export default async function Home({ searchParams }: HomePageProps) {
       <FiltersSidebar />
       <div className="flex flex-wrap gap-8">
         {listings.map((listing) => (
-          <PublicListingCard key={listing.id} listing={listing} />
+          <CommunityListingCard key={listing.id} listing={listing} />
         ))}
       </div>
     </div>

@@ -1,6 +1,8 @@
 "use client";
 import { saveListing, unsaveListing } from "@/app/actions";
 import { SavedListing } from "@/dtos";
+import { BookmarkBorderOutlined, BookmarkOutlined } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import { useCallback } from "react";
 
 interface FavoriteListingIconProps {
@@ -8,7 +10,10 @@ interface FavoriteListingIconProps {
   userId: number;
 }
 
-const FavoriteListingIcon = ({ userId, listing }: FavoriteListingIconProps) => {
+export const SaveListingActionIcon = ({
+  userId,
+  listing,
+}: FavoriteListingIconProps) => {
   const onToggleFavorite = useCallback(() => {
     if (listing.saved) {
       unsaveListing(userId, listing.id);
@@ -18,8 +23,8 @@ const FavoriteListingIcon = ({ userId, listing }: FavoriteListingIconProps) => {
   }, [listing, userId]);
 
   return (
-    <div onClick={onToggleFavorite}>{listing.saved ? "unsave" : "save"}</div>
+    <IconButton aria-label="save" color="primary" onClick={onToggleFavorite}>
+      {listing.saved ? <BookmarkOutlined /> : <BookmarkBorderOutlined />}
+    </IconButton>
   );
 };
-
-export default FavoriteListingIcon;
