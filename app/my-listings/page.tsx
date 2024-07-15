@@ -1,16 +1,9 @@
-import { getUserCreatedListings } from "@/app/actions";
-import { getSessionUserId } from "@/utils/hooks";
+import { getCurrentUserListings } from "@/app/actions";
 import UserListingCard from "./components/UserListingCard";
 import ZeroListingsNotice from "./components/ZeroListingsNotice";
 
 export default async function Home() {
-  const userId = await getSessionUserId();
-
-  if (!userId) {
-    return <div>Not logged in</div>;
-  }
-
-  const userListings = await getUserCreatedListings(userId);
+  const userListings = await getCurrentUserListings();
 
   const activeListings = userListings.filter((listing) => listing.active);
   const inactiveListings = userListings.filter((listing) => !listing.active);
