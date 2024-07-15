@@ -2,6 +2,7 @@ import FavoriteListingIcon from "@/components/FavoriteListingIcon";
 import ListingTypePill from "@/components/ListingTypePill";
 import { listingImagesBucketName, minioHostname, minioPort } from "@/config";
 import { SavedListing } from "@/dtos";
+import { getSessionUserId } from "@/utils/hooks";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,7 +10,13 @@ export interface ListingCardProps {
   listing: SavedListing;
 }
 
-const PublicListingCard = ({ listing }: ListingCardProps) => {
+const PublicListingCard = async ({ listing }: ListingCardProps) => {
+  const userId = await getSessionUserId();
+
+  if (!userId) {
+    return;
+  }
+
   return (
     <Link href={`listing/${listing.id}`}>
       <div className="flex flex-col p-4 shadow-md rounded-lg h-fit gap-y-2 hover:cursor-pointer">
@@ -35,7 +42,7 @@ const PublicListingCard = ({ listing }: ListingCardProps) => {
         ))}
         <div className="flex justify-end">
           <ListingTypePill type={listing.type} />
-          <FavoriteListingIcon listing={listing} />
+          <FavoriteListingIcon listing={listing} userId={userId} />
         </div>
       </div>
     </Link>

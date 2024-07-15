@@ -6,6 +6,7 @@ import { listingImagesBucketName, minioHostname, minioPort } from "@/config";
 import ListingTypePill from "./ListingTypePill";
 import Link from "next/link";
 import FavoriteListingIcon from "./FavoriteListingIcon";
+import { getSessionUserId } from "@/utils/hooks";
 
 interface ListingCardOptions {
   display?: {
@@ -18,7 +19,16 @@ export interface ListingCardProps {
   options?: ListingCardOptions;
 }
 
-export default function ListingCard({ listing, options }: ListingCardProps) {
+export default async function ListingCard({
+  listing,
+  options,
+}: ListingCardProps) {
+  const userId = await getSessionUserId();
+
+  if (!userId) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col p-4 shadow-md rounded-lg h-fit gap-y-2">
       <div className="flex justify-between">
@@ -46,7 +56,7 @@ export default function ListingCard({ listing, options }: ListingCardProps) {
       <div className="flex justify-end">
         <ListingTypePill type={listing.type} />
         {isSavedListing(listing) && options?.display?.showSaveButton && (
-          <FavoriteListingIcon listing={listing} />
+          <FavoriteListingIcon listing={listing} userId={userId} />
         )}
       </div>
     </div>
