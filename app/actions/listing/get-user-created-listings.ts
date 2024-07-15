@@ -1,11 +1,10 @@
 "use server";
-
-import { UserListing, userListingsSchema } from "@/dtos";
+import { Listing, listingsSchema } from "@/dtos";
 import prisma from "@/prisma/db";
 
 export async function getUserCreatedListings(
   userId: number
-): Promise<UserListing[]> {
+): Promise<Listing[]> {
   const dbListings = await prisma.listing.findMany({
     where: {
       userId: userId,
@@ -15,6 +14,6 @@ export async function getUserCreatedListings(
     },
   });
 
-  const validatedListings = userListingsSchema.parse(dbListings);
+  const validatedListings = listingsSchema.parse(dbListings);
   return validatedListings;
 }
