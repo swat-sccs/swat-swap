@@ -3,9 +3,9 @@ import {
   ListingCard,
   SaveListingActionIcon,
   ListingCategoryLabel,
+  ListingTypePill,
 } from "./ListingCard";
 import { SavedListing } from "@/dtos";
-import ListingTypePill from "./ListingTypePill";
 import { getSessionUserId } from "@/utils/hooks";
 
 interface CommunityListingCardHeaderProps {
@@ -37,7 +37,7 @@ const CommunityListingCardFooter = memo(
     if (!userId) return null;
 
     return (
-      <div className="flex space-x-4 justify-between">
+      <div className="flex space-x-4 justify-between items-center">
         <p>
           {listing.price.toLocaleString("en-US", {
             style: "currency",

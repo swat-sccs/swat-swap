@@ -2,7 +2,7 @@ import * as React from "react";
 import { Listing } from "@/dtos";
 import Image from "next/image";
 import { listingImagesBucketName, minioHostname, minioPort } from "@/config";
-import ListingTypePill from "@/components/ListingTypePill";
+import { ListingTypePill } from "@/components/ListingCard";
 import Link from "next/link";
 
 export interface ListingCardProps {

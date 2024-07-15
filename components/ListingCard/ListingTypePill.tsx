@@ -1,23 +1,20 @@
-import { ListingTypes } from "@/dtos";
+import { Listing, ListingTypes } from "@/dtos";
 import { clsx } from "clsx";
-import React from "react";
 
 interface ListingTypePillProps {
-  type: ListingTypes;
+  type: Listing["type"];
 }
 
-const ListingTypePill = ({ type }: ListingTypePillProps) => {
+export const ListingTypePill = ({ type }: ListingTypePillProps) => {
   return (
     <div
-      className={clsx("flex py-1 px-2 w-fit rounded-md", {
-        "bg-green-200": type === ListingTypes.Buying,
+      className={clsx("flex py-1 px-2 w-fit rounded-md text-sm", {
         "bg-red-200": type === ListingTypes.Selling,
         "bg-yellow-200": type === ListingTypes.Service,
       })}
     >
       <p
-        className={clsx("font-bold", {
-          "text-green-900": type === ListingTypes.Buying,
+        className={clsx("font-semibold", {
           "text-red-900": type === ListingTypes.Selling,
           "text-yellow-900": type === ListingTypes.Service,
         })}
@@ -27,5 +24,3 @@ const ListingTypePill = ({ type }: ListingTypePillProps) => {
     </div>
   );
 };
-
-export default ListingTypePill;
