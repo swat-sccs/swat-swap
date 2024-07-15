@@ -63,7 +63,7 @@ export default async function Home({ searchParams }: HomePageProps) {
   const listings = await getHomeListings(userId, searchParams ?? {});
 
   return (
-    <div className="flex overflow-hidden gap-x-8 ">
+    <div className="flex flex-1 overflow-hidden gap-x-8 ">
       <FiltersSidebar />
       <div className="flex flex-wrap flex-1 overflow-y-auto gap-8">
         {listings.map((listing) => (
