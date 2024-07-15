@@ -2,10 +2,12 @@
 import { Menu, MenuItem } from "@/components";
 import React, { useCallback } from "react";
 import { PROFILE, SIGN_OUT } from "@/constants/routes";
-import { useSession } from "next-auth/react";
 
-const SettingsMenu = () => {
-  const { data: session } = useSession();
+interface SettingsMenuProps {
+  userName: string;
+}
+
+const SettingsMenu = ({ userName }: SettingsMenuProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -29,7 +31,7 @@ const SettingsMenu = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        {session?.user.name}
+        {userName}
       </button>
 
       <Menu

@@ -5,6 +5,7 @@ import {
 } from "@/constants/routes";
 import SettingsMenu from "./SettingsMenu";
 import MobileMenu from "./MobileMenu";
+import { getSessionUser } from "@/utils/hooks";
 
 const NavigationOptions = {
   Create: CREATE_LISTING,
@@ -14,7 +15,13 @@ const NavigationOptions = {
 
 interface NavBarProps {}
 
-const NavBar = ({}: NavBarProps) => {
+const NavBar = async ({}: NavBarProps) => {
+  const user = await getSessionUser();
+
+  if (!user) {
+    return null;
+  }
+
   return (
     <div className="flex items-center justify-between px-8 py-4">
       {/* Logo */}
@@ -37,7 +44,7 @@ const NavBar = ({}: NavBarProps) => {
 
         {/* desktop settings menu */}
         <div className="hidden md:block">
-          <SettingsMenu />
+          <SettingsMenu userName={user.name ?? ""} />
         </div>
 
         {/* mobile only menu*/}
