@@ -66,16 +66,16 @@ const FiltersSidebar = () => {
   const handleFormSubmitError = useCallback((error: any) => {}, []);
 
   return (
-    <FormProvider {...methods}>
-      <div className="flex flex-col flex-shrink-0 overflow-y-auto items-center justify-between w-1/4">
+    <div className="flex flex-col items-center justify-between w-1/5 px-4">
+      <FormProvider {...methods}>
         <form
-          className="flex flex-col w-full px-4 space-y-4"
+          className="flex flex-col space-y-4 w-full"
           onSubmit={methods.handleSubmit(
             handleFormSubmitSuccess,
             handleFormSubmitError
           )}
         >
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col">
             <CategoryFilter />
           </div>
 
@@ -88,20 +88,20 @@ const FiltersSidebar = () => {
             </Button>
           </div>
         </form>
+      </FormProvider>
 
-        <div className="flex flex-col w-full">
-          <Divider />
-          <div className="flex float-bottom p-2 pl-4 w-full items-center justify-between">
-            <StorefrontIcon />
-            <p className="text-right">
-              <b>SwatSwap</b>
-              <br />
-              By <b>SCCS</b>
-            </p>
-          </div>
+      <div className="flex flex-col w-full">
+        <Divider />
+        <div className="flex items-center justify-between">
+          <StorefrontIcon />
+          <p className="m-0">
+            <b>SwatSwap</b>
+            <br />
+            By <b>SCCS</b>
+          </p>
         </div>
       </div>
-    </FormProvider>
+    </div>
   );
 };
 

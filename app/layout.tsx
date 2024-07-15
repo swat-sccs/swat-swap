@@ -11,11 +11,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex h-full">
+      <body>
         <NextAuthProvider>
           <TanstackQueryClientProvider>
             <AppRouterCacheProvider>
-              <div className="flex flex-col w-full h-screen">
+              <div className="flex flex-col gap-y-4 h-screen">
                 <NavBar />
                 {children}
               </div>

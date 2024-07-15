@@ -16,7 +16,7 @@ interface NavBarProps {}
 
 const NavBar = ({}: NavBarProps) => {
   return (
-    <div className="flex items-center justify-between sticky px-8 py-4">
+    <div className="flex items-center justify-between px-8 py-4">
       {/* Logo */}
       <a href="/">
         <p className="m-0 font-bold text-2xl transition-colors duration-200 ease-in-out text-black hover:text-accent">
