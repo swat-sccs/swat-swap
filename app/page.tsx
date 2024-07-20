@@ -6,7 +6,7 @@ import { split } from "lodash";
 import { CommunityListingCard } from "@/components";
 
 export interface QueryFilters {
-  categories?: string;
+  category?: string;
 }
 interface HomePageProps {
   searchParams?: QueryFilters;
@@ -21,9 +21,9 @@ const getHomeListings = async (
     userId: {
       not: userId,
     },
-    ...(query.categories && {
+    ...(query.category && {
       category: {
-        in: split(query.categories, ","),
+        in: split(query.category, ","),
       },
     }),
   };
