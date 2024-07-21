@@ -1,8 +1,8 @@
 "use client";
 import { saveListing, unsaveListing } from "@/app/actions";
 import { SavedListing } from "@/dtos";
-import { BookmarkBorderOutlined, BookmarkOutlined } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { ActionIcon } from "@mantine/core";
+import { IconBookmark, IconBookmarkFilled } from "@tabler/icons-react";
 import { MouseEvent, useCallback } from "react";
 
 interface FavoriteListingIconProps {
@@ -28,8 +28,8 @@ export const SaveListingActionIcon = ({
   );
 
   return (
-    <IconButton aria-label="save" color="primary" onClick={onToggleFavorite}>
-      {listing.saved ? <BookmarkOutlined /> : <BookmarkBorderOutlined />}
-    </IconButton>
+    <ActionIcon variant="transparent" onClick={onToggleFavorite}>
+      {listing.saved ? <IconBookmarkFilled /> : <IconBookmark />}
+    </ActionIcon>
   );
 };
