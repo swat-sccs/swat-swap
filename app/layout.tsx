@@ -1,7 +1,8 @@
 import NextAuthProvider from "./NextAuthProvider";
 import TanstackQueryClientProvider from "./TanstackQueryProvider";
 import NavBar from "@/components/Navbar";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
 import "./globals.css";
 
 export default function RootLayout({
@@ -14,12 +15,12 @@ export default function RootLayout({
       <body>
         <NextAuthProvider>
           <TanstackQueryClientProvider>
-            <AppRouterCacheProvider>
+            <MantineProvider>
               <div className="flex flex-col gap-y-4 h-screen">
                 <NavBar />
                 {children}
               </div>
-            </AppRouterCacheProvider>
+            </MantineProvider>
           </TanstackQueryClientProvider>
         </NextAuthProvider>
       </body>
