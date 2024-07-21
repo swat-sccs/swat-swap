@@ -1,7 +1,5 @@
 "use client";
-import { IconButton, Menu, MenuItem } from "@/components";
-import React, { useCallback } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Menu } from "@/components";
 import {
   CREATE_LISTING,
   MY_LISTINGS,
@@ -10,61 +8,37 @@ import {
   SIGN_OUT,
 } from "@/constants/routes";
 import { useSession } from "next-auth/react";
+import { IconMenu2 } from "@tabler/icons-react";
+import Link from "next/link";
 
 const MobileMenu = () => {
   const { data: session } = useSession();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      setAnchorEl(event.currentTarget);
-    },
-    [setAnchorEl]
-  );
-
-  const handleClose = useCallback(() => {
-    setAnchorEl(null);
-  }, [setAnchorEl]);
 
   return (
-    <>
-      <IconButton
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        <MenuIcon />
-      </IconButton>
+    <Menu>
+      <Menu.Target>
+        <IconMenu2 />
+      </Menu.Target>
+      <Menu.Dropdown>
+        <Menu.Label>{session?.user.name}</Menu.Label>
 
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        <MenuItem disabled>{session?.user.name}</MenuItem>
-        <MenuItem onClick={handleClose}>
-          <a href={PROFILE}>Profile</a>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <a href={MY_LISTINGS}>My Listings</a>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <a href={SAVED_LISTINGS}>Saved Listings</a>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <a href={CREATE_LISTING}>Create Listing</a>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <a href={SIGN_OUT}>Log Out</a>
-        </MenuItem>
-      </Menu>
-    </>
+        <Menu.Item>
+          <Link href={PROFILE}>Profile</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link href={MY_LISTINGS}>My Listings</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link href={SAVED_LISTINGS}>Saved Listings</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link href={CREATE_LISTING}>Create Listing</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link href={SIGN_OUT}>Log Out</Link>
+        </Menu.Item>
+      </Menu.Dropdown>
+    </Menu>
   );
 };
 
