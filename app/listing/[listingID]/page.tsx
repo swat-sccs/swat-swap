@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Box } from "@mui/material";
+import { Container, Grid, Box } from "@/components";
 import Image from "next/image";
 import { getUserDataById, getListing } from "@/app/actions";
 import { minioListingImagesEndpoint } from "@/config/";
@@ -37,16 +37,9 @@ const ListingPage = async ({ params: { listingId } }: ListingPageProps) => {
         backgroundColor: "#f1f1f1",
       }}
     >
-      <Grid container spacing={2} style={{ margin: "8px" }}>
-        <Grid item xs={12} md={6}>
-          <Box
-            sx={{
-              height: "90%",
-              width: "90%",
-              overflow: "clip",
-              position: "relative",
-            }}
-          >
+      <Grid>
+        <Grid>
+          <Box>
             <Image
               fill={true}
               src={`${minioListingImagesEndpoint}/${listing?.images[0].fileName}`}
@@ -56,109 +49,81 @@ const ListingPage = async ({ params: { listingId } }: ListingPageProps) => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} md={6} gap={8}>
-          {/* <Typography variant="h5">theron:{listing?.title}</Typography> */}
-          {!!listing.price && (
-            <Typography fontSize={"20px"} fontWeight={"bold"}>
-              ${listing?.price}
-            </Typography>
-          )}
+        <Grid>
+          {/* <p variant="h5">theron:{listing?.title}</Typography> */}
+          {!!listing.price && <p>${listing?.price}</p>}
 
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
           >
-            <Typography fontSize={"18px"} fontWeight={"bold"}>
-              {`Description:`}
-            </Typography>
+            <p>{`Description:`}</p>
 
-            <Typography fontSize={"18px"}>{listing?.description}</Typography>
+            <p>{listing?.description}</p>
           </div>
 
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
           >
-            <Typography fontSize={"18px"} fontWeight={"bold"}>
-              Category:
-            </Typography>
+            <p>Category:</p>
 
-            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {listing.category}
-            </Typography>
+            <p>{listing.category}</p>
           </div>
 
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
           >
-            <Typography fontSize={"18px"} fontWeight={"bold"}>
-              Payment Type:
-            </Typography>
+            <p>Payment Type:</p>
 
             {listing?.acceptedPaymentTypes.map((pt, index) => (
-              <Typography
-                key={pt}
-                fontSize={"18px"}
-                style={{ marginLeft: "8px" }}
-              >
+              <p key={pt}>
                 {pt}
                 {index !== listing.acceptedPaymentTypes.length - 1 && ","}
-              </Typography>
+              </p>
             ))}
           </div>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
           >
-            <Typography fontSize={"18px"} fontWeight={"bold"}>
-              Condition:
-            </Typography>
-            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {listing?.condition}
-            </Typography>
+            <p>Condition:</p>
+            <p>{listing?.condition}</p>
           </div>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
           >
-            {/* <Typography fontSize={"18px"} fontWeight={"bold"}>
+            {/* <p fontSize={"18px"} fontWeight={"bold"}>
               Apparel Gender:
-            </Typography> */}
+            </p> */}
             {/* {listing?.apparel.map((appar, index) => (
-              <Typography
+              <p
                 key={appar}
                 fontSize={"18px"}
                 style={{ marginLeft: "8px" }}
               >
                 {appar}
                 {index !== listing.apparel.length - 1 && ","}
-              </Typography>
+              </p>
             ))} */}
           </div>
 
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
           >
-            <Typography fontSize={"18px"} fontWeight={"bold"}>
-              Contact:
-            </Typography>
-            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {listingUserData.name}
-            </Typography>
+            <p>Contact:</p>
+            <p>{listingUserData.name}</p>
           </div>
-          <Typography fontSize={"18px"}>{listingUserData.email}</Typography>
+          <p>{listingUserData.email}</p>
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
           >
-            <Typography fontSize={"18px"} fontWeight={"bold"}>
-              Posted on:
-            </Typography>
-            <Typography fontSize={"18px"} style={{ marginLeft: "8px" }}>
-              {formattedCreatedAt}
-            </Typography>
+            <p>Posted on:</p>
+            <p>{formattedCreatedAt}</p>
           </div>
         </Grid>
-        <Grid container spacing={3} style={{ marginTop: "5px" }}>
-          <Grid item>
+        <Grid>
+          <Grid>
             <DeleteListingButton listingId={listing.id} />
           </Grid>
-          <Grid item>
+          <Grid>
             <DeactivateListingButton
               listingId={listing.id}
               active={listing.active}

@@ -1,5 +1,5 @@
-import ListingCard from "@/components/ListingCard";
-import { Divider, Icon } from "@mui/material";
+import { ListingCard } from "@/components/ListingCard";
+import { Divider } from "@/components";
 import Image from "next/image";
 import { getCommunityListings, getUserDataById } from "@/app/actions";
 import { Edit } from "@/components/icons";

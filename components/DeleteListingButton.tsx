@@ -1,7 +1,7 @@
 "use client";
 
 import { deleteListing } from "@/app/actions";
-import { Button } from "@mui/material";
+import { Button } from "@/components";
 
 interface DeleteListingButtonProps {
   listingId: number;

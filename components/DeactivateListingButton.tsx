@@ -1,7 +1,7 @@
 "use client";
 
 import { toggleListingActivation } from "@/app/actions";
-import { Button } from "@mui/material";
+import { Button } from "@/components";
 import { useState } from "react";
 
 interface DeactivateListingButtonProps {
