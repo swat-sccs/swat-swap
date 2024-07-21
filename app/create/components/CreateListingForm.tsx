@@ -1,10 +1,6 @@
 "use client";
 import { createListing } from "@/app/actions";
-import {
-  CreateListingPayload,
-  ListingTypes,
-  createListingFormDataSchema,
-} from "@/dtos";
+import { CreateListingPayload, createListingFormDataSchema } from "@/dtos";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -197,7 +193,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
 
         <FieldErrorMessage errors={errors} field="condition" />
 
-        {listingType === ListingTypes.Selling && (
+        {listingType === "selling" && (
           <>
             <Typography
               fontSize={"20px"}

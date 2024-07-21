@@ -1,20 +1,21 @@
 import { z } from "zod";
 
-export enum ListingTypes {
-  Selling = "selling",
-  // Buying = "buying",
-  Service = "service",
-}
+export const ListingTypes = ["selling", "service"] as const;
 
-export enum ListingConditions {
-  BrandNewUnboxed = "brand_new_unboxed",
-  BrandNewOpenbox = "brand_new_openbox",
-  LikeNew = "like_new",
-  LightlyUsed = "lightly_used",
-  WellLoved = "well_loved",
-  NotWorking = "not_working",
-  PartsMissing = "parts_missing",
-}
+export type ListingType = (typeof ListingTypes)[number];
+
+export const ListingConditions = [
+  "brand_new_unboxed",
+  "brand_new_openbox",
+  "like_new",
+  "lightly_used",
+  "well_loved",
+  "not_working",
+  "parts_missing",
+] as const;
+
+export type ListingCondition = (typeof ListingConditions)[number];
+
 export const ListingCategories = [
   "clothing",
   "furniture",
@@ -51,17 +52,14 @@ export enum ClothingItemGenders {
   XXXL = "xxxl",
 }
 
-export enum PaymentType {
-  Cash = "cash",
-  Venmo = "venmo",
-  Paypal = "paypal",
-  Zelle = "zelle",
-}
+export const PaymentTypes = ["cash", "venmo", "paypal", "zelle"] as const;
+
+export type PaymentType = (typeof PaymentTypes)[number];
 
 export const createListingFormDataSchema = z.object({
   image: z.instanceof(File, { message: "Required" }),
   title: z.string(),
-  type: z.nativeEnum(ListingTypes),
+  type: z.enum(ListingTypes),
   description: z.string(),
   category: z.enum(ListingCategories, {
     errorMap: () => ({
@@ -69,8 +67,8 @@ export const createListingFormDataSchema = z.object({
     }),
   }),
   price: z.number().positive(),
-  acceptedPaymentTypes: z.array(z.nativeEnum(PaymentType)),
-  condition: z.nativeEnum(ListingConditions, {
+  acceptedPaymentTypes: z.array(z.enum(PaymentTypes)),
+  condition: z.enum(ListingConditions, {
     errorMap: () => ({
       message: "Invalid condition",
     }),
