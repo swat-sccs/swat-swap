@@ -12,6 +12,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body>
         <NextAuthProvider>
           <TanstackQueryClientProvider>
