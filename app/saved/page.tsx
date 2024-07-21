@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { getSavedListings } from "@/app/actions";
 import { getSessionUserId } from "@/utils/hooks";
 import { CommunityListingCard } from "@/components";
@@ -12,12 +11,12 @@ export default async function Home() {
   const savedListings = await getSavedListings(userId);
 
   return (
-    <Box className="flex h-[calc(100vh-68.5px)] p-8">
+    <div className="flex flex-col px-24 my-4">
       <div className="flex flex-wrap gap-6">
         {savedListings.map((savedListing) => (
           <CommunityListingCard key={savedListing.id} listing={savedListing} />
         ))}
       </div>
-    </Box>
+    </div>
   );
 }
