@@ -1,13 +1,15 @@
 import { CREATE_LISTING } from "@/constants/routes";
+import { Button } from "@mui/material";
 import Link from "next/link";
 
 const ZeroListingsNotice = () => {
   return (
-    <div className="flex flex-col">
-      <p>You have zero listings</p>
-      <p>Click the button below to create your first listing</p>
+    <div className="flex flex-col h-full gap-4 items-center">
+      <p className="m-0">You currently have zero listings created.</p>
       <Link href={CREATE_LISTING}>
-        <button>Create Listing</button>
+        <Button variant="contained" className="">
+          Create Listing
+        </Button>
       </Link>
     </div>
   );

@@ -9,7 +9,7 @@ export default async function Home() {
   const inactiveListings = userListings.filter((listing) => !listing.active);
 
   return (
-    <div className="flex flex-col gap-y-16 p-8">
+    <div className="flex flex-col h-full gap-y-16 p-8">
       {userListings.length === 0 ? (
         <ZeroListingsNotice />
       ) : (
