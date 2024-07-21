@@ -1,2 +1,2 @@
-export * from "@mui/material";
+export * from "@mantine/core";
 export * from "./CommunityListingCard";

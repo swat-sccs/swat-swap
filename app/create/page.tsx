@@ -9,7 +9,7 @@ export default async function Create() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full md:w-3/4 p-8">
+      <div className="w-full md:w-7/12 p-8">
         <CreateListingForm userId={userId} />
       </div>
     </div>
