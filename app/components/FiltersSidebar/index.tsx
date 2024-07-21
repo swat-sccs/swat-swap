@@ -1,6 +1,5 @@
 "use client";
-import { Button, Divider } from "@mui/material";
-import StorefrontIcon from "@mui/icons-material/Storefront";
+import { Button, Divider } from "@/components";
 import { useCallback, useMemo } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
@@ -13,6 +12,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import CategoryFilter from "./CategoryFilter";
 import { split } from "lodash";
+import { IconBuildingStore } from "@tabler/icons-react";
 
 const FiltersSidebar = () => {
   const searchParams = useSearchParams();
@@ -93,7 +93,7 @@ const FiltersSidebar = () => {
       <div className="flex flex-col w-full">
         <Divider />
         <div className="flex items-center justify-between">
-          <StorefrontIcon />
+          <IconBuildingStore />
           <p className="m-0">
             <b>SwatSwap</b>
             <br />

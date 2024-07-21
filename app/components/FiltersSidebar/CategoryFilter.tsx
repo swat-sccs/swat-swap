@@ -1,14 +1,8 @@
 "use client";
-import { ArrowDropDownCircleOutlined } from "@mui/icons-material";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Checkbox,
-} from "@mui/material";
-import CategoryIcon from "@mui/icons-material/Category";
+import { Accordion, Checkbox } from "@/components";
 import { useController, useFormContext } from "react-hook-form";
 import { CreateFiltersQueryPayload, ListingCategory } from "@/dtos";
+import { IconCategory } from "@tabler/icons-react";
 
 interface CategoryCheckboxOption {
   label: string;
@@ -27,7 +21,7 @@ const CategoryCheckboxGroup = ({ options }: CheckboxControllerProps) => {
   });
 
   return (
-    <>
+    <div className="flex flex-col gap-y-2">
       {options.map((option) => (
         <div key={option.category} className="flex items-center space-x-2">
           <Checkbox
@@ -51,7 +45,7 @@ const CategoryCheckboxGroup = ({ options }: CheckboxControllerProps) => {
           <p className="m-0">{option.label}</p>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
@@ -69,14 +63,14 @@ const CATEGORY_OPTIONS: CategoryCheckboxOption[] = [
 const CategoryFilter = () => {
   return (
     <Accordion>
-      <AccordionSummary expandIcon={<ArrowDropDownCircleOutlined />}>
-        <CategoryIcon />
-        <p className="px-2 font-semibold">Categories</p>
-      </AccordionSummary>
-
-      <AccordionDetails className="border">
-        <CategoryCheckboxGroup options={CATEGORY_OPTIONS} />
-      </AccordionDetails>
+      <Accordion.Item key="categories" value="categories">
+        <Accordion.Control icon={<IconCategory />}>
+          Categories
+        </Accordion.Control>
+        <Accordion.Panel>
+          <CategoryCheckboxGroup options={CATEGORY_OPTIONS} />
+        </Accordion.Panel>
+      </Accordion.Item>
     </Accordion>
   );
 };
