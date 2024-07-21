@@ -1,7 +1,7 @@
 import { Container, Typography, Grid, Box } from "@mui/material";
 import Image from "next/image";
 import { getUserDataById, getListing } from "@/app/actions";
-import { listingImagesBucketName, minioHostname, minioPort } from "@/config/";
+import { minioListingImagesEndpoint } from "@/config/";
 import DeleteListingButton from "@/components/DeleteListingButton";
 import DeactivateListingButton from "@/components/DeactivateListingButton";
 
@@ -49,7 +49,7 @@ const ListingPage = async ({ params: { listingId } }: ListingPageProps) => {
           >
             <Image
               fill={true}
-              src={`http://${minioHostname}:${minioPort}/${listingImagesBucketName}/${listing?.images[0].fileName}`}
+              src={`${minioListingImagesEndpoint}/${listing?.images[0].fileName}`}
               alt="listing image featuring a product/service"
               className="object-cover overflow-clip"
             />
