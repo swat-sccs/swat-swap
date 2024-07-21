@@ -1,9 +1,9 @@
 "use client";
 import { PatchUser } from "@/app/actions/user/edit-user";
 import { EditUser, User, editUserSchema } from "@/dtos";
-import { useFetchUser } from "@/utils/hooks";
+import { useFetchCurrentUserData } from "@/utils/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, TextField } from "@mui/material";
+import { Button, Input, Textarea } from "@/components";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +14,8 @@ interface EditProfilePageProps {
 
 export default function EditProfilePage({}: EditProfilePageProps) {
   const router = useRouter();
-  const { data: user } = useFetchUser(1);
+
+  const { data: user } = useFetchCurrentUserData();
 
   const {
     register,
@@ -59,7 +60,7 @@ export default function EditProfilePage({}: EditProfilePageProps) {
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-2">
             <p className="text-lg font-medium">Display Name</p>
-            <TextField type="text" {...register("displayName")} />
+            <Input type="text" {...register("displayName")} />
             <p className="text-xs font-semibold text-red-500">
               {errors.biography?.message}
             </p>
@@ -67,9 +68,9 @@ export default function EditProfilePage({}: EditProfilePageProps) {
 
           <div className="flex flex-col gap-2 w-full">
             <p className="text-lg font-medium">Biography</p>
-            <TextField
-              type="text"
-              multiline
+            <Textarea
+              autosize
+              maxRows={5}
               minRows={5}
               {...register("biography")}
             />
@@ -80,7 +81,7 @@ export default function EditProfilePage({}: EditProfilePageProps) {
 
           <div className="flex flex-col gap-2 w-full">
             <p className="text-lg font-medium">Contact Email</p>
-            <TextField type="email" {...register("email")} />
+            <Input type="email" {...register("email")} />
             <p className="text-xs font-semibold text-red-500">
               {errors.email?.message}
             </p>

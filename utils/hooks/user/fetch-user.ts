@@ -1,4 +1,4 @@
-import { getUserDataById } from "@/app/actions";
+import { getCurrentUserData } from "@/app/actions";
 import { useQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
 
@@ -10,12 +10,12 @@ import { useCallback } from "react";
  * @description
  * This hook is to only be used client side as a way to fetch user data by id
  */
-export const useFetchUser = (userId: number) => {
-  async function fetchUserFn(userId: number) {
-    return getUserDataById(userId);
+export const useFetchCurrentUserData = () => {
+  async function fetchUserFn() {
+    return getCurrentUserData();
   }
   return useQuery({
-    queryKey: ["user", userId],
-    queryFn: useCallback(async () => fetchUserFn(userId!), [userId]),
+    queryKey: ["profile"],
+    queryFn: useCallback(async () => fetchUserFn(), []),
   });
 };
