@@ -1,5 +1,5 @@
 import { CREATE_LISTING } from "@/constants/routes";
-import { Button } from "@mui/material";
+import { Button } from "@/components";
 import Link from "next/link";
 
 const ZeroListingsNotice = () => {
