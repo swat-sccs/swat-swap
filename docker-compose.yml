@@ -15,7 +15,7 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - .env.local
+      - .env
       # may need to make .env
     command: /bin/sh -c "npm install && timeout 22 sh -c 'until nc -z $0 $1; do sleep 1; done' swatswap-db 5432 && npx prisma migrate dev --name init && npx prisma generate && npm run dev"
 
@@ -31,7 +31,7 @@ services:
     volumes:
       - swatswap-db-data:/var/lib/postgresql/data
     env_file:
-      - .env.local
+      - .env
       # may need to make .env
     
   swatswap-minio-service:
