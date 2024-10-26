@@ -56,7 +56,8 @@ export enum ClothingItemGenders {
   XXXL = "xxxl",
 }
 
-export const PaymentTypes = ["cash", "venmo", "paypal", "zelle", "cashapp"] as const;
+export const PaymentTypes = ["cash", "venmo", "paypal", "zelle", "cashapp"] as const; 
+// added cashapp here
 
 export type PaymentType = (typeof PaymentTypes)[number];
 
