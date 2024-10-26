@@ -15,6 +15,8 @@ import { ListingConditionForm } from "./ListingConditionForm";
 import { ListingPriceForm } from "./ListingPriceForm";
 import { ListingPaymentTypesForm } from "./ListingPaymentTypesForm";
 import { ListingCategoryForm } from "./ListingCategoryForm";
+import { ListingBrandForm } from "./ListingBrandForm";
+import { ListingFirmOnPriceForm } from "./ListingFirmOnPriceForm";
 
 interface CreateListingFormProps {
   userId: number;
@@ -57,21 +59,27 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
         onSubmit={methods.handleSubmit(onFormSubmitSuccess, onFormSubmitError)}
       >
         <div className="flex flex-col w-full gap-y-8">
+          <ListingImagesForm />
+          
           <ListingTypeForm />
 
           <ListingTitleForm />
 
           <ListingDescriptionForm />
 
-          <ListingImagesForm />
+          <ListingCategoryForm />
 
           <ListingConditionForm />
 
+          <ListingBrandForm />
+
+          {/* add size here? not sure where that would be added in from, and should only be rendered depending on the selection of clothing or not from catagory */}
+
           <ListingPriceForm />
 
-          <ListingPaymentTypesForm />
+          <ListingFirmOnPriceForm/>
 
-          <ListingCategoryForm />
+          <ListingPaymentTypesForm />
 
           <div>
             <Button type="submit">List it!</Button>

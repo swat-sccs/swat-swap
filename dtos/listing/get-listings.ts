@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
   ClothingItemGenders,
   ClothingItemSizes,
+  FirmOnPriceTypes,
   ListingCategories,
   ListingConditions,
   ListingTypes,
@@ -29,6 +30,8 @@ export const listingSchema = z.object({
   description: z.string(),
   images: z.array(listingImageSchema),
   category: z.enum(ListingCategories),
+  brand: z.string(), //newly added
+  firmonprice: z.enum(FirmOnPriceTypes), //newly added
   type: z.enum(ListingTypes),
   price: z.number().positive(),
   acceptedPaymentTypes: z.array(z.enum(PaymentTypes)),

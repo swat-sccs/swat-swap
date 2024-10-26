@@ -1,9 +1,9 @@
-import { Textarea } from "@/components";
+import { Input } from "@/components";
 import FieldErrorMessage from "./FieldErrorMessage";
 import { useFormContext } from "react-hook-form";
 import { CreateListingPayload } from "@/dtos";
 
-export const ListingDescriptionForm = () => {
+export const ListingBrandForm = () => {
   const {
     register,
     formState: { errors },
@@ -11,9 +11,9 @@ export const ListingDescriptionForm = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <p className="m-0 font-medium text-xl">Add a description (optional)</p>
-      <Textarea autosize minRows={5} maxRows={5} {...register("description")} />
-      <FieldErrorMessage errors={errors} field="description" />
+      <p className="m-0 font-medium text-xl">Add a brand (optional)</p>
+      <Input className="w-full" {...register("brand")} />
+      <FieldErrorMessage errors={errors} field="brand" />
     </div>
   );
 };

@@ -19,7 +19,7 @@ export const ListingPaymentTypesForm = () => {
         render={({ field: { onChange } }) => (
           <Select
             isMulti
-            onChange={(options) =>
+            onChange={(options: any[]) =>
               onChange(options.map((option) => option.value))
             }
             options={PaymentTypes.map((value) => {

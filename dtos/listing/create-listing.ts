@@ -4,6 +4,10 @@ export const ListingTypes = ["selling", "service"] as const;
 
 export type ListingType = (typeof ListingTypes)[number];
 
+export const FirmOnPriceTypes = ["yes", "no"] as const;
+
+export type FirmOnPriceTypes = (typeof FirmOnPriceTypes)[number];
+
 export const ListingConditions = [
   "brand_new_unboxed",
   "brand_new_openbox",
@@ -52,7 +56,7 @@ export enum ClothingItemGenders {
   XXXL = "xxxl",
 }
 
-export const PaymentTypes = ["cash", "venmo", "paypal", "zelle"] as const;
+export const PaymentTypes = ["cash", "venmo", "paypal", "zelle", "cashapp"] as const;
 
 export type PaymentType = (typeof PaymentTypes)[number];
 
@@ -60,6 +64,7 @@ export const createListingFormDataSchema = z.object({
   image: z.instanceof(File, { message: "Required" }),
   title: z.string(),
   type: z.enum(ListingTypes),
+  firmonprice: z.enum(FirmOnPriceTypes), //new thing added, still need to define FirmOnPriceTypes
   description: z.string(),
   category: z.enum(ListingCategories, {
     errorMap: () => ({
@@ -75,6 +80,7 @@ export const createListingFormDataSchema = z.object({
   }),
   apparelSize: z.array(z.string()).optional(),
   apparelGender: z.array(z.string()).optional(),
+  brand: z.string().optional(), //brand is optional
 });
 
 export type CreateListingPayload = z.infer<typeof createListingFormDataSchema>;
