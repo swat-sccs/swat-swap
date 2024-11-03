@@ -7,6 +7,7 @@ import {
   uploadFileToListingImagesBucket,
 } from "@/app/actions/minio";
 import { listingImagesBucketName } from "@/config";
+import { firmonprice } from "@prisma/client";
 
 const validateFormDataField = (formData: FormData, field: string) => {
   if (!formData.has(field) && formData.get(field)) {
@@ -66,6 +67,8 @@ export async function createListing(userId: number, formData: FormData) {
       type: formData.get("type"),
       category: formData.get("category"),
       condition: formData.get("condition"),
+      firmonprice: formData.get("firmonprice"), //added this to fix bug
+      brand: formData.get("brand"),
       image: requestImageFile,
       acceptedPaymentTypes: formData.getAll("acceptedPaymentTypes") ?? [],
       price: formData.get("price") ? Number(formData.get("price")) : undefined,

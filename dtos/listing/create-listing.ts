@@ -6,7 +6,7 @@ export type ListingType = (typeof ListingTypes)[number];
 
 export const FirmOnPriceTypes = ["yes", "no"] as const;
 
-export type FirmOnPriceTypes = (typeof FirmOnPriceTypes)[number];
+export type FirmOnPriceType = (typeof FirmOnPriceTypes)[number];
 
 export const ListingConditions = [
   "brand_new_unboxed",

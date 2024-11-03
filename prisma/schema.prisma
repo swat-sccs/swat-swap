@@ -32,6 +32,7 @@ model Listing {
   title       String
   price       Int
   type        Type
+  firmonprice firmonprice
   description String
   images      ListingImage[]
   acceptedPaymentTypes Payment_Type[]
@@ -68,6 +69,11 @@ enum Type {
   selling
   // buying
   service
+}
+
+enum firmonprice {
+  yes
+  no
 }
 
 enum Category {
