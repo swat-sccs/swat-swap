@@ -22,6 +22,7 @@ const presenceCheckBaseFields = (formData: FormData) => {
     "type",
     "category",
     "condition",
+    "firmonprice", //firmonprice should be required
   ];
 
   for (const field of baseRequiredFields) {
@@ -74,7 +75,8 @@ export async function createListing(userId: number, formData: FormData) {
       price: formData.get("price") ? Number(formData.get("price")) : undefined,
     };
 
-    if (listingData.category === "clothing") {
+    if (listingData.category === "clothing") { 
+      //i'm not sure if user is ever prompted for this info when creating a listing for clothing...
       validateFormDataField(formData, "apparelSize");
       validateFormDataField(formData, "apparelGender");
 
@@ -107,11 +109,15 @@ export async function createListing(userId: number, formData: FormData) {
             data: listingImages,
           },
         },
+        firmonprice: validatedListingFormData.firmonprice,
         category: validatedListingFormData.category,
         condition: validatedListingFormData.condition,
         acceptedPaymentTypes: validatedListingFormData.acceptedPaymentTypes,
         // apparel: validatedListingFormData.apparelGender,
         // size: validatedListingFormData.apparelSize,
+        // brand: validatedListingFormData.brand
+        //brand is another optional thing, so is also commented out ?? (the commenting out is something theron had originally done for some reason...)
+        //apparel and size commented out?
         price: validatedListingFormData.price,
       },
     });

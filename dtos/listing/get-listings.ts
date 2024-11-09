@@ -30,7 +30,7 @@ export const listingSchema = z.object({
   description: z.string(),
   images: z.array(listingImageSchema),
   category: z.enum(ListingCategories),
-  brand: z.string(), //newly added
+  brand: z.string().optional(), //because brand should be optional, not required.
   firmonprice: z.enum(FirmOnPriceTypes), //newly added
   type: z.enum(ListingTypes),
   price: z.number().positive(),
