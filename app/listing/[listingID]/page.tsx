@@ -7,12 +7,12 @@ import DeactivateListingButton from "@/components/DeactivateListingButton";
 
 interface ListingPageProps {
   params: {
-    listingId: string;
+    listingID: string;
   };
 }
 
-const ListingPage = async ({ params: { listingId } }: ListingPageProps) => {
-  const listing = await getListing(parseInt(listingId));
+const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
+  const listing = await getListing(parseInt(listingID));
 
   if (!listing) {
     return <p>Listing does not exist!</p>;

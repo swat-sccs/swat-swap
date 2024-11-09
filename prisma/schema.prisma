@@ -128,4 +128,5 @@ enum Payment_Type {
   paypal
   zelle
   venmo
+  cashapp
 }

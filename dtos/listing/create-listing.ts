@@ -62,6 +62,7 @@ export const PaymentTypes = ["cash", "venmo", "paypal", "zelle", "cashapp"] as c
 export type PaymentType = (typeof PaymentTypes)[number];
 
 export const createListingFormDataSchema = z.object({
+  // userId: z.number(),
   image: z.instanceof(File, { message: "Required" }),
   title: z.string(),
   type: z.enum(ListingTypes),

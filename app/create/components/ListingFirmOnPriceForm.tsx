@@ -1,4 +1,4 @@
-import { CreateListingPayload, FirmOnPriceTypes, ListingTypes } from "@/dtos";
+import { CreateListingPayload, FirmOnPriceTypes } from "@/dtos";
 import { Group, Radio } from "@/components";
 import { startCase } from "lodash";
 import { Controller, useFormContext } from "react-hook-form";

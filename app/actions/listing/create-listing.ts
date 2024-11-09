@@ -8,6 +8,7 @@ import {
 } from "@/app/actions/minio";
 import { listingImagesBucketName } from "@/config";
 import { firmonprice } from "@prisma/client";
+import { validate } from "uuid";
 
 const validateFormDataField = (formData: FormData, field: string) => {
   if (!formData.has(field) && formData.get(field)) {
@@ -63,6 +64,7 @@ export async function createListing(userId: number, formData: FormData) {
     }
 
     let listingData: Record<string, any> = {
+      // userId: formData.get('userId'),
       title: formData.get("title"),
       description: formData.get("description"),
       type: formData.get("type"),
@@ -100,6 +102,7 @@ export async function createListing(userId: number, formData: FormData) {
 
     await prisma.listing.create({
       data: {
+        // userId: validatedListingFormData.userId,
         userId,
         title: validatedListingFormData.title,
         description: validatedListingFormData.description,
