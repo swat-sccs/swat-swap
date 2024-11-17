@@ -40,12 +40,16 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
       <Grid>
         <Grid>
           <Box>
+            <div className="relative w-40 h-40"> 
+
             <Image
               fill={true}
               src={`${minioListingImagesEndpoint}/${listing?.images[0].fileName}`}
               alt="listing image featuring a product/service"
+              layout="fill"
               className="object-cover overflow-clip"
             />
+            </div>
           </Box>
         </Grid>
 

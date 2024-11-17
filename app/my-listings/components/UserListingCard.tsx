@@ -10,7 +10,7 @@ export interface ListingCardProps {
 }
 
 export default function UserListingCard({ listing }: ListingCardProps) {
-  console.log("LISTINGID!!!!" + listing.id)
+  // console.log("LISTINGID!!!!" + listing.id)
   return (
     <Link href={`listing/${listing.id}`}>
       <div className="flex flex-col p-4 shadow-md rounded-lg h-fit gap-y-2">
