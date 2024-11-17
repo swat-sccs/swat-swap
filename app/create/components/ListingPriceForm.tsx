@@ -16,7 +16,14 @@ export const ListingPriceForm = () => {
         name="price"
         control={control}
         render={({ field }) => (
-          <NumberInput className="w-1/3" hideControls {...field} />
+          <NumberInput
+            className="w-1/3"
+            hideControls
+            {...field}
+            leftSection={
+              field.value ? <span className="text-gray-500">$</span> : null
+            }
+          />
         )}
       />
       <FieldErrorMessage errors={errors} field="price" />

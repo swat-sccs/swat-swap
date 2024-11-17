@@ -1,8 +1,10 @@
-version: "3.4" 
+version: "3.4"
 # may need to comment out
 
 services:
   swatswap:
+    stdin_open: true
+    tty: true
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -28,12 +30,10 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: swatswap_db
-    volumes:
-      - swatswap-db-data:/var/lib/postgresql/data
     env_file:
       - .env
       # may need to make .env
-    
+
   swatswap-minio-service:
     image: minio/minio
     command:
@@ -52,5 +52,4 @@ services:
       - swatswap-minio-data:/data
 
 volumes:
-  swatswap-db-data:
   swatswap-minio-data:

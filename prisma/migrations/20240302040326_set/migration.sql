@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "Listing" ALTER COLUMN "condition" DROP NOT NULL,
-ALTER COLUMN "paymentType" DROP NOT NULL,
-ALTER COLUMN "category" DROP NOT NULL;
