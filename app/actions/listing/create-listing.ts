@@ -55,6 +55,7 @@ const uploadImageFile = async (imageFile: File) => {
 
 export async function createListing(userId: number, formData: FormData) {
   console.log("form data", formData);
+  console.log("userID::::::::", userId);
   try {
     presenceCheckBaseFields(formData);
 
@@ -118,7 +119,7 @@ export async function createListing(userId: number, formData: FormData) {
         acceptedPaymentTypes: validatedListingFormData.acceptedPaymentTypes,
         // apparel: validatedListingFormData.apparelGender,
         // size: validatedListingFormData.apparelSize,
-        // brand: validatedListingFormData.brand
+        brand: validatedListingFormData.brand,
         //brand is another optional thing, so is also commented out ?? (the commenting out is something theron had originally done for some reason...)
         //apparel and size commented out?
         price: validatedListingFormData.price,

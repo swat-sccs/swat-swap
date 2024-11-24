@@ -33,7 +33,7 @@ model Listing {
   price       Int
   type        Type
   firmonprice firmonprice
-  // brand brand
+  brand String?
   description String
   images      ListingImage[]
   acceptedPaymentTypes Payment_Type[]
