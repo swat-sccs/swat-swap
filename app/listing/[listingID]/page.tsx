@@ -25,114 +25,85 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
     : "";
 
   return (
-    <Container
-      style={{
-        width: "75%",
-        height: "auto",
-        display: "flex",
-        flexDirection: "column",
-        margin: "auto",
-        marginTop: "20pt",
-        paddingBottom: "20pt",
-        backgroundColor: "#f1f1f1",
-      }}
-    >
-      <Grid>
-        <Grid>
+    <Container className="w-3/4 mx-auto mt-8 pb-8 bg-gray-50 rounded-lg shadow-md">
+      <div className="flex">
+            <h1 className="text-3xl font-bold mb-2">{listing?.title}</h1>
+            {!!listing.price && (
+              <p className="text-2xl font-semibold text-green-600 p-1">
+                ${listing?.price}
+              </p>
+            )}
+      </div>
+      <Grid className="p-6">
+        <Grid className="pr-5">
           <Box>
-            <div className="relative w-40 h-40"> 
-
-            <Image
-              fill={true}
-              src={`${minioListingImagesEndpoint}/${listing?.images[0].fileName}`}
-              alt="listing image featuring a product/service"
-              layout="fill"
-              className="object-cover overflow-clip"
-            />
+            <div className="relative w-64 h-64 rounded-lg overflow-hidden ">
+              <Image
+                fill={true}
+                src={`${minioListingImagesEndpoint}/${listing?.images[0].fileName}`}
+                alt="listing image featuring a product/service"
+                layout="fill"
+                className="object-cover"
+              />
             </div>
           </Box>
         </Grid>
 
-        <Grid>
-          {/* <p variant="h5">theron:{listing?.title}</Typography> */}
-          {!!listing.price && <p>${listing?.price}</p>}
+        <Grid className="pr-5">
+          <div className="space-y-4">
+            <div>
+              <h2 className="text-lg font-semibold mb-2">Description</h2>
+              <p className="text-gray-700">{listing?.description}</p>
+            </div>
 
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
-          >
-            <p>{`Description:`}</p>
+            <div>
+              <h2 className="text-lg font-semibold mb-2">Category</h2>
+              <p className="text-gray-700">{listing.category}</p>
+            </div>
 
-            <p>{listing?.description}</p>
-          </div>
+            <div>
+              <h2 className="text-lg font-semibold mb-2">Payment Types</h2>
+              <div className="flex gap-2">
+                {listing?.acceptedPaymentTypes.map((pt, index) => (
+                  <span
+                    key={pt}
+                    className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full"
+                  >
+                    {pt}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
-          >
-            <p>Category:</p>
+            <div>
+              <h2 className="text-lg font-semibold mb-2">Condition</h2>
+              <p className="text-gray-700">{listing?.condition}</p>
+            </div>
 
-            <p>{listing.category}</p>
-          </div>
+            <div className="border-t pt-4 mt-6">
+              <h2 className="text-lg font-semibold mb-2">Contact Information</h2>
+              <div className="space-y-2">
+                <p className="text-gray-700">
+                  <span className="font-medium">Name:</span> {listingUserData.name}
+                </p>
+                <p className="text-gray-700">
+                  <span className="font-medium">Email:</span> {listingUserData.email}
+                </p>
+              </div>
+            </div>
 
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
-          >
-            <p>Payment Type:</p>
-
-            {listing?.acceptedPaymentTypes.map((pt, index) => (
-              <p key={pt}>
-                {pt}
-                {index !== listing.acceptedPaymentTypes.length - 1 && ","}
-              </p>
-            ))}
-          </div>
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
-          >
-            <p>Condition:</p>
-            <p>{listing?.condition}</p>
-          </div>
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
-          >
-            {/* <p fontSize={"18px"} fontWeight={"bold"}>
-              Apparel Gender:
-            </p> */}
-            {/* {listing?.apparel.map((appar, index) => (
-              <p
-                key={appar}
-                fontSize={"18px"}
-                style={{ marginLeft: "8px" }}
-              >
-                {appar}
-                {index !== listing.apparel.length - 1 && ","}
-              </p>
-            ))} */}
-          </div>
-
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
-          >
-            <p>Contact:</p>
-            <p>{listingUserData.name}</p>
-          </div>
-          <p>{listingUserData.email}</p>
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
-          >
-            <p>Posted on:</p>
-            <p>{formattedCreatedAt}</p>
+            <div className="text-sm text-gray-500">
+              Posted on: {formattedCreatedAt}
+            </div>
           </div>
         </Grid>
-        <Grid>
-          <Grid>
-            <DeleteListingButton listingId={listing.id} />
-          </Grid>
-          <Grid>
-            <DeactivateListingButton
-              listingId={listing.id}
-              active={listing.active}
-            />
-          </Grid>
+
+        <Grid className="flex gap-4 mt-8">
+          <DeleteListingButton listingId={listing.id} />
+          <DeactivateListingButton
+            listingId={listing.id}
+            active={listing.active}
+          />
         </Grid>
       </Grid>
     </Container>
