@@ -24,20 +24,41 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
     ? new Date(listing.createdAt).toLocaleString()
     : "";
 
+  // Format condition by replacing underscores with spaces and capitalizing
+  const formatCondition = (condition: string) => {
+    return condition
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   return (
     <Container className="w-3/4 mx-auto mt-8 pb-8 bg-gray-50 rounded-lg shadow-md">
-      <div className="flex">
-            <h1 className="text-3xl font-bold mb-2">{listing?.title}</h1>
-            {!!listing.price && (
-              <p className="text-2xl font-semibold text-green-600 p-1">
+      <div className="flex justify-between items-start">
+        <div>
+          <div className="flex items-center gap-3 mb-2">
+            <h1 className="text-3xl font-bold">{listing?.title}</h1>
+            <span className="px-3 py-1 text-sm bg-purple-100 text-purple-800 rounded-full">
+              {listing.type === 'selling' ? 'For Sale' : 'Service'}
+            </span>
+          </div>
+          {!!listing.price && (
+            <div className="flex items-center gap-2">
+              <p className="text-2xl font-semibold text-green-600">
                 ${listing?.price}
               </p>
-            )}
+              <span className="text-sm text-gray-600">
+                ({listing.firmonprice ? 'Price is firm' : 'Price negotiable'})
+              </span>
+            </div>
+          )}
+        </div>
       </div>
+
       <Grid className="p-6">
         <Grid className="pr-5">
           <Box>
-            <div className="relative w-64 h-64 rounded-lg overflow-hidden ">
+            <div className="relative w-64 h-64 rounded-lg overflow-hidden">
               <Image
                 fill={true}
                 src={`${minioListingImagesEndpoint}/${listing?.images[0].fileName}`}
@@ -56,15 +77,29 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
               <p className="text-gray-700">{listing?.description}</p>
             </div>
 
+            {listing.brand && (
+              <div>
+                <h2 className="text-lg font-semibold mb-2">Brand</h2>
+                <p className="text-gray-700">{listing.brand}</p>
+              </div>
+            )}
+
             <div>
               <h2 className="text-lg font-semibold mb-2">Category</h2>
               <p className="text-gray-700">{listing.category}</p>
             </div>
 
+            {listing.type === 'selling' && (
+              <div>
+                <h2 className="text-lg font-semibold mb-2">Condition</h2>
+                <p className="text-gray-700">{formatCondition(listing?.condition)}</p>
+              </div>
+            )}
+
             <div>
               <h2 className="text-lg font-semibold mb-2">Payment Types</h2>
               <div className="flex gap-2">
-                {listing?.acceptedPaymentTypes.map((pt, index) => (
+                {listing?.acceptedPaymentTypes.map((pt) => (
                   <span
                     key={pt}
                     className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full"
@@ -73,11 +108,6 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
                   </span>
                 ))}
               </div>
-            </div>
-
-            <div>
-              <h2 className="text-lg font-semibold mb-2">Condition</h2>
-              <p className="text-gray-700">{listing?.condition}</p>
             </div>
 
             <div className="border-t pt-4 mt-6">
