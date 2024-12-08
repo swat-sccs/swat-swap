@@ -4,6 +4,17 @@ import { getUserDataById, getListing } from "@/app/actions";
 import { minioListingImagesEndpoint } from "@/config/";
 import DeleteListingButton from "@/components/DeleteListingButton";
 import DeactivateListingButton from "@/components/DeactivateListingButton";
+import { 
+  Tag, 
+  Package, 
+  DollarSign, 
+  Star, 
+  Bookmark,
+  CreditCard,
+  User,
+  Mail,
+  Clock
+} from "lucide-react";
 
 interface ListingPageProps {
   params: {
@@ -24,7 +35,6 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
     ? new Date(listing.createdAt).toLocaleString()
     : "";
 
-  // Format condition by replacing underscores with spaces and capitalizing
   const formatCondition = (condition: string) => {
     return condition
       .split('_')
@@ -34,24 +44,11 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
 
   return (
     <Container className="w-3/4 mx-auto mt-8 pb-8 bg-gray-50 rounded-lg shadow-md">
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-start p-6">
         <div>
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-center gap-3 mb-4">
             <h1 className="text-3xl font-bold">{listing?.title}</h1>
-            <span className="px-3 py-1 text-sm bg-purple-100 text-purple-800 rounded-full">
-              {listing.type === 'selling' ? 'For Sale' : 'Service'}
-            </span>
           </div>
-          {!!listing.price && (
-            <div className="flex items-center gap-2">
-              <p className="text-2xl font-semibold text-green-600">
-                ${listing?.price}
-              </p>
-              <span className="text-sm text-gray-600">
-                ({listing.firmonprice ? 'Price is firm' : 'Price negotiable'})
-              </span>
-            </div>
-          )}
         </div>
       </div>
 
@@ -71,59 +68,155 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
         </Grid>
 
         <Grid className="pr-5">
-          <div className="space-y-4">
-            <div>
-              <h2 className="text-lg font-semibold mb-2">Description</h2>
-              <p className="text-gray-700">{listing?.description}</p>
+          <div className="space-y-6">
+            {/* Type Field */}
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                <Tag className="w-5 h-5 text-purple-600" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold mb-2">Type</h2>
+                <span className="bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-sm">
+                  {listing.type === 'selling' ? 'For Sale' : 'Service'}
+                </span>
+              </div>
             </div>
 
+            {/* Description Field */}
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                <Tag className="w-5 h-5 text-blue-600" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold mb-2">Description</h2>
+                <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm">
+                  {listing?.description}
+                </span>
+              </div>
+            </div>
+
+            {/* Price Field */}
+            {!!listing.price && (
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                  <DollarSign className="w-5 h-5 text-green-600" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold mb-2">Price</h2>
+                  <div className="flex gap-2 flex-wrap">
+                    <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
+                      ${listing?.price}
+                    </span>
+                    <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
+                      {listing.firmonprice ? 'Price is firm' : 'Price negotiable'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Brand Field */}
             {listing.brand && (
-              <div>
-                <h2 className="text-lg font-semibold mb-2">Brand</h2>
-                <p className="text-gray-700">{listing.brand}</p>
-              </div>
-            )}
-
-            <div>
-              <h2 className="text-lg font-semibold mb-2">Category</h2>
-              <p className="text-gray-700">{listing.category}</p>
-            </div>
-
-            {listing.type === 'selling' && (
-              <div>
-                <h2 className="text-lg font-semibold mb-2">Condition</h2>
-                <p className="text-gray-700">{formatCondition(listing?.condition)}</p>
-              </div>
-            )}
-
-            <div>
-              <h2 className="text-lg font-semibold mb-2">Payment Types</h2>
-              <div className="flex gap-2">
-                {listing?.acceptedPaymentTypes.map((pt) => (
-                  <span
-                    key={pt}
-                    className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full"
-                  >
-                    {pt}
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
+                  <Star className="w-5 h-5 text-pink-600" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold mb-2">Brand</h2>
+                  <span className="bg-pink-50 text-pink-700 px-3 py-1 rounded-full text-sm">
+                    {listing.brand}
                   </span>
-                ))}
+                </div>
+              </div>
+            )}
+
+            {/* Category Field */}
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                <Bookmark className="w-5 h-5 text-yellow-600" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold mb-2">Category</h2>
+                <span className="bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full text-sm">
+                  {listing.category}
+                </span>
               </div>
             </div>
 
-            <div className="border-t pt-4 mt-6">
-              <h2 className="text-lg font-semibold mb-2">Contact Information</h2>
-              <div className="space-y-2">
-                <p className="text-gray-700">
-                  <span className="font-medium">Name:</span> {listingUserData.name}
-                </p>
-                <p className="text-gray-700">
-                  <span className="font-medium">Email:</span> {listingUserData.email}
-                </p>
+            {/* Condition Field (only for selling type) */}
+            {listing.type === 'selling' && (
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                  <Package className="w-5 h-5 text-red-600" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold mb-2">Condition</h2>
+                  <span className="bg-red-50 text-red-700 px-3 py-1 rounded-full text-sm">
+                    {formatCondition(listing?.condition)}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Payment Types Field */}
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                <CreditCard className="w-5 h-5 text-indigo-600" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold mb-2">Payment Types</h2>
+                <div className="flex gap-2 flex-wrap">
+                  {listing?.acceptedPaymentTypes.map((pt) => (
+                    <span
+                      key={pt}
+                      className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm"
+                    >
+                      {pt}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="text-sm text-gray-500">
-              Posted on: {formattedCreatedAt}
+            {/* Contact Information */}
+            <div className="pt-4">
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0">
+                    <User className="w-5 h-5 text-teal-600" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold mb-2">Name</h2>
+                    <span className="bg-teal-50 text-teal-700 px-3 py-1 rounded-full text-sm">
+                      {listingUserData.name}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-5 h-5 text-orange-600" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold mb-2">Email</h2>
+                    <span className="bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">
+                      {listingUserData.email}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-gray-600" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold mb-2">Posted</h2>
+                    <span className="bg-gray-50 text-gray-700 px-3 py-1 rounded-full text-sm">
+                      {formattedCreatedAt}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </Grid>
