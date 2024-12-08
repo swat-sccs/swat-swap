@@ -48,6 +48,16 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
         <div>
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-3xl font-bold">{listing?.title}</h1>
+            {!!listing.price && (
+              <div className="flex gap-2 items-center">
+                <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
+                  ${listing?.price}
+                </span>
+                <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
+                  {listing.firmonprice ? 'Price is firm' : 'Price negotiable'}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -95,26 +105,6 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
               </div>
             </div>
 
-            {/* Price Field */}
-            {!!listing.price && (
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                  <DollarSign className="w-5 h-5 text-green-600" />
-                </div>
-                <div>
-                  <h2 className="text-lg font-semibold mb-2">Price</h2>
-                  <div className="flex gap-2 flex-wrap">
-                    <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
-                      ${listing?.price}
-                    </span>
-                    <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
-                      {listing.firmonprice ? 'Price is firm' : 'Price negotiable'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Brand Field */}
             {listing.brand && (
               <div className="flex items-start gap-4">
@@ -137,7 +127,7 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
               </div>
               <div>
                 <h2 className="text-lg font-semibold mb-2">Category</h2>
-                <span className="bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full text-sm">
+                <span className="bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full text-sm capitalize">
                   {listing.category}
                 </span>
               </div>
@@ -169,7 +159,7 @@ const ListingPage = async ({ params: { listingID } }: ListingPageProps) => {
                   {listing?.acceptedPaymentTypes.map((pt) => (
                     <span
                       key={pt}
-                      className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm"
+                      className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm capitalize"
                     >
                       {pt}
                     </span>
