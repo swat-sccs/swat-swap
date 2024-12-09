@@ -60,7 +60,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
       >
         <div className="flex flex-col w-full gap-y-8">
           <ListingImagesForm />
-          
+
           <ListingTypeForm />
 
           <ListingTitleForm />
@@ -77,7 +77,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
 
           <ListingPriceForm />
 
-          <ListingFirmOnPriceForm/>
+          <ListingFirmOnPriceForm />
 
           <ListingPaymentTypesForm />
 

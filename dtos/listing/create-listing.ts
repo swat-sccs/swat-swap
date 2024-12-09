@@ -34,6 +34,17 @@ export const ListingCategories = [
 
 export type ListingCategory = (typeof ListingCategories)[number];
 
+export const clothingItemSizes = [
+  "xxs",
+  "xs",
+  "s",
+  "m",
+  "l",
+  "xl",
+  "xxl",
+  "xxxl",
+];
+
 export enum ClothingItemSizes {
   XXS = "xxs",
   XS = "xs",
@@ -45,18 +56,21 @@ export enum ClothingItemSizes {
   XXXL = "xxxl",
 }
 
+export const clothingItemGenders = ["male", "female", "unisex"];
+
 export enum ClothingItemGenders {
-  XXS = "xxs",
-  XS = "xs",
-  S = "s",
-  M = "m",
-  L = "l",
-  XL = "xl",
-  XXL = "xxl",
-  XXXL = "xxxl",
+  male = "m",
+  female = "f",
+  unisex = "u",
 }
 
-export const PaymentTypes = ["cash", "venmo", "paypal", "zelle", "cashapp"] as const; 
+export const PaymentTypes = [
+  "cash",
+  "venmo",
+  "paypal",
+  "zelle",
+  "cashapp",
+] as const;
 // added cashapp here
 
 export type PaymentType = (typeof PaymentTypes)[number];
