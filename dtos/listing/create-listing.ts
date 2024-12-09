@@ -94,8 +94,8 @@ export const createListingFormDataSchema = z.object({
       message: "Invalid condition",
     }),
   }),
-  apparelSize: z.array(z.string()).optional(),
-  apparelGender: z.array(z.string()).optional(),
+  apparelSize: z.string().optional(),
+  apparelGender: z.string().optional(),
   brand: z.string().optional(), //brand is optional
 });
 

@@ -26,6 +26,10 @@ const presenceCheckBaseFields = (formData: FormData) => {
     "firmonprice", //firmonprice should be required
   ];
 
+  // const clothingRequiredFields = [
+
+  // ]
+
   for (const field of baseRequiredFields) {
     if (!formData.has(field)) {
       console.error(`Missing required field: ${field}`);
@@ -70,6 +74,7 @@ export async function createListing(userId: number, formData: FormData) {
       description: formData.get("description"),
       type: formData.get("type"),
       category: formData.get("category"),
+      //
       condition: formData.get("condition"),
       firmonprice: formData.get("firmonprice"), //added this to fix bug
       brand: formData.get("brand"),
@@ -89,7 +94,7 @@ export async function createListing(userId: number, formData: FormData) {
         apparelGender: formData.get("apparelGender"),
       };
     }
-
+    console.log("Listing Data: \n", listingData)
     const validatedListingFormData =
       createListingFormDataSchema.parse(listingData);
 
@@ -117,12 +122,14 @@ export async function createListing(userId: number, formData: FormData) {
         category: validatedListingFormData.category,
         condition: validatedListingFormData.condition,
         acceptedPaymentTypes: validatedListingFormData.acceptedPaymentTypes,
-        // apparel: validatedListingFormData.apparelGender,
-        // size: validatedListingFormData.apparelSize,
+        // apparel: validatedListingFormData.apparelGender, //new
+        // size: validatedListingFormData.apparelSize, //new
         brand: validatedListingFormData.brand,
         //brand is another optional thing, so is also commented out ?? (the commenting out is something theron had originally done for some reason...)
         //apparel and size commented out?
         price: validatedListingFormData.price,
+        
+        
       },
     });
     revalidatePath("/");

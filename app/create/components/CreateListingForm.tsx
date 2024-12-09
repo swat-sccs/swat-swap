@@ -50,6 +50,7 @@ const CreateListingForm = ({ userId }: CreateListingFormProps) => {
   );
 
   const onFormSubmitError = useCallback((error: any) => {
+    console.log("failed to submit error")
     console.log(error);
   }, []);
 

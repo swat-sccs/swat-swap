@@ -51,7 +51,7 @@ export const ListingCategoryForm = () => {
         <>
           <p className="m-0 font-medium text-xl">Choose a size</p>
           <Controller
-            name="clothingItemSize"
+            name="apparelSize"
             control={control}
             render={({ field: { onChange } }) => (
               <Select
@@ -67,7 +67,7 @@ export const ListingCategoryForm = () => {
           />
           <p className="m-0 font-medium text-xl">Choose a gender</p>
           <Controller
-            name="clothingItemTypes"
+            name="apparelGender"
             control={control}
             render={({ field: { onChange } }) => (
               <Select
