@@ -13,15 +13,16 @@ const DeactivateListingButton = ({
   listingId,
   active,
 }: DeactivateListingButtonProps) => {
-  const [isActive, setActive] = useState(active);
+  const [isActive, setIsActive] = useState(active);
+
+  const handleToggle = async () => {
+    const updatedStatus = !isActive;
+    await toggleListingActivation(listingId, updatedStatus);
+    setIsActive(updatedStatus); // Update the local state
+  };
 
   return (
-    <Button
-      onClick={() => {
-        setActive(!isActive);
-        toggleListingActivation(listingId, isActive);
-      }}
-    >
+    <Button onClick={handleToggle}>
       {isActive ? "Deactivate" : "Activate"}
     </Button>
   );
